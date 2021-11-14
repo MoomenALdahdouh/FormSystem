@@ -14,7 +14,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::latest()->paginate(3);
+        $projects = Project::latest()->paginate(4);
         $trash = Project::onlyTrashed()->latest()->paginate(3);
         return view('projects', compact('projects','trash'));
     }

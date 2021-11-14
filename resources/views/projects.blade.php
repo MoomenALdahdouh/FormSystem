@@ -54,7 +54,7 @@
                                         <td>
                                             <a href="{{url('projects/delete/'.$project->id)}}"
                                                class="btn btn-danger"><i class='bx bx-trash'></i>&nbsp DELETE</a>
-                                            <a href="{{url('project/edit/'.$project->id)}}" class="btn btn-primary"><i
+                                            <a href="{{url('projects/edit/'.$project->id)}}" class="btn btn-primary"><i
                                                     class='bx bx-edit'></i>&nbsp EDIT</a>
                                         </td>
                                     </tr>

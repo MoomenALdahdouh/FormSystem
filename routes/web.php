@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SubprojectController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,12 @@ Route::get('/projects/delete/{id}',[ProjectController::class,'destroy'])->name('
 Route::get('/projects/forcedelete/{id}',[ProjectController::class,'forcedestroy'])->name('forcedestroy');
 Route::get('/projects/restore/{id}',[ProjectController::class,'restore'])->name('restore');
 
+Route::get('/subprojects', [SubprojectController::class, 'index'])->name('subprojects');
+Route::post('/subprojects/add', [SubprojectController::class, 'store'])->name('add');
+Route::get('/subprojects/delete/{id}',[SubprojectController::class,'destroy'])->name('destroy');
+Route::get('/subprojects/forcedelete/{id}',[SubprojectController::class,'forcedestroy'])->name('forcedestroy');
+Route::get('/subprojects/restore/{id}',[SubprojectController::class,'restore'])->name('restore');
+
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/projects', function () {
     Route::get('/', [ProjectController::class, 'index']);
 
@@ -58,9 +65,9 @@ Route::get('/projects/restore/{id}',[ProjectController::class,'restore'])->name(
     Route::delete('/delete/{id}', [ProjectController::class, 'destroy']);
 })->name('projects');*/
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/subprojects', function () {
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/subprojects', function () {
     return view('subprojects');
-})->name('subprojects');
+})->name('subprojects');*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
     return view('activities');
