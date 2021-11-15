@@ -26,6 +26,7 @@
                                 <tr>
                                     <th scope="col">SL No</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Main Project</th>
                                     <th scope="col">User</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
@@ -41,6 +42,7 @@
                                         <th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>
                                         <td>{{$subproject->name}}</td>
                                         {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
+                                        <td>{{$subproject->mainProject->name}}</td>
                                         <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
                                         {{--<td>{{$subproject->name}}</td>--}}  {{--After join with Quiry builder --}}
                                         {{--<td>{{$subproject->created_at}}</td>--}}
@@ -53,9 +55,11 @@
                                         <!--Use this line if you compact users from DB to pars the date by carbon library-->
                                         <td>
                                             <a href="{{url('subprojects/delete/'.$subproject->id)}}"
-                                               class="btn btn-danger"><i class='bx bx-trash'></i>&nbsp DELETE</a>
-                                            <a href="{{url('subprojects/edit/'.$subproject->id)}}" class="btn btn-primary"><i
-                                                    class='bx bx-edit'></i>&nbsp EDIT</a>
+                                               class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>
+                                            &nbsp
+                                            <a href="{{url('subprojects/edit/'.$subproject->id)}}"
+                                               class="btn btn-outline-primary" title="settings">
+                                                <i class="las la-cog"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -76,17 +80,35 @@
                                             aria-label="Close"></button>
                                 </div>
                             @endif
-                            <form action="{{route('add')}}" method="POST">
+                            <form action="{{route('subproject.add')}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Subproject Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                           placeholder="subProject Name"
+                                           placeholder="Sub Project Name"
                                            aria-describedby="nameHelp" required>
                                     @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
+                                <div>
+                                    <p>Select project</p>
+                                    <div>
+                                        <select name="project" id="project"
+                                                class="project-dropdown form-control input-group-lg">
+                                            <option hidden>Select project</option>
+                                            @foreach ($projects as $project)
+                                                <option class="alert-warning"
+                                                        value="{{ $project->id }}">{{ $project->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{csrf_field()}}
+                                    </div>
+                                    @error('project')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <br>
                                 <button type="submit" class="btn btn-primary"><i class='bx bx-add-to-queue'></i>&nbsp
                                     Add subProject
                                 </button>
@@ -108,6 +130,7 @@
                                 <tr>
                                     <th scope="col">SL No</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Main Project</th>
                                     <th scope="col">User</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
@@ -122,6 +145,7 @@
                                         {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
                                         <th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>
                                         <td>{{$subproject->name}}</td>
+                                        <td>{{$subproject->mainProject->name}}</td>
                                         {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
                                         <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
                                         {{--<td>{{$subproject->name}}</td>--}}  {{--After join With Query builder--}}
@@ -135,9 +159,10 @@
                                         <!--Use this line if you compact users from DB to pars the date by carbon library-->
                                         <td>
                                             <a href="{{url('subprojects/forcedelete/'.$subproject->id)}}"
-                                               class="btn btn-danger"><i class="fa fa-trash"></i>FORCE DELETE</a>
+                                               class="btn btn-outline-danger" title="force delete"><i class="bx bx-trash"></i></a>
+                                            &nbsp
                                             <a href="{{url('subprojects/restore/'.$subproject->id)}}"
-                                               class="btn btn-primary"><i class="fas fa-trash-restore"></i>RESTORE</a>
+                                               class="btn btn-outline-primary" title="restore"><i class="las la-trash-restore"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -26,7 +26,8 @@
                                 <tr>
                                     <th scope="col">SL No</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">User</th>
+                                    <th scope="col">Created By</th>
+                                    <th scope="col">Manage By</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -41,7 +42,8 @@
                                         <th scope="row">{{$projects->firstItem()+$loop->index}}</th>
                                         <td>{{$project->name}}</td>
                                         {{--<td>{{$project->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                                        <td>{{$project->user->name}}</td> {{--Use this when join table by ROM method--}}
+                                        <td>{{$project->createBy->name}}</td> {{--Use this when join table by ROM method--}}
+                                        <td>{{@$project->manageBy->name}}</td>
                                         {{--<td>{{$project->name}}</td>--}}  {{--After join with Quiry builder --}}
                                         {{--<td>{{$project->created_at}}</td>--}}
                                         @if($project->created_at == NULL)
@@ -53,9 +55,10 @@
                                         <!--Use this line if you compact users from DB to pars the date by carbon library-->
                                         <td>
                                             <a href="{{url('projects/delete/'.$project->id)}}"
-                                               class="btn btn-danger"><i class='bx bx-trash'></i>&nbsp DELETE</a>
-                                            <a href="{{url('projects/edit/'.$project->id)}}" class="btn btn-primary"><i
-                                                    class='bx bx-edit'></i>&nbsp EDIT</a>
+                                               class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>
+                                            &nbsp
+                                            <a href="{{url('projects/edit/'.$project->id)}}"  class="btn btn-outline-primary" title="settings">
+                                                <i class="las la-cog"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -76,7 +79,7 @@
                                             aria-label="Close"></button>
                                 </div>
                             @endif
-                            <form action="{{route('add')}}" method="POST">
+                            <form action="{{route('project.add')}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Project Name</label>
@@ -86,6 +89,26 @@
                                     @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    <br>
+                                    <div>
+                                        <p>Select User manager</p>
+                                        <div>
+                                            <select name="manager" id="manager"
+                                                    class="manager-dropdown form-control input-group-lg">
+                                                <option hidden>Select Manager</option>
+                                                @foreach ($users as $user)
+                                                    @if($user->project_fk_id == 0)
+                                                        <option class="alert-warning"
+                                                                value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            {{csrf_field()}}
+                                        </div>
+                                        @error('manager')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class='bx bx-add-to-queue'></i>&nbsp
                                     Add Project
@@ -93,7 +116,6 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
             <br>
@@ -108,7 +130,8 @@
                                 <tr>
                                     <th scope="col">SL No</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">User</th>
+                                    <th scope="col">Created By</th>
+                                    <th scope="col">Manage By</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -123,7 +146,8 @@
                                         <th scope="row">{{$projects->firstItem()+$loop->index}}</th>
                                         <td>{{$project->name}}</td>
                                         {{--<td>{{$project->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                                        <td>{{$project->user->name}}</td> {{--Use this when join table by ROM method--}}
+                                        <td>{{$project->createBy->name}}</td> {{--Use this when join table by ROM method--}}
+                                        <td>{{@$project->manageBy->name}}</td>
                                         {{--<td>{{$project->name}}</td>--}}  {{--After join With Query builder--}}
                                         {{--<td>{{$project->created_at}}</td>--}}
                                         @if($project->created_at == NULL)
@@ -135,9 +159,10 @@
                                         <!--Use this line if you compact users from DB to pars the date by carbon library-->
                                         <td>
                                             <a href="{{url('projects/forcedelete/'.$project->id)}}"
-                                               class="btn btn-danger"><i class="fa fa-trash"></i>FORCE DELETE</a>
+                                               class="btn btn-outline-danger" title="force delete"><i class="fa fa-trash"></i>FORCE DELETE</a>
+                                            &nbsp
                                             <a href="{{url('projects/restore/'.$project->id)}}"
-                                               class="btn btn-primary"><i class="fas fa-trash-restore"></i>RESTORE</a>
+                                               class="btn btn-outline-primary" title="restore"><i class="las la-trash-restore"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

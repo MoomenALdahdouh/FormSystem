@@ -40,13 +40,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
 });*/
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
-Route::post('/projects/add', [ProjectController::class, 'store'])->name('add');
+Route::post('/projects/add', [ProjectController::class, 'store'])->name('project.add');
 Route::get('/projects/delete/{id}',[ProjectController::class,'destroy'])->name('destroy');
 Route::get('/projects/forcedelete/{id}',[ProjectController::class,'forcedestroy'])->name('forcedestroy');
 Route::get('/projects/restore/{id}',[ProjectController::class,'restore'])->name('restore');
 
 Route::get('/subprojects', [SubprojectController::class, 'index'])->name('subprojects');
-Route::post('/subprojects/add', [SubprojectController::class, 'store'])->name('add');
+Route::post('/subprojects/add', [SubprojectController::class, 'store'])->name('subproject.add');
 Route::get('/subprojects/delete/{id}',[SubprojectController::class,'destroy'])->name('destroy');
 Route::get('/subprojects/forcedelete/{id}',[SubprojectController::class,'forcedestroy'])->name('forcedestroy');
 Route::get('/subprojects/restore/{id}',[SubprojectController::class,'restore'])->name('restore');

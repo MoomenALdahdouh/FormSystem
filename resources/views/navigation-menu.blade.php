@@ -74,7 +74,7 @@
                     <div class="profile-details">
                         {{--<img src="profile.jpg" alt="i">--}}
                         <div class="name_job">
-                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                            @if (Auth::user())
                                 <div class="name"><span><i
                                             class='bx bxl-product-hunt'></i></span>{{ Auth::user()->name }}</div>
                                 {{--<div class="job">Web designer</div>--}}

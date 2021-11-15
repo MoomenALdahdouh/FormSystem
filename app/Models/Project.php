@@ -25,8 +25,13 @@ class Project extends Model
     public $timestamps = false;
 
     //Here this function to join user table with category table by id and user_id and return one user by hasOne() function
-    public function user()
+    public function createBy()
     {
         return $this->hasOne(User::class, 'id', 'user_fk_id');
+    }
+
+    public function manageBy()
+    {
+        return $this->hasOne(User::class, 'id', 'manager_fk_id');
     }
 }
