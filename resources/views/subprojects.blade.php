@@ -42,7 +42,7 @@
                                         <th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>
                                         <td>{{$subproject->name}}</td>
                                         {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                                        <td>{{$subproject->mainProject->name}}</td>
+                                        <td>{{@$subproject->mainProject->name}}</td>
                                         <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
                                         {{--<td>{{$subproject->name}}</td>--}}  {{--After join with Quiry builder --}}
                                         {{--<td>{{$subproject->created_at}}</td>--}}
@@ -58,8 +58,11 @@
                                                class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>
                                             &nbsp
                                             <a href="{{url('subprojects/edit/'.$subproject->id)}}"
-                                               class="btn btn-outline-primary" title="settings">
+                                               class="btn btn-outline-dark" title="settings">
                                                 <i class="las la-cog"></i></a>
+                                            &nbsp
+                                            <a href="{{url('subprojects/view'.$subproject->id)}}"  class="btn btn-link" title="view">
+                                                <i class="las la-external-link-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -145,7 +148,7 @@
                                         {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
                                         <th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>
                                         <td>{{$subproject->name}}</td>
-                                        <td>{{$subproject->mainProject->name}}</td>
+                                        <td>{{@$subproject->mainProject->name}}</td>
                                         {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
                                         <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
                                         {{--<td>{{$subproject->name}}</td>--}}  {{--After join With Query builder--}}
@@ -162,7 +165,7 @@
                                                class="btn btn-outline-danger" title="force delete"><i class="bx bx-trash"></i></a>
                                             &nbsp
                                             <a href="{{url('subprojects/restore/'.$subproject->id)}}"
-                                               class="btn btn-outline-primary" title="restore"><i class="las la-trash-restore"></i></a>
+                                               class="btn btn-outline-dark" title="restore"><i class="las la-trash-restore"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

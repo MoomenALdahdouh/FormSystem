@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if(Auth::check()) {
+    if (Auth::check()) {
         return redirect()->route('home');
     }
     return view('welcome');
@@ -40,16 +40,20 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
 });*/
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+Route::get('/projects/all', [ProjectController::class, 'all'])->name('projects.all');
+Route::get('/projects/trash', [ProjectController::class, 'trash'])->name('projects.trash');
+Route::get('/projects/project/id/{id}', [ProjectController::class, 'view'])->name('project.view');
+Route::get('/projects/restore/{id}', [ProjectController::class, 'restore'])->name('project.restore');
+Route::get('/projects/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+Route::get('/projects/forcedelete/{id}', [ProjectController::class, 'forcedestroy'])->name('forcedestroy');
 Route::post('/projects/add', [ProjectController::class, 'store'])->name('project.add');
-Route::get('/projects/delete/{id}',[ProjectController::class,'destroy'])->name('destroy');
-Route::get('/projects/forcedelete/{id}',[ProjectController::class,'forcedestroy'])->name('forcedestroy');
-Route::get('/projects/restore/{id}',[ProjectController::class,'restore'])->name('restore');
+Route::post('/projects/create', [ProjectController::class, 'create'])->name('project.create');
 
 Route::get('/subprojects', [SubprojectController::class, 'index'])->name('subprojects');
 Route::post('/subprojects/add', [SubprojectController::class, 'store'])->name('subproject.add');
-Route::get('/subprojects/delete/{id}',[SubprojectController::class,'destroy'])->name('destroy');
-Route::get('/subprojects/forcedelete/{id}',[SubprojectController::class,'forcedestroy'])->name('forcedestroy');
-Route::get('/subprojects/restore/{id}',[SubprojectController::class,'restore'])->name('restore');
+Route::get('/subprojects/delete/{id}', [SubprojectController::class, 'destroy'])->name('destroy');
+Route::get('/subprojects/forcedelete/{id}', [SubprojectController::class, 'forcedestroy'])->name('forcedestroy');
+Route::get('/subprojects/restore/{id}', [SubprojectController::class, 'restore'])->name('restore');
 
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/projects', function () {
     Route::get('/', [ProjectController::class, 'index']);

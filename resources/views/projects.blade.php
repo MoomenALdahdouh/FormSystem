@@ -1,6 +1,7 @@
 <x-app-layout>
+    @include('alerts')
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Projects') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
         </h2>
@@ -9,65 +10,30 @@
     <br>
     <div class="header-section">
         <div class="container">
+            {{--Section get & add projects--}}
             <div class="row">
+                {{--Alert actions--}}
                 @if(session('successUpdate'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                            <use xlink:href="#check-circle-fill"/>
+                        </svg>
                         <strong>{{session('successUpdate')}}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
                     </div>
                 @endif
+                <button id="sdf" type="button"></button>
+                {{--Section get all project--}}
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">All project</div>
                         <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">SL No</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Created By</th>
-                                    <th scope="col">Manage By</th>
-                                    <th scope="col">Created At</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-
-                                </thead>
-                                <tbody>
-                                @php($count = 1) {{--Here this way to show columen number not work with paging so we use
-                                other way $projects->firstItem()+$loop->index--}}
-                                @foreach($projects as $project)
-                                    <tr>
-                                        {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
-                                        <th scope="row">{{$projects->firstItem()+$loop->index}}</th>
-                                        <td>{{$project->name}}</td>
-                                        {{--<td>{{$project->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                                        <td>{{$project->createBy->name}}</td> {{--Use this when join table by ROM method--}}
-                                        <td>{{@$project->manageBy->name}}</td>
-                                        {{--<td>{{$project->name}}</td>--}}  {{--After join with Quiry builder --}}
-                                        {{--<td>{{$project->created_at}}</td>--}}
-                                        @if($project->created_at == NULL)
-                                            <td><span class="text-danger">No Date Set</span></td>
-                                        @else
-                                            <td>{{\Carbon\Carbon::parse($project->created_at)->diffForHumans()}}</td>
-                                    @endif
-                                    <!--Use this line if you compact users from Auth-->
-                                        <!--Use this line if you compact users from DB to pars the date by carbon library-->
-                                        <td>
-                                            <a href="{{url('projects/delete/'.$project->id)}}"
-                                               class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>
-                                            &nbsp
-                                            <a href="{{url('projects/edit/'.$project->id)}}"  class="btn btn-outline-primary" title="settings">
-                                                <i class="las la-cog"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            {{$projects->links()}}
+                            <div id="table-data">
+                                @include('pagination_projects')
+                            </div>
                         </div>
                     </div>
                 </div>
+                {{--Section add new project--}}
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">Add project</div>
@@ -79,7 +45,9 @@
                                             aria-label="Close"></button>
                                 </div>
                             @endif
-                            <form action="{{route('project.add')}}" method="POST">
+
+                            @include('add_project')
+                            {{--<form action="{{route('project.add')}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Project Name</label>
@@ -96,12 +64,18 @@
                                             <select name="manager" id="manager"
                                                     class="manager-dropdown form-control input-group-lg">
                                                 <option hidden>Select Manager</option>
-                                                @foreach ($users as $user)
-                                                    @if($user->project_fk_id == 0)
-                                                        <option class="alert-warning"
-                                                                value="{{ $user->id }}">{{ $user->name }}</option>
-                                                    @endif
-                                                @endforeach
+                                                @if($users == '[]')
+                                                    <option class="alert-warning"
+                                                            value=""> Empty All managers are busy...
+                                                    </option>
+                                                @else
+                                                    @foreach ($users as $user)
+                                                        @if($user->project_fk_id == 0)
+                                                            <option class="alert-warning"
+                                                                    value="{{ $user->id }}">{{ $user->name }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             </select>
                                             {{csrf_field()}}
                                         </div>
@@ -113,73 +87,145 @@
                                 <button type="submit" class="btn btn-primary"><i class='bx bx-add-to-queue'></i>&nbsp
                                     Add Project
                                 </button>
-                            </form>
+                            </form>--}}
                         </div>
                     </div>
                 </div>
             </div>
             <br>
             <br>
+            {{--Section get all trash projects--}}
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">Trash List</div>
                         <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">SL No</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Created By</th>
-                                    <th scope="col">Manage By</th>
-                                    <th scope="col">Created At</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-
-                                </thead>
-                                <tbody>
-                                @php($count = 1) {{--Here this way to show columen number not work with paging so we use
-                                other way $projects->firstItem()+$loop->index--}}
-                                @foreach($trash as $project)
-                                    <tr>
-                                        {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
-                                        <th scope="row">{{$projects->firstItem()+$loop->index}}</th>
-                                        <td>{{$project->name}}</td>
-                                        {{--<td>{{$project->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                                        <td>{{$project->createBy->name}}</td> {{--Use this when join table by ROM method--}}
-                                        <td>{{@$project->manageBy->name}}</td>
-                                        {{--<td>{{$project->name}}</td>--}}  {{--After join With Query builder--}}
-                                        {{--<td>{{$project->created_at}}</td>--}}
-                                        @if($project->created_at == NULL)
-                                            <td><span class="text-danger">No Date Set</span></td>
-                                        @else
-                                            <td>{{\Carbon\Carbon::parse($project->created_at)->diffForHumans()}}</td>
-                                    @endif
-                                    <!--Use this line if you compact users from Auth-->
-                                        <!--Use this line if you compact users from DB to pars the date by carbon library-->
-                                        <td>
-                                            <a href="{{url('projects/forcedelete/'.$project->id)}}"
-                                               class="btn btn-outline-danger" title="force delete"><i class="fa fa-trash"></i>FORCE DELETE</a>
-                                            &nbsp
-                                            <a href="{{url('projects/restore/'.$project->id)}}"
-                                               class="btn btn-outline-primary" title="restore"><i class="las la-trash-restore"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            {{$trash->links()}}
+                            <div id="table_trash">
+                                @include('pagination_trash_project')
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{--<div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                --}}{{--<x-jet-welcome />--}}{{--
-            </div>
-        </div>
-    </div>--}}
 </x-app-layout>
+<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+<script>
+    $(function () {
+        $(document).ready(function () {
+            $('body').on('click', '#table-data .pagination a', function () {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                fetch_projects(page);
+            });
+
+            $('#table_trash').on('click', '.pagination a', function () {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                fetch_trash_projects(page);
+            });
+
+            $('.delete').click(function () {
+                var project_id = document.getElementById('project_id').value;
+                delete_project(project_id);
+
+            });
+            $('.force_delete').click(function () {
+                var project_id = document.getElementById('project_id').value;
+                force_delete_project(project_id);
+
+            });
+
+            $('#add_project').click(function () {
+                var project_name = document.getElementById('name').value;
+                var manager_id = document.getElementById('manager').value;
+                add_project(project_name, manager_id);
+            });
+            Array.from(document.querySelectorAll('.restore')).forEach(bttn => {
+                bttn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    let project_id = e.target.parentNode.querySelector('#project_id').value;
+                    restore_project(project_id);
+                });
+            });
+            /*$('.restore').click(function () {
+                var project_id = document.getElementById('project_id').value;
+                restore_project(project_id);
+
+            });*/
+        });
+
+        function fetch_projects(page) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('projects.all') }}" + "?page=" + page,
+                success: function (response) {
+                    $('#table-data').html(response)
+                }
+            });
+        }
+
+        function fetch_trash_projects(page) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('projects.trash') }}" + "?page=" + page,
+                success: function (response) {
+                    $('#table_trash').html(response)
+                }
+            });
+        }
+
+        function delete_project(id) {
+            $.ajax({
+                type: "get",
+                url: "/projects/delete/" + id,
+                data: {
+                    _token: $("input[name=_token]").val()
+                },
+                success: function (response) {
+                    fetch_projects(1)
+                    fetch_trash_projects(1)
+                }
+            });
+        }
+
+        function force_delete_project(id) {
+            $.ajax({
+                type: "GET",
+                url: "/projects/forcedelete/" + id,
+                data: {
+                    _token: $("input[name=_token]").val()
+                },
+                success: function (response) {
+                    fetch_trash_projects(1)
+                }
+            });
+        }
+
+        function restore_project(id) {
+            $.ajax({
+                type: "GET",
+                url: "/projects/restore/" + id,
+                data: {
+                    _token: $("input[name=_token]").val()
+                },
+                success: function (response) {
+                    fetch_projects(1)
+                    fetch_trash_projects(1)
+                }
+            });
+        }
+
+        function add_project(project_name, manager_id) {
+            $.ajax({
+                method: "POST",
+                url: "{{route('project.create')}}",
+                data: {_token: $("input[name=_token]").val(), name: project_name, manager: manager_id},
+                success: function (response) {
+                    fetch_projects(1)
+                }
+            });
+        }
+    });
+</script>
