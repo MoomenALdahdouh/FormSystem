@@ -34,4 +34,9 @@ class Project extends Model
     {
         return $this->hasOne(User::class, 'id', 'manager_fk_id');
     }
+
+    public function subproject()
+    {
+        return $this->hasMany(Subproject::class, 'project_fk_id', 'id');
+    }
 }

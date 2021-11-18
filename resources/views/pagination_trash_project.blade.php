@@ -1,6 +1,6 @@
 <table class="trash_trash table">
     <thead>
-    <tr>
+    <tr class=" text-dark">
         <th scope="col">SL No</th>
         <th scope="col">Name</th>
         <th scope="col">Created By</th>
@@ -36,7 +36,7 @@
             <td>
                 <input value="{{$project->id}}" type="hidden" id="project_id">
                 <button
-                        class="force_delete btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></button>
+                        class="force_delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
                 {{--<a href="{{url('projects/forcedelete/'.$project->id)}}"
                    class="btn btn-outline-danger" title="force delete"><i
                         class="fa fa-trash"></i>FORCE DELETE</a>--}}
@@ -45,9 +45,9 @@
                    class="btn btn-outline-dark" title="restore"><i
                         class="las la-trash-restore"></i></a>--}}
                 <button
-                        class="restore btn btn-outline-dark" title="restore"><i class="las la-trash-restore"></i></button>
+                        class="restore btn-outline-dark sm:rounded-md" title="restore"><i class="las la-trash-restore"></i></button>
                 &nbsp
-                <a href="{{url('projects/project/id/'.$project->id)}}" class="btn btn-link" title="view">
+                <a href="{{url('projects/project/id/'.$project->id)}}" class="btn-outline-primary sm:rounded-md" title="view">
                     <i class="las la-external-link-alt"></i></a>
             </td>
         </tr>
@@ -56,7 +56,7 @@
 </table>
 {{$trash->links()}}
 
-{{--<script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         $(document).ready(function () {
             $('body').on('click', '#table-data .pagination a', function () {
@@ -82,11 +82,12 @@
 
             });
 
-            $('#add_project').click(function () {
+            /*$('#add_project').click(function () {
                 var project_name = document.getElementById('name').value;
                 var manager_id = document.getElementById('manager').value;
                 add_project(project_name, manager_id);
-            });
+            });*/
+
             Array.from(document.querySelectorAll('.restore')).forEach(bttn => {
                 bttn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -173,5 +174,5 @@
             });
         }
     });
-</script>--}}
+</script>
 

@@ -55,13 +55,14 @@
                                         <!--Use this line if you compact users from DB to pars the date by carbon library-->
                                         <td>
                                             <a href="{{url('subprojects/delete/'.$subproject->id)}}"
-                                               class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>
+                                               class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></a>
                                             &nbsp
                                             <a href="{{url('subprojects/edit/'.$subproject->id)}}"
-                                               class="btn btn-outline-dark" title="settings">
+                                               class="btn-outline-dark sm:rounded-md" title="settings">
                                                 <i class="las la-cog"></i></a>
                                             &nbsp
-                                            <a href="{{url('subprojects/view'.$subproject->id)}}"  class="btn btn-link" title="view">
+                                            <a href="{{url('subprojects/view'.$subproject->id)}}" class="btn-outline-primary sm:rounded-md"
+                                               title="view">
                                                 <i class="las la-external-link-alt"></i></a>
                                         </td>
                                     </tr>
@@ -72,9 +73,10 @@
                         </div>
                     </div>
                 </div>
+                {{--create subproject--}}
                 <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">Add subproject</div>
+                    <div class="card shadow">
+                        <div class="card-header alert-secondary text-dark"><strong>Create new Subproject</strong></div>
                         <div class="card-body">
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -112,8 +114,9 @@
                                     @enderror
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary"><i class='bx bx-add-to-queue'></i>&nbsp
-                                    Add subProject
+                                <button type="submit" class="btn btn-primary float-right"><i
+                                        class='bx bx-add-to-queue'></i>&nbsp
+                                    Create
                                 </button>
                             </form>
                         </div>
@@ -162,10 +165,16 @@
                                         <!--Use this line if you compact users from DB to pars the date by carbon library-->
                                         <td>
                                             <a href="{{url('subprojects/forcedelete/'.$subproject->id)}}"
-                                               class="btn btn-outline-danger" title="force delete"><i class="bx bx-trash"></i></a>
+                                               class="btn-outline-danger sm:rounded-md" title="force delete"><i
+                                                    class="bx bx-trash"></i></a>
                                             &nbsp
                                             <a href="{{url('subprojects/restore/'.$subproject->id)}}"
-                                               class="btn btn-outline-dark" title="restore"><i class="las la-trash-restore"></i></a>
+                                               class="btn-outline-dark sm:rounded-md" title="restore"><i
+                                                    class="las la-trash-restore"></i></a>
+                                            &nbsp
+                                            <a href="{{url('subprojects/view'.$subproject->id)}}" class="btn-outline-primary sm:rounded-md"
+                                               title="view">
+                                                <i class="las la-external-link-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -178,11 +187,14 @@
             </div>
         </div>
     </div>
-    {{--<div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                --}}{{--<x-jet-welcome />--}}{{--
-            </div>
-        </div>
-    </div>--}}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </x-app-layout>

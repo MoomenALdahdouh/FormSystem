@@ -1,5 +1,5 @@
 <x-app-layout>
-    @include('alerts')
+    <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <x-slot name="header">
         <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Projects') }}
@@ -24,8 +24,10 @@
                 <button id="sdf" type="button"></button>
                 {{--Section get all project--}}
                 <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">All project</div>
+                    <div class="card shadow">
+                        <div class="card-header alert-secondary">
+                            <strong>Project List</strong>
+                        </div>
                         <div class="card-body">
                             <div id="table-data">
                                 @include('pagination_projects')
@@ -35,8 +37,8 @@
                 </div>
                 {{--Section add new project--}}
                 <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">Add project</div>
+                    <div class="card shadow">
+                        <div class="card-header alert-secondary text-dark"><strong>Create new Project</strong></div>
                         <div class="card-body">
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -46,8 +48,8 @@
                                 </div>
                             @endif
 
-                            @include('add_project')
-                            {{--<form action="{{route('project.add')}}" method="POST">
+                            {{-- @include('add_project')--}}
+                            <form action="{{route('project.add')}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Project Name</label>
@@ -64,6 +66,9 @@
                                             <select name="manager" id="manager"
                                                     class="manager-dropdown form-control input-group-lg">
                                                 <option hidden>Select Manager</option>
+                                                @php
+                                                    $count = 0;
+                                                @endphp
                                                 @if($users == '[]')
                                                     <option class="alert-warning"
                                                             value=""> Empty All managers are busy...
@@ -71,10 +76,18 @@
                                                 @else
                                                     @foreach ($users as $user)
                                                         @if($user->project_fk_id == 0)
-                                                            <option class="alert-warning"
+                                                            @php
+                                                                $count =+ 1;
+                                                            @endphp
+                                                            <option class="alert-dark"
                                                                     value="{{ $user->id }}">{{ $user->name }}</option>
                                                         @endif
                                                     @endforeach
+                                                    @if($count==0)
+                                                        <option class="alert-warning"
+                                                                value=""> Empty All managers are busy...
+                                                        </option>
+                                                    @endif
                                                 @endif
                                             </select>
                                             {{csrf_field()}}
@@ -84,10 +97,10 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary"><i class='bx bx-add-to-queue'></i>&nbsp
-                                    Add Project
+                                <button type="submit" class="btn btn-primary float-right"><i class='bx bx-add-to-queue'></i>&nbsp
+                                    Create
                                 </button>
-                            </form>--}}
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -97,8 +110,9 @@
             {{--Section get all trash projects--}}
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Trash List</div>
+                    <div class="card shadow">
+                        <div class="card-header alert-secondary">
+                            <strong>Trash List</strong></div>
                         <div class="card-body">
                             <div id="table_trash">
                                 @include('pagination_trash_project')
@@ -109,123 +123,15 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </x-app-layout>
-<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
-<script>
-    $(function () {
-        $(document).ready(function () {
-            $('body').on('click', '#table-data .pagination a', function () {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_projects(page);
-            });
 
-            $('#table_trash').on('click', '.pagination a', function () {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_trash_projects(page);
-            });
-
-            $('.delete').click(function () {
-                var project_id = document.getElementById('project_id').value;
-                delete_project(project_id);
-
-            });
-            $('.force_delete').click(function () {
-                var project_id = document.getElementById('project_id').value;
-                force_delete_project(project_id);
-
-            });
-
-            $('#add_project').click(function () {
-                var project_name = document.getElementById('name').value;
-                var manager_id = document.getElementById('manager').value;
-                add_project(project_name, manager_id);
-            });
-            Array.from(document.querySelectorAll('.restore')).forEach(bttn => {
-                bttn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    let project_id = e.target.parentNode.querySelector('#project_id').value;
-                    restore_project(project_id);
-                });
-            });
-            /*$('.restore').click(function () {
-                var project_id = document.getElementById('project_id').value;
-                restore_project(project_id);
-
-            });*/
-        });
-
-        function fetch_projects(page) {
-            $.ajax({
-                type: "GET",
-                url: "{{ route('projects.all') }}" + "?page=" + page,
-                success: function (response) {
-                    $('#table-data').html(response)
-                }
-            });
-        }
-
-        function fetch_trash_projects(page) {
-            $.ajax({
-                type: "GET",
-                url: "{{ route('projects.trash') }}" + "?page=" + page,
-                success: function (response) {
-                    $('#table_trash').html(response)
-                }
-            });
-        }
-
-        function delete_project(id) {
-            $.ajax({
-                type: "get",
-                url: "/projects/delete/" + id,
-                data: {
-                    _token: $("input[name=_token]").val()
-                },
-                success: function (response) {
-                    fetch_projects(1)
-                    fetch_trash_projects(1)
-                }
-            });
-        }
-
-        function force_delete_project(id) {
-            $.ajax({
-                type: "GET",
-                url: "/projects/forcedelete/" + id,
-                data: {
-                    _token: $("input[name=_token]").val()
-                },
-                success: function (response) {
-                    fetch_trash_projects(1)
-                }
-            });
-        }
-
-        function restore_project(id) {
-            $.ajax({
-                type: "GET",
-                url: "/projects/restore/" + id,
-                data: {
-                    _token: $("input[name=_token]").val()
-                },
-                success: function (response) {
-                    fetch_projects(1)
-                    fetch_trash_projects(1)
-                }
-            });
-        }
-
-        function add_project(project_name, manager_id) {
-            $.ajax({
-                method: "POST",
-                url: "{{route('project.create')}}",
-                data: {_token: $("input[name=_token]").val(), name: project_name, manager: manager_id},
-                success: function (response) {
-                    fetch_projects(1)
-                }
-            });
-        }
-    });
-</script>

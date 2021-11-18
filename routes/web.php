@@ -42,7 +42,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/all', [ProjectController::class, 'all'])->name('projects.all');
 Route::get('/projects/trash', [ProjectController::class, 'trash'])->name('projects.trash');
-Route::get('/projects/project/id/{id}', [ProjectController::class, 'view'])->name('project.view');
+Route::get('/projects/view/{id}', [ProjectController::class, 'show'])->name('project.view');
+Route::get('/projects/edit/{id}', [ProjectController::class, 'show'])->name('project.edit');
 Route::get('/projects/restore/{id}', [ProjectController::class, 'restore'])->name('project.restore');
 Route::get('/projects/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
 Route::get('/projects/forcedelete/{id}', [ProjectController::class, 'forcedestroy'])->name('forcedestroy');

@@ -16,8 +16,8 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::latest()->paginate(1);
-        $trash = Project::onlyTrashed()->latest()->paginate(1);
+        $projects = Project::latest()->paginate(6);
+        $trash = Project::onlyTrashed()->latest()->paginate(6);
         $users = User::query()->where('type', 1)->get();
         $data['projects'] = $projects;
         $data['trash'] = $trash;
@@ -28,7 +28,7 @@ class ProjectController extends Controller
     public function all(Request $request)
     {
         if ($request->ajax()) {
-            $projects = Project::latest()->paginate(1);
+            $projects = Project::latest()->paginate(6);
             return view('pagination_projects', compact('projects'))->render();
         }
     }
@@ -36,7 +36,7 @@ class ProjectController extends Controller
     public function trash(Request $request)
     {
         if ($request->ajax()) {
-            $trash = Project::onlyTrashed()->latest()->paginate(1);
+            $trash = Project::onlyTrashed()->latest()->paginate(6);
             return view('pagination_trash_project', compact('trash'))->render();
         }
     }
@@ -89,7 +89,8 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        return $id ? Project::find($id) : Project::all();
+        $project =  Project::find($id);
+        return view('view_project',compact('project'));
     }
 
     public function edit($id)

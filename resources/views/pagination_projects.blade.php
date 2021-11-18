@@ -1,6 +1,6 @@
 <table id="project_table" class="table">
     <thead>
-    <tr>
+    <tr class=" text-dark">
         <th scope="col">SL No</th>
         <th scope="col">Name</th>
         <th scope="col">Created By</th>
@@ -34,12 +34,12 @@
                    class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>--}}
                 <input value="{{$project->id}}" type="hidden" id="project_id">
                 <button
-                    class="delete btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></button>
+                    class="delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
                 &nbsp
-                <a href="{{url('projects/edit/'.$project->id)}}" class="btn btn-outline-dark" title="settings">
+                <a href="{{url('projects/edit/'.$project->id)}}" class="btn-outline-dark sm:rounded-md" title="settings">
                     <i class="las la-cog"></i></a>
                 &nbsp
-                <a href="{{url('projects/project/id/'.$project->id)}}" class="btn btn-link" title="view">
+                <a href="{{url('projects/view/'.$project->id)}}" class="btn-outline-primary sm:rounded-md" title="view">
                     <i class="las la-external-link-alt"></i></a>
             </td>
         </tr>
@@ -49,7 +49,7 @@
 {{ $projects->links() }}
 {{--{!! $projects->links() !!}--}}
 
-{{--<script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         $(document).ready(function () {
             $('body').on('click', '#table-data .pagination a', function () {
@@ -75,11 +75,12 @@
 
             });
 
-            $('#add_project').click(function () {
+            /*$('#add_project').click(function () {
                 var project_name = document.getElementById('name').value;
                 var manager_id = document.getElementById('manager').value;
                 add_project(project_name, manager_id);
-            });
+            });*/
+
             Array.from(document.querySelectorAll('.restore')).forEach(bttn => {
                 bttn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -166,7 +167,7 @@
             });
         }
     });
-</script>--}}
+</script>
 
 
 
