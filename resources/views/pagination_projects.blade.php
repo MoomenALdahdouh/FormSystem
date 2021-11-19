@@ -84,6 +84,7 @@
             Array.from(document.querySelectorAll('.restore')).forEach(bttn => {
                 bttn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    //var project_id = document.getElementById('project_id').value;
                     let project_id = e.target.parentNode.querySelector('#project_id').value;
                     restore_project(project_id);
                 });

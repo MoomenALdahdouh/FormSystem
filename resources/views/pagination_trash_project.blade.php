@@ -36,7 +36,8 @@
             <td>
                 <input value="{{$project->id}}" type="hidden" id="project_id">
                 <button
-                        class="force_delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
+                    class="force_delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i>
+                </button>
                 {{--<a href="{{url('projects/forcedelete/'.$project->id)}}"
                    class="btn btn-outline-danger" title="force delete"><i
                         class="fa fa-trash"></i>FORCE DELETE</a>--}}
@@ -45,9 +46,11 @@
                    class="btn btn-outline-dark" title="restore"><i
                         class="las la-trash-restore"></i></a>--}}
                 <button
-                        class="restore btn-outline-dark sm:rounded-md" title="restore"><i class="las la-trash-restore"></i></button>
+                    class="restore btn-outline-dark sm:rounded-md" title="restore"><i class="las la-trash-restore"></i>
+                </button>
                 &nbsp
-                <a href="{{url('projects/project/id/'.$project->id)}}" class="btn-outline-primary sm:rounded-md" title="view">
+                <a href="{{url('projects/project/id/'.$project->id)}}" class="btn-outline-primary sm:rounded-md"
+                   title="view">
                     <i class="las la-external-link-alt"></i></a>
             </td>
         </tr>
@@ -92,6 +95,8 @@
                 bttn.addEventListener('click', (e) => {
                     e.preventDefault();
                     let project_id = e.target.parentNode.querySelector('#project_id').value;
+                    //var project_id = document.getElementById('project_id').value;
+                    //console.log(parseInt(project_id))
                     restore_project(project_id);
                 });
             });

@@ -43,7 +43,7 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
-        if ($request->ajax()){
+        if ($request->ajax()) {
             $data = new Project();
             $data->name = $request->name;
             $data->user_fk_id = Auth::user()->id;
@@ -89,23 +89,19 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        $project =  Project::find($id);
-        return view('view_project',compact('project'));
+        $project = Project::find($id);
+        return view('view_project', compact('project'));
     }
 
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+        return view('edit_project', compact('project'));
     }
 
     public function update(Request $request, $id)
     {
-        /**Using ORM Method*/
-        /*$categories = Category::find($id);*/
-        /**Using Query builder*/
-        $categories = DB::table('categories')->where('id', $id)->first();
 
-        return view('admin.categories.edit', compact('categories'));
     }
 
     public function search($string)

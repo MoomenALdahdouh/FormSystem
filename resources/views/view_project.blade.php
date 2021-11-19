@@ -72,12 +72,17 @@
                                             </strong>
                                             <br>
                                             <p> &nbsp &nbsp {{$project->createBy->name}}</p>
-
                                             <div class="">
                                                 <strong><i class="las la-calendar-check text-primary"></i>Created At
                                                 </strong>
                                                 <br>
-                                                &nbsp &nbsp {{$project->created_at}}
+                                               <p>&nbsp &nbsp {{$project->created_at}}</p>
+                                            </div>
+                                            <div class="">
+                                                <strong><i class="las la-clock text-primary"></i></i>&nbsp Update At
+                                                </strong>
+                                                <br>
+                                                <p>&nbsp &nbsp {{$project->updated_at}}</p>
                                             </div>
                                         </div>
 
