@@ -1,5 +1,5 @@
 <x-app-layout>
-    <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+    {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>--}}
     <x-slot name="header">
         <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Projects') }}

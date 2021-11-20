@@ -118,7 +118,7 @@
 
         function delete_project(id) {
             $.ajax({
-                type: "get",
+                type: "delete",
                 url: "/projects/delete/" + id,
                 data: {
                     _token: $("input[name=_token]").val()

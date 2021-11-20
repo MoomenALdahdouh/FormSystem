@@ -44,8 +44,10 @@ Route::get('/projects/all', [ProjectController::class, 'all'])->name('projects.a
 Route::get('/projects/trash', [ProjectController::class, 'trash'])->name('projects.trash');
 Route::get('/projects/view/{id}', [ProjectController::class, 'show'])->name('project.view');
 Route::get('/projects/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+Route::post('/projects/update/{id}', [ProjectController::class, 'update'])->name('project.update');
 Route::get('/projects/restore/{id}', [ProjectController::class, 'restore'])->name('project.restore');
-Route::get('/projects/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+Route::delete('/projects/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+//Route::get('/projects/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
 Route::get('/projects/forcedelete/{id}', [ProjectController::class, 'forcedestroy'])->name('forcedestroy');
 Route::post('/projects/add', [ProjectController::class, 'store'])->name('project.add');
 Route::post('/projects/create', [ProjectController::class, 'create'])->name('project.create');

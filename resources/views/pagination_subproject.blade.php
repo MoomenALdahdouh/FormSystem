@@ -42,7 +42,10 @@
                     <i class="las la-external-link-alt"></i></a>
             </td>
         </tr>
+        <input type="hidden" id="subproject-size" name="subproject-size"
+               value="{{$count}}">
     @endforeach
     </tbody>
 </table>
+
 {{--{{$project->subproject->links()}}--}}

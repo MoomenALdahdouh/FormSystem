@@ -19,7 +19,7 @@
                 @endif
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">All subproject</div>
+                        <div class="card-header alert-secondary"><strong>All subproject</strong></div>
                         <div class="card-body">
                             <table class="table">
                                 <thead>
@@ -129,7 +129,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Trash List</div>
+                        <div class="card-header alert-secondary"><strong>Trash List</strong></div>
                         <div class="card-body">
                             <table class="table">
                                 <thead>
