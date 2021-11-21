@@ -122,7 +122,8 @@
 $(function () {
     $(document).ready(function () {
         /*Project settings*/
-        var status = document.getElementById('flexSwitchCheckChecked').value;
+        var status = 0;
+        //var status = document.getElementById('flexSwitchCheckChecked').value;
         $('#update-project').click(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
@@ -133,6 +134,7 @@ $(function () {
         });
 
         $('#flexSwitchCheckChecked').click(function () {
+            status = document.getElementById('flexSwitchCheckChecked').value;
             /*var status = document.getElementsByClassName("status-project");
             const status_active = document.getElementById("status-active").innerHTML;
             const status_pended = document.getElementById("status-pended").innerHTML;*/
@@ -160,26 +162,26 @@ $(function () {
 
         /*Start Users*/
         /*Admin*/
-        $('#admin-table').DataTable({
+        /*$('#users-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax:{
-                url:"admins"
+            ajax: {
+                url: "/users/admin"
             },
-            columns:[
+            columns: [
                 {
-                    data:'id',
-                    name:'no',
-                },{
-                    data:'name',
-                    name:'name',
-                },{
-                    data:'action',
-                    name:'action',
-                    orderable:false
+                    data: 'id',
+                    name: 'no',
+                }, {
+                    data: 'name',
+                    name: 'name',
+                }, {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false
                 },
             ]
-        });
+        });*/
     })
 
     function edit_project(id, name, description, status) {

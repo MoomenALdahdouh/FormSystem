@@ -7,12 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="table-responsive">
-                    <table id="admin-table" class="table table-bordered table-striped">
-                        <thead>
-                        <tr class="text-center">
-                            <th>No</th>
+            <div class="bg-white overflow-hidden shadow-xl ">
+                <div class="table-responsive" style="padding: 30px">
+                    {{--<div class="card-header alert-secondary">
+                        <strong>Project List</strong>
+                    </div>--}}
+                    <table id="users-table" class="text-center table table-bordered table-striped" style="width: 100%; padding-top: 30px">
+                        <thead class="text-light" style="background-color: #11101D">
+                        <tr>
+                            <th>SL No</th>
                             <th>Name</th>
                             <th>Action</th>
                         </tr>
@@ -21,5 +24,33 @@
                 </div>
             </div>
         </div>
+        <script>
+            $('#users-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "/users/admin"
+                },
+                columns: [
+                    {
+                        name: 'no',
+                    }, {
+                        data: 'name',
+                        name: 'name',
+                    }, {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false
+                    },
+
+                ],
+                "columnDefs": [{
+                    "render": function (data, type, full, meta) {
+                        return meta.row + 1; // adds id to serial no
+                    },
+                    "targets": 0
+                }],
+            });
+        </script>
     </div>
 </x-app-layout>

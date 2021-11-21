@@ -26,7 +26,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "/users/workers"
+                    url: "/users/managers"
                 },
                 columns: [
                     {

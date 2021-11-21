@@ -61,7 +61,9 @@ Route::get('/subprojects/forcedelete/{id}', [SubprojectController::class, 'force
 Route::get('/subprojects/restore/{id}', [SubprojectController::class, 'restore'])->name('restore');
 
 Route::get('/users', [UserController::class, 'index'])->name('users');
-
+Route::get('/users/admin', [UserController::class, 'admin'])->name('users.admin');
+Route::get('/users/managers', [UserController::class, 'managers'])->name('users.managers');
+Route::get('/users/workers', [UserController::class, 'workers'])->name('users.workers');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
