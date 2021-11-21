@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubprojectController;
+use App\Http\Controllers\UserController;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,31 +60,21 @@ Route::get('/subprojects/delete/{id}', [SubprojectController::class, 'destroy'])
 Route::get('/subprojects/forcedelete/{id}', [SubprojectController::class, 'forcedestroy'])->name('forcedestroy');
 Route::get('/subprojects/restore/{id}', [SubprojectController::class, 'restore'])->name('restore');
 
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/projects', function () {
-    Route::get('/', [ProjectController::class, 'index']);
+Route::get('/users', [UserController::class, 'index'])->name('users');
 
-    Route::get('/{id}', [ProjectController::class, 'show']);
 
-    Route::post('/add', [ProjectController::class, 'store']);
-
-    Route::put('/edit/{id}', [ProjectController::class, 'update']);
-
-    Route::get('/search/{string}', [ProjectController::class, 'search']);
-
-    Route::delete('/delete/{id}', [ProjectController::class, 'destroy']);
-})->name('projects');*/
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/subprojects', function () {
-    return view('subprojects');
-})->name('subprojects');*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
     return view('activities');
 })->name('activities');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/users', function () {
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/users', function () {
     return view('users');
-})->name('users');
+})->name('users');*/
+
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/admins', function () {
+    return view('admins');
+})->name('admins');*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/workers', function () {
     return view('workers');
@@ -105,3 +97,20 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/workers', function () {
 
 });*/
 
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/projects', function () {
+    Route::get('/', [ProjectController::class, 'index']);
+
+    Route::get('/{id}', [ProjectController::class, 'show']);
+
+    Route::post('/add', [ProjectController::class, 'store']);
+
+    Route::put('/edit/{id}', [ProjectController::class, 'update']);
+
+    Route::get('/search/{string}', [ProjectController::class, 'search']);
+
+    Route::delete('/delete/{id}', [ProjectController::class, 'destroy']);
+})->name('projects');*/
+
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/subprojects', function () {
+    return view('subprojects');
+})->name('subprojects');*/

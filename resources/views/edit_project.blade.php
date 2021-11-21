@@ -143,10 +143,10 @@
                                                 <div class="form-check form-switch">
                                                     @if($project->status == 1)
                                                         <input class="form-check-input" type="checkbox"
-                                                               id="flexSwitchCheckChecked" value="0" checked>
+                                                               id="flexSwitchCheckChecked" value="1" checked>
                                                     @else
                                                         <input class="form-check-input" type="checkbox"
-                                                               id="flexSwitchCheckChecked" value="1">
+                                                               id="flexSwitchCheckChecked" value="0">
                                                     @endif
                                                 </div>
                                             </div>

@@ -121,10 +121,12 @@
 /*start Project Setting and edit*/
 $(function () {
     $(document).ready(function () {
+        /*Project settings*/
+        var status = document.getElementById('flexSwitchCheckChecked').value;
         $('#update-project').click(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
-            var status = document.getElementById('flexSwitchCheckChecked').value;
+            //var status = document.getElementById('flexSwitchCheckChecked').value;
             var id = document.getElementById('project-id').value;
             console.log(id, name, description, status)
             edit_project(id, name, description, status);
@@ -138,9 +140,11 @@ $(function () {
             if (isChecked) {
                 $('#status-project').html("Active");
                 $('#status-project').css("background-color", "#3fd9cb");
+                status = 1;
             } else {
                 $('#status-project').html("Pended");
                 $('#status-project').css("background-color", "#d93f51");
+                status = 0;
             }
         })
 
@@ -149,8 +153,32 @@ $(function () {
             var subproject_size = document.getElementById('subproject-size').value;
             if (subproject_size === 0)
                 delete_project(project_id)
-            else
-                $('#login-modal-message').modal('show');
+            else {
+                $('#can-not-remove').modal('show');
+            }
+        });
+
+        /*Start Users*/
+        /*Admin*/
+        $('#admin-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax:{
+                url:"admins"
+            },
+            columns:[
+                {
+                    data:'id',
+                    name:'no',
+                },{
+                    data:'name',
+                    name:'name',
+                },{
+                    data:'action',
+                    name:'action',
+                    orderable:false
+                },
+            ]
         });
     })
 
@@ -167,7 +195,7 @@ $(function () {
             },
             success: function (response) {
                 //alert(response['success'])
-                $('#login-modal-message').modal('show');
+                $('#successfully-save').modal('show');
             }
         });
     }
@@ -185,5 +213,12 @@ $(function () {
         });
     }
 });
+/*End Project Setting and edit*/
 
+/*Start Users*/
+/*Admin*/
+
+/*End Users*/
+
+/*End Project Setting and edit*/
 /*End Project Setting and edit*/

@@ -41,12 +41,22 @@
                 <span class="tooltip">{{ __('Subprojects') }}</span>
             </li>
             <li>
-                <a href="{{ route('users') }}">
-                    <i class='bx bx-user'></i>
+                <div class="iocn-link">
+{{--                    {{ route('users') }}--}}
+                    <a href="#">
+                        <i class='bx bx-user'></i>
 
-                    <span class="links_name">{{ __('Users') }}</span>
-                </a>
-                <span class="tooltip">{{ __('Users') }}</span>
+                        <span class="links_name">{{ __('Users') }}</span>
+                    </a>
+                    <span class="tooltip">{{ __('Users') }}</span>
+                    <i class='bx bxs-chevron-down arrow' ></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">{{ __('Users') }}</a></li>
+                    <li><a href="{{ route('users') }}">Admins</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Workers</a></li>
+                </ul>
             </li>
             <li>
                 <a href="{{ route('activities') }}">
@@ -94,20 +104,20 @@
             </li>
         </ul>
     </div>
-   {{-- <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu'></i>
-            <span class="text">Drop Down Sidebar</span>
-        </div>
-    </section>--}}
+    {{-- <section class="home-section">
+         <div class="home-content">
+             <i class='bx bx-menu'></i>
+             <span class="text">Drop Down Sidebar</span>
+         </div>
+     </section>--}}
     <script>
-        /*let arrow = document.querySelectorAll(".arrow");
+        let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=>{
+            arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
                 arrowParent.classList.toggle("showMenu");
             });
-        }*/
+        }
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".bx-menu");
         console.log(sidebarBtn);
