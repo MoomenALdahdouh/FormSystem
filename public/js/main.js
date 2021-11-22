@@ -159,29 +159,6 @@ $(function () {
                 $('#can-not-remove').modal('show');
             }
         });
-
-        /*Start Users*/
-        /*Admin*/
-        /*$('#users-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "/users/admin"
-            },
-            columns: [
-                {
-                    data: 'id',
-                    name: 'no',
-                }, {
-                    data: 'name',
-                    name: 'name',
-                }, {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false
-                },
-            ]
-        });*/
     })
 
     function edit_project(id, name, description, status) {

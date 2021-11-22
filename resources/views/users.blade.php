@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admins') }}
+            {{ __('Users') }}
         </h2>
     </x-slot>
 
@@ -15,6 +15,10 @@
                         <tr>
                             <th>SL No</th>
                             <th>Name</th>
+                            <th>Email</th>
+                            <th>Created At</th>
+                            <th>Type</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -36,6 +40,18 @@
                         data: 'name',
                         name: 'name',
                     }, {
+                        data: 'email',
+                        name: 'email',
+                    }, {
+                        data: 'created_at',
+                        name: 'created_at',
+                    }, {
+                        data: 'type',
+                        name: 'type',
+                    }, {
+                        data: 'status',
+                        name: 'status',
+                    }, {
                         data: 'action',
                         name: 'action',
                         orderable: false,
@@ -51,18 +67,18 @@
             });
 
             $(document).on('click', '#view', function () {
-                alert("ass")
-                location.href = "/users/view/1";
+                var id = $(this).data('id');
+                location.href = "/users/view/" + id;
             });
 
             $(document).on('click', '#edit', function () {
-                alert("ass")
-                location.href = "/users/view/1";
+                var id = $(this).data('id');
+                location.href = "/users/edit/" + id;
             });
 
             $(document).on('click', '#delete', function () {
-                alert("ass")
-                location.href = "/users/view/1";
+                var id = $(this).data('id');
+                location.href = "/users/delete/" + id;
             });
 
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admins') }}
+            {{ __('Workers') }}
         </h2>
     </x-slot>
 
@@ -46,6 +46,20 @@
                     },
                     "targets": 0
                 }],
+            });
+            $(document).on('click', '#view', function () {
+                var id = $(this).data('id');
+                location.href = "/users/view/" + id;
+            });
+
+            $(document).on('click', '#edit', function () {
+                var id = $(this).data('id');
+                location.href = "/users/edit/" + id;
+            });
+
+            $(document).on('click', '#delete', function () {
+                var id = $(this).data('id');
+                location.href = "/users/delete/" + id;
             });
         </script>
     </div>

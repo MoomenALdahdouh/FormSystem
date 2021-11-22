@@ -457,7 +457,7 @@
     float: none;
 }
 
-.paragraph-title {
+.paragraph-active {
     background-color: #3fd9cb;
     color: #FFF;
     border-radius: 12px;
@@ -487,6 +487,30 @@
 }
 
 /*end view project page style */
+
+/*Users types*/
+.paragraph-admin {
+    background-color: #002677;
+    color: #FFF;
+    border-radius: 12px;
+    display: inline-flex;
+    padding: 0 12px;
+}
+.paragraph-manager {
+    background-color: #00a445;
+    color: #FFF;
+    border-radius: 12px;
+    display: inline-flex;
+    padding: 0 12px;
+}
+.paragraph-worker {
+    background-color: #f89500;
+    color: #FFF;
+    border-radius: 12px;
+    display: inline-flex;
+    padding: 0 12px;
+}
+/*Users types*/
 
 /*start models alert style */
 .model-style {

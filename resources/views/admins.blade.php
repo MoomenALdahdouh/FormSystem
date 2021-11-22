@@ -51,6 +51,20 @@
                     "targets": 0
                 }],
             });
+            $(document).on('click', '#view', function () {
+                var id = $(this).data('id');
+                location.href = "/users/view/" + id;
+            });
+
+            $(document).on('click', '#edit', function () {
+                var id = $(this).data('id');
+                location.href = "/users/edit/" + id;
+            });
+
+            $(document).on('click', '#delete', function () {
+                var id = $(this).data('id');
+                location.href = "/users/delete/" + id;
+            });
         </script>
     </div>
 </x-app-layout>

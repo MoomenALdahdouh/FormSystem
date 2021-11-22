@@ -134,7 +134,7 @@
                                              style=" margin: 0; padding-left:0; padding-right: 0">
                                             <div class="col-md-11">
                                                 @if($project->status == 1)
-                                                    <strong id="status-project" class=" paragraph-title shadow">Active</strong>
+                                                    <strong id="status-project" class=" paragraph-active shadow">Active</strong>
                                                 @else
                                                     <strong id="status-project" class=" paragraph-pended shadow">Pended</strong>
                                                 @endif

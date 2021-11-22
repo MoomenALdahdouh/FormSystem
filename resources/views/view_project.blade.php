@@ -44,7 +44,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <p class="paragraph-title shadow">
+                                        <p class="paragraph-active shadow">
                                             @if($project->status == 1)
                                                 Active
                                             @else
@@ -102,7 +102,7 @@
                             <p class="hint">manager</p>
                             <p><strong>{{$project->manageBy->name}}</strong><a href="#"><i
                                         class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a></p>
-                            <p class="paragraph-title shadow">
+                            <p class="paragraph-active shadow">
                                 @if($project->manageBy->status == 1)
                                     Active
                                 @else
