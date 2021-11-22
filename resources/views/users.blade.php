@@ -23,7 +23,6 @@
             </div>
         </div>
         <script>
-            var count = 1;
             $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -39,7 +38,8 @@
                     }, {
                         data: 'action',
                         name: 'action',
-                        orderable: false
+                        orderable: false,
+                        searchable: false
                     },
                 ],
                 "columnDefs": [{
@@ -49,6 +49,23 @@
                     "targets": 0
                 }],
             });
+
+            $(document).on('click', '#view', function () {
+                alert("ass")
+                location.href = "/users/view/1";
+            });
+
+            $(document).on('click', '#edit', function () {
+                alert("ass")
+                location.href = "/users/view/1";
+            });
+
+            $(document).on('click', '#delete', function () {
+                alert("ass")
+                location.href = "/users/view/1";
+            });
+
+
         </script>
     </div>
 </x-app-layout>

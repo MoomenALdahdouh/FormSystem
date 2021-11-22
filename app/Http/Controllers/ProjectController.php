@@ -101,7 +101,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, $id)
     {
-        if ($request->action == "update"){
+        if ($request->action == "update") {
             $update = Project::find($id)->update([
                 'name' => $request->name,
                 'description' => $request->description,

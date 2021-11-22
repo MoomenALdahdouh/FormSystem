@@ -61,6 +61,8 @@ Route::get('/subprojects/forcedelete/{id}', [SubprojectController::class, 'force
 Route::get('/subprojects/restore/{id}', [SubprojectController::class, 'restore'])->name('restore');
 
 Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+Route::get('/users/view/{id}', [UserController::class, 'show'])->name('users.view');
 Route::get('/users/admin', [UserController::class, 'admin'])->name('users.admin');
 Route::get('/users/managers', [UserController::class, 'managers'])->name('users.managers');
 Route::get('/users/workers', [UserController::class, 'workers'])->name('users.workers');
