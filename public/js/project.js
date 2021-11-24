@@ -121,6 +121,7 @@
 /*start Project Setting and edit*/
 $(function () {
     $(document).ready(function () {
+        $("#name").focus();
         /*Project settings*/
         var status = 0;
         //var status = document.getElementById('flexSwitchCheckChecked').value;

@@ -84,8 +84,8 @@
 
 
     {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}" defer></script>--}}
-
-    <script src="{{asset('js/main.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @stack('js')
+{{--    <script src="{{asset('js/project.js')}}" defer></script> Must add defer to active js file--}}
 </head>
 <body class="font-sans antialiased">
 
@@ -109,8 +109,9 @@
     </main>
 </div>
 
-@stack('modals')
 
 @livewireScripts
+@stack('modals')
+
 </body>
 </html>

@@ -2,7 +2,7 @@
     <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <x-slot name="header">
         <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Projects') }}
+            {{ __('View Project') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
         </h2>
     </x-slot>
@@ -39,7 +39,8 @@
                                                 <h5>{{$project->name}}</h5>
                                             </div>
                                             <div class="col-1 row-3">
-                                                <a href="{{url('projects/edit/'.$project->id)}}"><i class="lar la-edit btn-outline-primary sm:rounded-md"></i></a>
+                                                <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}"><i
+                                                        class="lar la-edit btn-outline-primary sm:rounded-md"></i></a>
                                             </div>
                                         </div>
                                     </li>
@@ -76,7 +77,7 @@
                                                 <strong><i class="las la-calendar-check text-primary"></i>Created At
                                                 </strong>
                                                 <br>
-                                               <p>&nbsp &nbsp {{$project->created_at}}</p>
+                                                <p>&nbsp &nbsp {{$project->created_at}}</p>
                                             </div>
                                             <div class="">
                                                 <strong><i class="las la-clock text-primary"></i></i>&nbsp Update At
@@ -100,8 +101,10 @@
                         <div class="text-center">
                             <img class="user-image" width="80" src="{{asset('images/user.png')}}">
                             <p class="hint">manager</p>
-                            <p><strong>{{$project->manageBy->name}}</strong><a href="#"><i
-                                        class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a></p>
+                            <p><strong>{{$project->manageBy->name}}</strong>
+                                <a href="{{url('/users/view/'.$project->manageBy->id)}}"><i
+                                        class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
+                            </p>
                             <p class="paragraph-active shadow">
                                 @if($project->manageBy->status == 1)
                                     Active

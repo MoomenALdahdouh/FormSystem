@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Settings') }}
+            {{ __('Project Settings') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
         </h2>
     </x-slot>
@@ -26,7 +26,16 @@
                 <div class="col-md-12">
                     <div class="card shadow">
                         <div class="card-header alert">
-                            <h4><i class="lab la-r-project"></i>&nbsp;{{$project->name}}</h4>
+                            <div class="row">
+                                <div class="col-11">
+                                    <h4><i class="lab la-r-project"></i>&nbsp;{{$project->name}}</h4>
+                                </div>
+                                <div class="col-1 row-3">
+                                    <a href="{{url('/projects/view/'.$project->id)}}"><i
+                                            class="las la-binoculars btn-outline-primary sm:rounded-md"></i></a>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="card-body">
                             <div class="container">
@@ -73,93 +82,88 @@
                     </div>
                 </div>
             </div>
-            <br>
+            <br id="edit-project">
             <br>
             {{--Section Edit project--}}
-            <div class="row">
-                {{--Alert actions--}}
-                {{-- @if(session('successUpdate'))
-                     <div class="alert alert-success d-flex align-items-center" role="alert">
-                         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                             <use xlink:href="#check-circle-fill"/>
-                         </svg>
-                         <strong>{{session('successUpdate')}}</strong>
-                     </div>
-                 @endif--}}
-                {{--Section get all project--}}
-                <div class="col-md-12">
-                    <div class="card shadow">
-                        <div class="card-header alert alert-secondary">
-                            <h4><i class="las la-pen-square"></i>Edit</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="container">
-                                <ul class="ul-project">
-                                    <input type="hidden" id="project-id" name="project-id" value="{{$project->id}}">
-                                    <input type="hidden" id="subproject-size" name="subproject-size" value="{{$project->id}}">
-                                    <li>
-                                        <div class="">
-                                            <strong><i class='bx bx-rename'></i>&nbsp Name
-                                            </strong>
-                                            <br>
-                                            <input placeholder="name" id="name" name="name"
-                                                   class="rounded-md col-md-12 alert alert-secondary"
-                                                   value="{{$project->name}}" type="text">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="">
-                                            <strong>
-                                                <i class="las la-audio-description"></i>&nbsp
-                                                Description
-                                            </strong>
-                                            <br>
-                                            @php
-                                                $desc = "no description ...";
-                                             if(!empty($project->description) ){
-                                                 $desc = $project->description;
-                                             }
-                                            @endphp
-                                            <textarea placeholder="description" id="description" name="description"
-                                                      class="rounded-md col-md-12 alert alert-secondary"
-                                                      type="text">{{$desc}}</textarea>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <strong>
-                                            <i class="las la-fish"></i>&nbsp Status
-                                        </strong>
-                                        <br>
-                                        <div class="row alert alert-secondary"
-                                             style=" margin: 0; padding-left:0; padding-right: 0">
-                                            <div class="col-md-11">
-                                                @if($project->status == 1)
-                                                    <strong id="status-project" class=" paragraph-active shadow">Active</strong>
-                                                @else
-                                                    <strong id="status-project" class=" paragraph-pended shadow">Pended</strong>
-                                                @endif
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow">
+                            <div class="card-header alert alert-secondary">
+                                <h4><i class="las la-pen-square"></i>Edit</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <ul class="ul-project">
+                                        <input type="hidden" id="project-id" name="project-id" value="{{$project->id}}">
+                                        <input type="hidden" id="subproject-size" name="subproject-size"
+                                               value="{{$project->id}}">
+                                        <li>
+                                            <div class="">
+                                                <strong><i class='bx bx-rename'></i>&nbsp Name
+                                                </strong>
+                                                <br>
+                                                <input placeholder="name" id="name" name="name"
+                                                       class="rounded-md col-md-12 alert alert-secondary"
+                                                       value="{{$project->name}}" type="text">
                                             </div>
-                                            <div class="col-md-1">
-                                                <div class="form-check form-switch">
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <strong>
+                                                    <i class="las la-audio-description"></i>&nbsp
+                                                    Description
+                                                </strong>
+                                                <br>
+                                                @php
+                                                    $desc = "no description ...";
+                                                 if(!empty($project->description) ){
+                                                     $desc = $project->description;
+                                                 }
+                                                @endphp
+                                                <textarea placeholder="description" id="description" name="description"
+                                                          class="rounded-md col-md-12 alert alert-secondary"
+                                                          type="text">{{$desc}}</textarea>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <strong>
+                                                <i class="las la-toggle-off"></i>&nbsp Status
+                                            </strong>
+                                            <br>
+                                            <div class="row alert alert-secondary"
+                                                 style=" margin: 0; padding-left:0; padding-right: 0">
+                                                <div class="col-md-11">
                                                     @if($project->status == 1)
-                                                        <input class="form-check-input" type="checkbox"
-                                                               id="flexSwitchCheckChecked" value="1" checked>
+                                                        <strong id="status-project"
+                                                                class=" paragraph-active shadow">Active</strong>
                                                     @else
-                                                        <input class="form-check-input" type="checkbox"
-                                                               id="flexSwitchCheckChecked" value="0">
+                                                        <strong id="status-project"
+                                                                class=" paragraph-pended shadow">Pended</strong>
                                                     @endif
                                                 </div>
+                                                <div class="col-md-1">
+                                                    <div class="form-check form-switch">
+                                                        @if($project->status == 1)
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="flexSwitchCheckChecked" value="1" checked>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="flexSwitchCheckChecked" value="0">
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <br>
-                                    <br>
-                                    <li>
-                                        <button id="update-project" class="btn btn-primary float-right"><i
-                                                class="lar la-save"></i> Save
-                                        </button>
-                                    </li>
-                                </ul>
+                                        </li>
+                                        <br>
+                                        <br>
+                                        <li>
+                                            <button id="update-project" class="btn btn-primary float-right"><i
+                                                    class="lar la-save"></i> Save
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -228,8 +232,7 @@
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary float-right"><i
-                                        class='bx bx-add-to-queue'></i>&nbsp
+                                <button type="submit" class="btn btn-primary float-right"><i class="las la-plus-square"></i>&nbsp
                                     Create
                                 </button>
                             </form>
@@ -241,6 +244,9 @@
             <br>
         </div>
     </div>
+    @push('js')
+        <script src="{{asset('js/project.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @endpush
     <br>
     <br>
     <br>
@@ -252,3 +258,4 @@
     <br>
     <br>
 </x-app-layout>
+

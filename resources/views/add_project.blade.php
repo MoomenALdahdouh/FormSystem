@@ -34,6 +34,6 @@
         @enderror
     </div>
 </div>
-<button id="add_project" class="btn btn-primary"><i class='bx bx-add-to-queue'></i>&nbsp
+<button id="add_project" class="btn btn-primary"><i class="las la-plus-square"></i>&nbsp
     Create Project
 </button>

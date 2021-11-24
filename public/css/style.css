@@ -451,6 +451,10 @@
     margin: 0 16px;
 }
 
+.row-2 .name {
+    padding-top: 5px;
+}
+
 .user-image {
     margin: 0 auto;
     display: block;
@@ -490,7 +494,7 @@
 
 /*Users types*/
 .paragraph-admin {
-    background-color: #002677;
+    background-color: #003198;
     color: #FFF;
     border-radius: 12px;
     display: inline-flex;

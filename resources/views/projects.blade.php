@@ -97,7 +97,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary float-right"><i class='bx bx-add-to-queue'></i>&nbsp
+                                <button type="submit" class="btn btn-primary float-right"><i class="las la-plus-square"></i>&nbsp
                                     Create
                                 </button>
                             </form>

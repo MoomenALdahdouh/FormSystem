@@ -8,7 +8,6 @@ use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
-
     public function index(Request $request)
     {
         $users = User::latest()->get();
@@ -43,7 +42,7 @@ class UserController extends Controller
                 })
                 ->addColumn('action', function ($users) {
                     $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
                            <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
@@ -58,12 +57,21 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $users = User::query()->where('type', 0)->get();
-            return DataTables::of($users)->addColumn('action', function ($users) {
-                $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
+            return DataTables::of($users)
+                ->addColumn('status', function ($users) {
+                    $status = '';
+                    if ($users->status == 0)
+                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                    else
+                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                    return $status;
+                })
+                ->addColumn('action', function ($users) {
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
                            <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
-                return $button;
-            })->rawColumns(['action'])->make(true);
+                    return $button;
+                })->rawColumns(['status', 'action'])->make(true);
         }
         return view('admins');
     }
@@ -73,12 +81,21 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $users = User::query()->where('type', 1)->get();
-            return DataTables::of($users)->addColumn('action', function ($users) {
-                $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
+            return DataTables::of($users)
+                ->addColumn('status', function ($users) {
+                    $status = '';
+                    if ($users->status == 0)
+                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                    else
+                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                    return $status;
+                })
+                ->addColumn('action', function ($users) {
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
                            <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
-                return $button;
-            })->rawColumns(['action'])->make(true);
+                    return $button;
+                })->rawColumns(['status', 'action'])->make(true);
         }
         return view('managers');
     }
@@ -87,12 +104,21 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $users = User::query()->where('type', 2)->get();
-            return DataTables::of($users)->addColumn('action', function ($users) {
-                $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
+            return DataTables::of($users)
+                ->addColumn('status', function ($users) {
+                    $status = '';
+                    if ($users->status == 0)
+                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                    else
+                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                    return $status;
+                })
+                ->addColumn('action', function ($users) {
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
                            <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
-                return $button;
-            })->rawColumns(['action'])->make(true);
+                    return $button;
+                })->rawColumns(['', 'action'])->make(true);
         }
         return view('workers');
     }
