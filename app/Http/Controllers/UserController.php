@@ -4,13 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::latest()->get();
+        $user_type = $request->get('user_type');
+
+        $users = User::query()->latest()->get();
+        if ($user_type < 3)
+            $users = User::query()->where('type', $user_type);
+
         if ($request->ajax()) {
             return DataTables::of($users)
                 ->addColumn('type', function ($users) {
@@ -23,13 +33,8 @@ class UserController extends Controller
                             $type = '<p class="paragraph-manager shadow">Manager</p>';
                             break;
                         case 2:
-                            $type = '<p class="paragraph-worker shadow">&nbsp; Worker &nbsp;</p>';
+                            $type = '<p class="paragraph-worker shadow">&nbsp;Worker&nbsp;</p>';
                     }
-                    /*return match ($users->type) {
-                        1 => '<p class="paragraph-manager shadow">Manager</p>',
-                        2 => '<p class="paragraph-worker shadow">Worker</p>',
-                        default => '<p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>',
-                    };*/
                     return $type;
                 })
                 ->addColumn('status', function ($users) {
@@ -123,9 +128,37 @@ class UserController extends Controller
         return view('workers');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            if ($request->action == "create") {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required:users|max:255',
+                    'email' => 'required|unique:users',
+                    'phone' => 'required|unique:users',
+                ], [
+                    'name.required' => ['The name is required!'],
+                    'email.required' => ['The email is required!'],
+                    'phone.required' => ['The phone is required!'],
+                ]);
+
+
+                if ($validator->passes()) {
+                    $data = new User();
+                    $data->name = $request->name;
+                    $data->email = $request->email;
+                    $data->phone = $request->phone;
+                    $data->type = $request->type;
+                    $data->status = $request->status;
+                    $data->password = Hash::make("123456789");//(string)$this->randomPassword()
+                    $data->created_at = Carbon::now();
+                    $data->save();
+                    return response()->json(['success' => 'Successfully create new User']);
+                }
+                return response()->json(['error' => $validator->errors()->toArray()]);
+                //return response()->json(['error' => $validator->errors()->all()]);
+            }
+        }
     }
 
     public function store(Request $request)
@@ -153,6 +186,16 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function randomPassword()
+    {
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, count($alphabet) - 1);
+            $pass[$i] = $alphabet[$n];
+        }
+        return $pass;
     }
 
 }

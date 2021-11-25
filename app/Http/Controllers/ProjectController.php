@@ -68,14 +68,6 @@ class ProjectController extends Controller
             'manager_fk_id.required' => 'Please Select User Manager!'
         ]);
 
-        /*$data = array();
-        $data['name'] = $request->name;
-        $data['user_fk_id'] = Auth::user()->id;
-        $data['manager_fk_id'] = $request->manager;
-        $data['created_at'] = Carbon::now();
-        //dd($data);
-        //Project::query()->create($request->all());
-        DB::table('projects')->insert($data);*/
         $data = new Project();
         $data->name = $request->name;
         $data->user_fk_id = Auth::user()->id;

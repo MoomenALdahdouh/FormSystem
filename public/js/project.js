@@ -140,13 +140,14 @@ $(function () {
             const status_active = document.getElementById("status-active").innerHTML;
             const status_pended = document.getElementById("status-pended").innerHTML;*/
             const isChecked = document.getElementById("flexSwitchCheckChecked").checked;
+            const project_status = $('#status-project');
             if (isChecked) {
-                $('#status-project').html("Active");
-                $('#status-project').css("background-color", "#3fd9cb");
+                project_status.html("Active");
+                project_status.css("background-color", "#3fd9cb");
                 status = 1;
             } else {
-                $('#status-project').html("Pended");
-                $('#status-project').css("background-color", "#d93f51");
+                project_status.html("Pended");
+                project_status.css("background-color", "#d93f51");
                 status = 0;
             }
         })

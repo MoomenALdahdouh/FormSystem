@@ -66,7 +66,7 @@ Route::get('/users/view/{id}', [UserController::class, 'show'])->name('users.vie
 Route::get('/users/admin', [UserController::class, 'admin'])->name('users.admin');
 Route::get('/users/managers', [UserController::class, 'managers'])->name('users.managers');
 Route::get('/users/workers', [UserController::class, 'workers'])->name('users.workers');
-
+Route::post('/users/create', [UserController::class, 'create'])->name('users.create');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
     return view('activities');

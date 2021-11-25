@@ -362,7 +362,7 @@
 }
 
 .sidebar .nav-list li.showMenu .sub-menu {
-    display: block;
+    display: table-footer-group;
 }
 
 .sidebar .nav-list li .sub-menu a {

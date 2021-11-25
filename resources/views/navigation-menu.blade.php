@@ -42,8 +42,7 @@
             </li>
             <li>
                 <div class="iocn-link">
-{{--                    {{ route('users') }}--}}
-                    <a href="{{route('users')}}">
+                    <a href="{{url('users')}}">
                         <i class='bx bx-user'></i>
 
                         <span class="links_name">{{ __('Users') }}</span>
@@ -53,9 +52,9 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">{{ __('Users') }}</a></li>
-                    <li><a href="{{ route('users.admin') }}">Admins</a></li>
-                    <li><a href="{{ route('users.managers') }}">Managers</a></li>
-                    <li><a href="{{ route('users.workers') }}">Workers</a></li>
+                    <li><a href="{{ route('users.admin') }}"><i class="las la-user-check"></i>Admins</a></li>
+                    <li><a href="{{ route('users.managers') }}"><i class="las la-user-tag"></i>Managers</a></li>
+                    <li><a href="{{ route('users.workers') }}"><i class='bx bxs-user-voice'></i>Workers</a></li>
                 </ul>
             </li>
             <li>

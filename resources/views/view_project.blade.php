@@ -156,18 +156,6 @@
                                 <div>
                                     <input type="hidden" class="form-control" id="project" name="project"
                                            value="{{$project->id}}" required>
-                                    {{--<p>Select project</p>
-                                    <div>
-                                        <select name="project" id="project"
-                                                class="project-dropdown form-control input-group-lg">
-                                            <option hidden>Select project</option>
-                                            --}}{{--@foreach ($projects as $project)
-                                                <option class="alert-warning"
-                                                        value="{{ $project->id }}">{{ $project->name }}</option>
-                                            @endforeach--}}{{--
-                                        </select>
-                                        {{csrf_field()}}
-                                    </div>--}}
                                     @error('project')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
