@@ -136,7 +136,7 @@
                                         <p class="paragraph-manager shadow">Manager</p>
                                         @break
                                         @case (2)
-                                        <p class="paragraph-worker shadow">&nbsp; Worker &nbsp;</p>
+                                        <p class="paragraph-worker shadow">Worker</p>
                                         @break
                                     @endswitch
                                 </div>

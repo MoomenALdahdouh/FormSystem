@@ -514,6 +514,9 @@
     display: inline-flex;
     padding: 0 12px;
 }
+.paragraph-worker-text {
+    color: #f89500;
+}
 /*Users types*/
 
 /*start models alert style */
@@ -527,8 +530,15 @@
 
 /*end models alert style */
 
-/*start view project page style */
-/*start view project page style */
+/*start activity page style */
+.activity-type {
+    background-color: #f500e7;
+    color: #FFF;
+    border-radius: 12px;
+    display: inline-flex;
+    padding: 0 12px;
+}
+/*start activity page style */
 /*start view project page style */
 /*start view project page style */
 

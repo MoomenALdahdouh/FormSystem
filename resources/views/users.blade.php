@@ -115,7 +115,7 @@
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                                     <div class="col-md-10">
-                                                        <strong class="paragraph-admin shadow">Admin</strong>
+                                                        <strong id="user_type_strong" class="paragraph-admin shadow">Admin</strong>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-check form-switch">

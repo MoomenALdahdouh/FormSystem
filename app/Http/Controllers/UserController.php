@@ -137,9 +137,9 @@ class UserController extends Controller
                     'email' => 'required|unique:users',
                     'phone' => 'required|unique:users',
                 ], [
-                    'name.required' => ['The name is required!'],
-                    'email.required' => ['The email is required!'],
-                    'phone.required' => ['The phone is required!'],
+                    'name.required' => 'The name is required!',
+                    'email.required' => 'The email is required!',
+                    'phone.required' => 'The phone is required!'
                 ]);
 
 

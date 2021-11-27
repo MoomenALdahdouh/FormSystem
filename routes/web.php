@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubprojectController;
 use App\Http\Controllers\UserController;
@@ -68,9 +69,14 @@ Route::get('/users/managers', [UserController::class, 'managers'])->name('users.
 Route::get('/users/workers', [UserController::class, 'workers'])->name('users.workers');
 Route::post('/users/create', [UserController::class, 'create'])->name('users.create');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
+Route::get('/activities/edit/{id}', [ActivityController::class, 'edit'])->name('activities.edit');
+Route::get('/activities/view/{id}', [ActivityController::class, 'show'])->name('activities.view');
+Route::post('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
+
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
     return view('activities');
-})->name('activities');
+})->name('activities');*/
 
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/users', function () {
     return view('users');

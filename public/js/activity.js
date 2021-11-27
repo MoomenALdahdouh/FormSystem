@@ -120,41 +120,24 @@
 
 /*start Project Setting and edit*/
 $(function () {
-    const table = $('#users-table');
-    const in_user_type = $('#user_type');
+    const table = $('#activities-table');
+
     $(document).ready(function () {
-        get_users_as();
-        $(document).on('click', '#users-all', function () {
-            in_user_type.val(4);
-            table.DataTable().ajax.reload();
-        });
-        $(document).on('click', '#users-admins', function () {
-            in_user_type.val(0);
-            table.DataTable().ajax.reload();
-        });
-        $(document).on('click', '#users-managers', function () {
-            in_user_type.val(1);
-            table.DataTable().ajax.reload();
-            // get_users_as(user_type);
-        });
-        $(document).on('click', '#users-workers', function () {
-            in_user_type.val(2);
-            table.DataTable().ajax.reload();
-        });
+        get_activities_as();
 
         $(document).on('click', '#view', function () {
             var id = $(this).data('id');
-            location.href = "/users/view/" + id;
+            location.href = "/activities/view/" + id;
         });
 
         $(document).on('click', '#edit', function () {
             var id = $(this).data('id');
-            location.href = "/users/edit/" + id;
+            location.href = "/activities/edit/" + id;
         });
 
         $(document).on('click', '#delete', function () {
             var id = $(this).data('id');
-            location.href = "/users/delete/" + id;
+            location.href = "/activity/delete/" + id;
         });
 
         /*Project settings*/
@@ -210,12 +193,13 @@ $(function () {
                 $('#can-not-remove').modal('show');
             }
         });
-        create_user();
+
+        create_activity();
 
 
     })
 
-    function get_users_as() {
+    function get_activities_as() {
         table.DataTable({
             processing: true,
             serverSide: true,
@@ -223,10 +207,10 @@ $(function () {
             sDom: 'lrtip',
             "order": [[0, "desc"]],
             ajax: {
-                "url": '/users',
+                "url": '/activities',
                 "type": 'GET',
                 "data": function (d) {
-                    d.user_type = in_user_type.val()
+                    //d.user_type = in_user_type.val()
                 }
             },
             columns: [
@@ -236,8 +220,14 @@ $(function () {
                     data: 'name',
                     name: 'name',
                 }, {
-                    data: 'email',
-                    name: 'email',
+                    data: 'description',
+                    name: 'description',
+                }, {
+                    data: 'subproject',
+                    name: 'subproject',
+                }, {
+                    data: 'worker',
+                    name: 'worker',
                 }, {
                     data: 'created_at',
                     name: 'created_at',
@@ -293,41 +283,39 @@ $(function () {
         });
     }
 
-    function create_user() {
+    function create_activity() {
 
         const name_error = $('#name_error');
-        const email_error = $('#email_error');
-        const phone_error = $('#phone_error');
+        const description_error = $('#description_error');
         name_error.css('display', 'none');
-        email_error.css('display', 'none');
-        phone_error.css('display', 'none');
+        description_error.css('display', 'none');
 
-        $('#create_user').click(function () {
+        $('#create_activity').click(function () {
             const name = $('#name').val();
-            const phone = $('#phone').val();
-            const email = $('#email').val();
+            const description = $('#description').val();
             const type = $('#type').val();
+            const worker = $('#worker').val();
+            const subproject = $('#subproject').val();
             const status = $('#flexSwitchCheckChecked').val();
             //console.log(name, phone, email, type, status)
             $.ajax({
                 type: "POST",
-                url: "/users/create",
+                url: "/activities/create",
                 data: {
                     _token: $("input[name=_token]").val(),
                     action: "create",
                     name: name,
-                    email: email,
-                    phone: phone,
+                    description: description,
                     type: type,
+                    worker: worker,
+                    subproject: subproject,
                     status: status,
                 },
                 success: function (data) {
                     if ($.isEmptyObject(data.error)) {
                         name_error.css('display', 'none');
-                        email_error.css('display', 'none');
-                        phone_error.css('display', 'none');
-                        $('#successfully-creat').modal('show');
-                        in_user_type.val(4);
+                        description_error.css('display', 'none');
+                        $('#successfully-creat-activity').modal('show');
                         table.DataTable().ajax.reload();
                     } else {
                         printErrorMsg(data.error);
@@ -342,17 +330,11 @@ $(function () {
                 } else {
                     name_error.css('display', 'none');
                 }
-                if (msg['email']) {
-                    $('#email_error').html(msg['email']);
-                    email_error.css('display', 'block');
+                if (msg['description']) {
+                    $('#description_error').html(msg['description']);
+                    description_error.css('display', 'block');
                 } else {
-                    email_error.css('display', 'none');
-                }
-                if (msg['phone']) {
-                    $('#phone_error').html(msg['phone']);
-                    phone_error.css('display', 'block');
-                } else {
-                    phone_error.css('display', 'none');
+                    description_error.css('display', 'none');
                 }
             }
         });
@@ -361,10 +343,3 @@ $(function () {
 });
 /*End Project Setting and edit*/
 
-/*Start Users*/
-/*Admin*/
-
-/*End Users*/
-
-/*End Project Setting and edit*/
-/*End Project Setting and edit*/
