@@ -124,11 +124,9 @@ $(function () {
         $("#name").focus();
         /*Project settings*/
         var status = 0;
-        //var status = document.getElementById('flexSwitchCheckChecked').value;
         $('#update-project').click(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
-            //var status = document.getElementById('flexSwitchCheckChecked').value;
             var id = document.getElementById('project-id').value;
             console.log(id, name, description, status)
             edit_project(id, name, description, status);
@@ -136,9 +134,6 @@ $(function () {
 
         $('#flexSwitchCheckChecked').click(function () {
             status = document.getElementById('flexSwitchCheckChecked').value;
-            /*var status = document.getElementsByClassName("status-project");
-            const status_active = document.getElementById("status-active").innerHTML;
-            const status_pended = document.getElementById("status-pended").innerHTML;*/
             const isChecked = document.getElementById("flexSwitchCheckChecked").checked;
             const project_status = $('#status-project');
             if (isChecked) {

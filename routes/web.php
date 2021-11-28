@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubprojectController;
 use App\Http\Controllers\UserController;
@@ -73,6 +74,11 @@ Route::get('/activities', [ActivityController::class, 'index'])->name('activitie
 Route::get('/activities/edit/{id}', [ActivityController::class, 'edit'])->name('activities.edit');
 Route::get('/activities/view/{id}', [ActivityController::class, 'show'])->name('activities.view');
 Route::post('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
+Route::get('/activities/delete/{id}', [ActivityController::class, 'destroy'])->name('activities.delete');
+
+Route::post('/form/create', [FormController::class, 'create'])->name('form.create');
+Route::get('/form/edit/{id}', [FormController::class, 'edit'])->name('form.edit');
+Route::get('/form/apply/{id}', [FormController::class, 'apply'])->name('form.apply');
 
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
     return view('activities');

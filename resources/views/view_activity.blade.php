@@ -109,6 +109,24 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    {{--Section View Form Questions --}}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card shadow">
+                                <div class="row alert alert-success text-dark"
+                                     style=" margin: 0; padding-left:0; padding-right: 0">
+                                    <div class="col-md-10">
+                                        <strong><i class="lab la-wpforms"></i>&nbsp View Form Questions</strong>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="{{url("/form/edit/0")}}" class="btn btn-success float-right">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
                 </div>
                 {{--Sub project and Manager details--}}
                 <div class="col-md-4">
