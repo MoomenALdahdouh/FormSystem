@@ -8,5 +8,10 @@
     margin: 8px 0;
 }
 
-.questions-list li button{
+.apply-icon{
+    font-size: 26px;
+}
+
+.button_icon{
+    font-size: 22px;
 }
