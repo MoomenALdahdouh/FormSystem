@@ -80,6 +80,36 @@
             </div>
         </div>
     </div>
+    {{--model edit questions--}}
+    <div>
+        <div id="edit_question" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content model-style">
+                    <div class="modal-header">
+                        <strong class="col-sm-11"><i class="las la-edit"></i>Edit question</strong>
+                        <button class="btn float-right" data-bs-dismiss="modal"><i class="las la-times"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <strong>Enter question title</strong>
+                        <input id="title" class="rounded-md alert col-sm-12 alert-secondary" type="text" name="title"
+                               placeholder="Question title">
+                        <br>
+                        <p class="alert alert-warning"><i class="las la-key"></i>&nbsp;question key &nbsp; <strong id="question_key" >key</strong>
+                        </p>
+                    </div>
+                    <button id="save_edit_question" class="selector btn btn-primary" data-bs-dismiss="modal">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--include form component questions--}}
+    {{--<div id="divCheckbox" style="display: none;">
+        @include('form_body')
+    </div>--}}
+
+    {{--Js--}}
     @include('modal_alert')
     @push('js')
         <script src="{{asset('js/form.js')}}" defer></script> {{--Must add defer to active js file--}}

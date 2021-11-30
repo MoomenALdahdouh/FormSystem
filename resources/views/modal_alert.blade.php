@@ -118,7 +118,8 @@
                 <h6 id="message">Are you sure you want to remove all questions?</h6>
                 <br>
             </div>
-            <button id="confirm-remove" class="selector btn btn-danger" data-bs-dismiss="modal">Clear</button>
+            <button id="confirm-remove" class="selector btn btn-danger" data-bs-dismiss="modal">Yes, Clear All</button>
         </div>
     </div>
 </div>
+

@@ -19,3 +19,9 @@
 .clear-button {
     margin-right: 12px;
 }
+
+.questions-title{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
