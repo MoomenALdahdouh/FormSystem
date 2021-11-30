@@ -47,6 +47,9 @@ $(function () {
                 case 'calender-button':
                     add_calender_field();
                     break;
+                case 'form-button':
+                    add_image_field();
+                    break;
                 case 'delete':
                     $(this).closest('li').remove();
                     delete_question();
@@ -112,6 +115,15 @@ $(function () {
             //console.log(input_name);
             //console.log($(this).val());
         });
+
+        /*Right click mouse*/
+        /*$(document).mousedown(function(e){
+            if( e.button == 2 ) {
+                alert('Right mouse button!');
+                return false;
+            }
+            return true;
+        });*/
     });
 
     function add_input_field() {
@@ -152,6 +164,17 @@ $(function () {
         form_body_ul.html(form_body);
         question_key = form_id + form_size + question_key;
         let question = new Question(form_id, question_key, "Calender", input_calender_component(form_size), 3);
+        questionsList.push(question);
+        //console.log(questionsList);
+    }
+
+    function add_image_field() {
+        check_form_size();
+        question_key = 'key'
+        form_body = form_body + input_image_component(form_size);
+        form_body_ul.html(form_body);
+        question_key = form_id + form_size + question_key;
+        let question = new Question(form_id, question_key, "Image", input_image_component(form_size), 3);
         questionsList.push(question);
         //console.log(questionsList);
     }
@@ -282,6 +305,21 @@ $(function () {
             "                                <input id='input_number_count' type='hidden' name='input_number_count' value='" + form_size + "'> " +
             "                                <input class=\"rounded-md col-md-11 alert alert-secondary\" type=\"date\"" +
             "                                       placeholder=\"Calender\">" +
+            "                            </li>";
+    }
+
+    function input_image_component(form_size) {
+        return "<li>" +
+            "                                <div class=\"questions-title input-group input-group-sm mb-1   \">" +
+            "                                       <span class=\"input-group-text\" id=\"inputGroup-sizing-sm\">Title</span>" +
+            "                                       <input data-question_key='" + form_size + "' name='image' value='Image' type=\"text\" class=\"form-control\" aria-label=\"Sizing example input\" aria-describedby=\"inputGroup-sizing-sm\">" +
+            "                                </div><div class=\" float-right alert alert-secondary\">" +
+            "                                    <button id=\"delete\" class=\"selector rounded-md btn-outline-primary\" title=\"delete\"><i" +
+            "                                            class=\"bx bx-trash\"></i></button>" +
+            "                                </div>" +
+            "                                <input id='input_number_count' type='hidden' name='input_number_count' value='" + form_size + "'> " +
+            "                                <button class=\"rounded-md col-md-11 alert alert-secondary text-left\"" +
+            "                                       ><i class=\"button_icon las la-cloud-upload-alt\"></i>&nbsp; Upload Image</button>" +
             "                            </li>";
     }
 

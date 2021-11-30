@@ -30,7 +30,7 @@ class FormController extends Controller
 
     public function apply($id)
     {
-        $form = Form::query()->where('activity_fk_id',$id)->get();
+        $form = Form::query()->where('activity_fk_id', $id)->get();
         return view('apply_form', compact('form'));
     }
 
@@ -47,9 +47,9 @@ class FormController extends Controller
 
     public function edit($id)
     {
-        $form = Form::query()->where('activity_fk_id',$id)->get()->first();
-
-        return view('edit_form', compact('form'));
+        $form = Form::query()->where('activity_fk_id', $id)->get()->first();
+        $activity = Activity::query()->find($id);
+        return view('edit_form', compact('form','activity'));
     }
 
     public function update(Request $request, $id)

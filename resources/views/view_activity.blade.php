@@ -29,7 +29,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-1">
-                                        <img class="activity-image" width="70" src="{{asset('images/user.png')}}">
+                                        <img class="activity-image" width="70" src="{{asset('images/list.png')}}">
                                     </div>
                                     <div class="col-10 row-2">
                                         <h5 class="name">{{$activity->name}}</h5>
