@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Form;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // $questions = Question::query()->where('form_fk_id', $request->id)->get();
+
     }
 
     public function create(Request $request)
@@ -36,7 +38,7 @@ class FormController extends Controller
 
     public function store(Request $request)
     {
-        //
+
     }
 
 
@@ -49,8 +51,10 @@ class FormController extends Controller
     {
         $form = Form::query()->where('activity_fk_id', $id)->get()->first();
         $activity = Activity::query()->find($id);
-        return view('edit_form', compact('form','activity'));
+        $questions = Question::query()->where('form_fk_id', $form->id)->get();
+        return view('edit_form', compact('form', 'activity','questions'));
     }
+
 
     public function update(Request $request, $id)
     {

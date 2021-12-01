@@ -103,17 +103,25 @@
                     <div class="card shadow">
                         <div class="card-body">
                             <input type="hidden" id="form_id" name="form_id" value="{{$form->id}}">
+                            <input type="hidden" id="form_size" name="form_size" value="{{count($questions)}}">
+                            {{--<input type="hidden" id="old_questions" name="old_questions" value="{{count($questions)}}">--}}
                             <ul id="form-body" class="questions-list list-group-item">
-                                <li class="btn btn-light text-center">
-                                    <br>
-                                    <br>
-                                    <div>
-                                        <i class="las la-boxes" style="font-size: 50px"></i>
-                                        <p>Drag Components here!</p>
-                                    </div>
-                                    <br>
-                                    <br>
-                                </li>
+                                @if(count($questions)>0)
+                                    @foreach($questions as $question)
+                                        {!! $question->body !!}
+                                    @endforeach
+                                @else
+                                    <li class="btn btn-light text-center">
+                                        <br>
+                                        <br>
+                                        <div>
+                                            <i class="las la-boxes" style="font-size: 50px"></i>
+                                            <p>Drag Components here!</p>
+                                        </div>
+                                        <br>
+                                        <br>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                         <div class="card-footer alert-light">
@@ -134,23 +142,27 @@
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="text-area-button" class="selector btn btn-outline-secondary col-md-12 mb-1">
+                                                <button id="text-area-button"
+                                                        class="selector btn btn-outline-secondary col-md-12 mb-1">
                                                     <i
                                                         class="button_icon las la-align-justify float-left"></i><span>Text Area</span>
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="number-button" class="selector btn btn-outline-secondary col-md-12 mb-1"><i
+                                                <button id="number-button"
+                                                        class="selector btn btn-outline-secondary col-md-12 mb-1"><i
                                                         class="button_icon las la-sort-numeric-down float-left"></i><span>Number</span>
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="calender-button" class="selector btn btn-outline-secondary col-md-12 mb-1">
+                                                <button id="calender-button"
+                                                        class="selector btn btn-outline-secondary col-md-12 mb-1">
                                                     <i class="button_icon las la-calendar-plus float-left"></i><span>Calender</span>
                                                 </button>
                                             </li>
                                             <li>
-                                                <button id="form-button" class="selector btn btn-outline-secondary col-md-12 mb-1">
+                                                <button id="form-button"
+                                                        class="selector btn btn-outline-secondary col-md-12 mb-1">
                                                     <i class="button_icon las la-image float-left"></i><span>Image</span>
                                                 </button>
                                             </li>
@@ -158,7 +170,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <button id="create_form" class="selector shadow btn btn-primary float-right"><i
+                                    <button id="save_form" class="selector shadow btn btn-primary float-right"><i
                                             class="las la-plus-square"></i> Save
                                     </button>
                                     <button id="clean_form"

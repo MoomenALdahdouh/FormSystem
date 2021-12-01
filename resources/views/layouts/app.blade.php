@@ -86,7 +86,7 @@
             crossorigin="anonymous"></script>
 
 
-    <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}" defer></script>
+    {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}" defer></script>--}}
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}" defer></script>
     @stack('js')
 {{--    <script src="{{asset('js/project.js')}}" defer></script> Must add defer to active js file--}}

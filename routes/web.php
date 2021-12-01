@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubprojectController;
 use App\Http\Controllers\UserController;
 use App\Models\Project;
@@ -79,6 +80,9 @@ Route::get('/activities/delete/{id}', [ActivityController::class, 'destroy'])->n
 Route::post('/form/create', [FormController::class, 'create'])->name('form.create');
 Route::get('/form/edit/{id}', [FormController::class, 'edit'])->name('form.edit');
 Route::get('/form/apply/{id}', [FormController::class, 'apply'])->name('form.apply');
+
+Route::get('/questions', [QuestionController::class, 'index'])->name('questions');
+Route::post('/questions/store', [QuestionController::class, 'store'])->name('questions.store');
 
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
     return view('activities');

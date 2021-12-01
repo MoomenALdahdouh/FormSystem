@@ -122,4 +122,21 @@
         </div>
     </div>
 </div>
+<div id="ask-remove-question" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content model-style">
+            {{-- <div class="modal-header"><button class="btn float-right"><i class="las la-times"></i></button></div>--}}
+            <div class="modal-body text-center">
+                <button class="btn float-right" data-bs-dismiss="modal"><i class="las la-times"></i></button>
+                <br>
+                <br>
+                <p><i class="alert-icon text-danger las la-question"></i></p>
+                <br>
+                <h6 id="message">Are you sure you want to remove this questions?</h6>
+                <br>
+            </div>
+            <button id="confirm-remove-question" class="selector btn btn-danger" data-bs-dismiss="modal">Yes, Clear All</button>
+        </div>
+    </div>
+</div>
 
