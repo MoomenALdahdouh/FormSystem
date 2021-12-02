@@ -55,7 +55,13 @@ class UserController extends Controller
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }
-        return view('users', compact('users'));
+        $type = Auth::user()->type;
+        switch ($type) {
+            case 0:
+                return view('users', compact('users'));
+            case 1:
+                return redirect('/');
+        }
     }
 
     public function admin(Request $request)

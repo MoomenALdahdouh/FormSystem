@@ -96,8 +96,9 @@
                     <div class="card shadow">
                         <div class="card-body">
                             <i class="las la-border-style shadow"></i> <strong>Form Area</strong>
-                            <i class="apply-icon las la-feather-alt rounded-md btn-outline-primary float-right"
-                               title="apply"></i>
+                            <a href="{{url('/form/apply/'.$activity->id)}}">
+                                <i class="apply-icon las la-feather-alt rounded-md btn-outline-primary float-right"
+                                   title="apply"></i></a>
                         </div>
                     </div>
                     <div class="card shadow">

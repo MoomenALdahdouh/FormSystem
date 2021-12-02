@@ -22,7 +22,13 @@ class ProjectController extends Controller
         $data['projects'] = $projects;
         $data['trash'] = $trash;
         $data['users'] = $users;
-        return view('projects', $data);
+        $type = Auth::user()->type;
+        switch ($type) {
+            case 0:
+                return view('projects', $data);
+            case 1:
+                return redirect('/');
+        }
     }
 
     public function all(Request $request)

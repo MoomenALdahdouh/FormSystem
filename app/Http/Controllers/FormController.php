@@ -32,8 +32,10 @@ class FormController extends Controller
 
     public function apply($id)
     {
-        $form = Form::query()->where('activity_fk_id', $id)->get();
-        return view('apply_form', compact('form'));
+        $form = Form::query()->where('activity_fk_id', $id)->get()->first();
+        $activity = Activity::query()->find($id);
+        $questions = Question::query()->where('form_fk_id', $form->id)->get();
+        return view('apply_form', compact('form', 'activity', 'questions'));
     }
 
     public function store(Request $request)
@@ -52,7 +54,7 @@ class FormController extends Controller
         $form = Form::query()->where('activity_fk_id', $id)->get()->first();
         $activity = Activity::query()->find($id);
         $questions = Question::query()->where('form_fk_id', $form->id)->get();
-        return view('edit_form', compact('form', 'activity','questions'));
+        return view('edit_form', compact('form', 'activity', 'questions'));
     }
 
 
