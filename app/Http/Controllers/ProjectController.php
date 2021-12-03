@@ -7,21 +7,50 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use UxWeb\SweetAlert\SweetAlert;
+use Yajra\DataTables\DataTables;
 
 class ProjectController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::latest()->paginate(6);
+        $projects = Project::query()->latest()->get();
         $trash = Project::onlyTrashed()->latest()->paginate(6);
         $users = User::query()->where('type', 1)->get();
         $data['projects'] = $projects;
         $data['trash'] = $trash;
         $data['users'] = $users;
+
+        if ($request->ajax()) {
+            return DataTables::of($projects)
+                ->addColumn('user_fk_id', function ($projects) {
+                    return '<strong>' . $projects->createBy->name . '</strong>';
+                })
+                ->addColumn('manager_fk_id', function ($projects) {
+                    return '<strong>' . $projects->manageBy->name . '</strong>';
+                })
+                ->addColumn('created_at', function ($projects) {
+                    return '<p>' . \Carbon\Carbon::parse($projects->created_at)->diffForHumans() . '</p>';
+                })
+                ->addColumn('status', function ($projects) {
+                    $status = '';
+                    if ($projects->status == 0)
+                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                    else
+                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                    return $status;
+                })
+                ->addColumn('action', function ($projects) {
+                    $button = '<button data-id="' . $projects->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $projects->id . '#edit-project' . '" data-type="' . $projects->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $projects->id . '" data-type="' . $projects->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    return $button;
+                })
+                ->rawColumns(['user_fk_id'],['manager_fk_id'],['created_at'],['status'])
+                ->escapeColumns(['action' => 'action'])
+                ->make(true);
+        }
+
         $type = Auth::user()->type;
         switch ($type) {
             case 0:

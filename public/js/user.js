@@ -97,11 +97,11 @@ $(function () {
 
     function get_users_as() {
         table.DataTable({
-            processing: true,
+            /*processing: true,
             serverSide: true,
             pageLength: 10,
             sDom: 'lrtip',
-            "order": [[0, "desc"]],
+            "order": [[0, "desc"]],*/
             ajax: {
                 "url": '/users',
                 "type": 'GET',

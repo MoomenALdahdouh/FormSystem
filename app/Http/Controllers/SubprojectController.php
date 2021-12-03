@@ -8,14 +8,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class SubprojectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $subprojects = Subproject::latest()->paginate(4);
+        $subprojects = Subproject::query()->latest()->get();
         $trash = Subproject::onlyTrashed()->latest()->paginate(3);
         $projects = Project::all();
+        if ($request->ajax()) {
+            return DataTables::of($subprojects)
+                ->addColumn('user_fk_id', function ($subprojects) {
+                    return '<strong>' . $subprojects->user->name . '</strong>';
+                })
+                ->addColumn('project_fk_id', function ($subprojects) {
+                    return '<strong>' . $subprojects->mainProject->name . '</strong>';
+                })
+                ->addColumn('created_at', function ($subprojects) {
+                    return '<p>' . \Carbon\Carbon::parse($subprojects->created_at)->diffForHumans() . '</p>';
+                })
+                ->addColumn('status', function ($subprojects) {
+                    $status = '';
+                    if ($subprojects->status == 0)
+                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                    else
+                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                    return $status;
+                })
+                ->addColumn('action', function ($subprojects) {
+                    $button = '<button data-id="' . $subprojects->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $subprojects->id . '#edit-subproject' . '" data-type="' . $subprojects->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $subprojects->id . '" data-type="' . $subprojects->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    return $button;
+                })
+                ->rawColumns(['user_fk_id'],['project_fk_id'],['created_at'],['status'])
+                ->escapeColumns(['action' => 'action'])
+                ->make(true);
+        }
         return view('subprojects', compact('subprojects', 'trash','projects'));
     }
 

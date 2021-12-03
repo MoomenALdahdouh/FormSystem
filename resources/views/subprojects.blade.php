@@ -7,7 +7,173 @@
     </x-slot>
     <br>
     <br>
-    <div class="header-section">
+    <div class="container">
+        <div class="row">
+            {{--Section all projects table--}}
+            <div class="col-md-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    {{--<p><strong class="shadow alert alert-warning text-dark">All users table</strong></p>
+                    <br>--}}
+                    <div class="bg-white overflow-hidden shadow-xl ">
+                        <div class="table-responsive" style="padding: 30px">
+                            <table id="subprojects-table" class="text-center table table-bordered table-striped"
+                                   style="width: 100%; padding-top: 30px;margin-bottom: 15px">
+                                <thead class="text-light" style="background-color: #11101D">
+                                <tr>
+                                    <th>SL No</th>
+                                    <th>Name</th>
+                                    <th>User</th>
+                                    <th>Main Project</th>
+                                    <th>Created At</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {{--Section create new user--}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    @if(session('success'))
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                                <use xlink:href="#check-circle-fill"/>
+                            </svg>
+                            <strong>{{session('success')}}</strong>
+                        </div>
+                    @endif
+                    <div class="bg-white overflow-hidden shadow-xl">
+                        <div class="col-md-12">
+                            <div class="card shadow">
+                                <div class="card-header alert alert-secondary">
+                                    <h4><i class="las la-plus-square"></i>Create new Subproject</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <ul class="ul-project">
+                                            <div class="alert alert-danger print-error-msg" style="display:none">
+                                                <ul></ul>
+                                            </div>
+
+                                            <li>
+                                                <div class="">
+                                                    <strong><i
+                                                            class="las la-signature text-primary"></i>Name
+                                                    </strong>
+                                                    &nbsp &nbsp<input
+                                                        class="rounded-md col-md-12 alert alert-secondary"
+                                                        id="name" name="name" type="text"
+                                                        placeholder="Name">
+                                                    <p id="name_error" class="alert alert-danger"
+                                                       style="display: none"></p>
+                                                </div>
+                                                <div class="">
+                                                    <strong>
+                                                        <i class="las la-signature text-primary"></i>Description
+                                                    </strong>
+                                                    &nbsp &nbsp<input
+                                                        class="rounded-md col-md-12 alert alert-secondary"
+                                                        id="email" name="description" type="text"
+                                                        placeholder="Description">
+                                                    <p id="description_error" class="alert alert-danger"
+                                                       style="display: none"></p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <strong>
+                                                    <i class="las la-hand-pointer text-primary"></i>Select Manager
+                                                </strong>
+
+                                                <div class="row alert alert-secondary"
+                                                     style=" margin: 0">
+                                                    <div class="form-check form-switch col-md-3" style="padding-left:0">
+                                                        <select name="manager" id="manager"
+                                                                class="btn-outline-primary manager-dropdown form-control input-group-lg "
+                                                                value="0">
+                                                            @php
+                                                                $count = 0;
+                                                            @endphp
+                                                            @if($projects == '[]')
+                                                                <option class="alert-warning"
+                                                                        value=""> Empty All managers are busy...
+                                                                </option>
+                                                            @else
+                                                                @foreach ($projects as $project)
+                                                                    @if($project->project_fk_id == 0)
+                                                                        @php
+                                                                            $count =+ 1;
+                                                                        @endphp
+                                                                        <option class="alert-dark"
+                                                                                value="{{ $project->id }}">{{ $project->name }}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                                @if($count==0)
+                                                                    <option class="alert-warning"
+                                                                            value=""> Empty All managers are busy...
+                                                                    </option>
+                                                                @endif
+                                                            @endif
+                                                        </select>
+                                                        {{csrf_field()}}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <br>
+                                            <li>
+                                                <strong><i
+                                                        class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                                <br>
+                                                <div class="row alert alert-secondary"
+                                                     style=" margin: 0; padding-left:0; padding-right: 0">
+                                                    <div class="col-md-11">
+                                                        <strong id="status-project"
+                                                                class=" paragraph-active shadow">Active</strong>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="flexSwitchCheckChecked"
+                                                                   name="flexSwitchCheckChecked" value="1" checked>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <br>
+                                            <br>
+                                            <li>
+                                                <button id="create_user" class="btn btn-primary float-right"><i
+                                                        class="las la-plus-square"></i> Create
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+        @include('modal_alert')
+        @push('js')
+            <script src="{{asset('js/subproject.js')}}" defer></script> {{--Must add defer to active js file--}}
+        @endpush
+    </div>
+
+
+    {{--<div class="header-section">
         <div class="container">
             <div class="row">
                 @if(session('successUpdate'))
@@ -34,18 +200,18 @@
 
                                 </thead>
                                 <tbody>
-                                @php($count = 1) {{--Here this way to show columen number not work with paging so we use
-                                other way $subprojects->firstItem()+$loop->index--}}
+                                @php($count = 1) --}}{{--Here this way to show columen number not work with paging so we use
+                                other way $subprojects->firstItem()+$loop->index--}}{{--
                                 @foreach($subprojects as $subproject)
                                     <tr>
-                                        {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
+                                        --}}{{--<th scope="row">{{$count++}}</th>--}}{{-- --}}{{--not work with paging--}}{{--
                                         <th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>
                                         <td>{{$subproject->name}}</td>
-                                        {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
+                                        --}}{{--<td>{{$subproject->user_id}}</td>--}}{{-- --}}{{--Just aarived to user id so we will join two table to arrived --}}{{--
                                         <td>{{@$subproject->mainProject->name}}</td>
-                                        <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
-                                        {{--<td>{{$subproject->name}}</td>--}}  {{--After join with Quiry builder --}}
-                                        {{--<td>{{$subproject->created_at}}</td>--}}
+                                        <td>{{$subproject->user->name}}</td> --}}{{--Use this when join table by ROM method--}}{{--
+                                        --}}{{--<td>{{$subproject->name}}</td>--}}{{--  --}}{{--After join with Quiry builder --}}{{--
+                                        --}}{{--<td>{{$subproject->created_at}}</td>--}}{{--
                                         @if($subproject->created_at == NULL)
                                             <td><span class="text-danger">No Date Set</span></td>
                                         @else
@@ -73,7 +239,7 @@
                         </div>
                     </div>
                 </div>
-                {{--create subproject--}}
+                --}}{{--create subproject--}}{{--
                 <div class="col-md-4">
                     <div class="card shadow">
                         <div class="card-header alert-secondary text-dark"><strong>Create new Subproject</strong></div>
@@ -144,18 +310,18 @@
 
                                 </thead>
                                 <tbody>
-                                @php($count = 1) {{--Here this way to show columen number not work with paging so we use
-                                other way $subprojects->firstItem()+$loop->index--}}
+                                @php($count = 1) --}}{{--Here this way to show columen number not work with paging so we use
+                                other way $subprojects->firstItem()+$loop->index--}}{{--
                                 @foreach($trash as $subproject)
                                     <tr>
-                                        {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
+                                        --}}{{--<th scope="row">{{$count++}}</th>--}}{{-- --}}{{--not work with paging--}}{{--
                                         <th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>
                                         <td>{{$subproject->name}}</td>
                                         <td>{{@$subproject->mainProject->name}}</td>
-                                        {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                                        <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
-                                        {{--<td>{{$subproject->name}}</td>--}}  {{--After join With Query builder--}}
-                                        {{--<td>{{$subproject->created_at}}</td>--}}
+                                        --}}{{--<td>{{$subproject->user_id}}</td>--}}{{-- --}}{{--Just aarived to user id so we will join two table to arrived --}}{{--
+                                        <td>{{$subproject->user->name}}</td> --}}{{--Use this when join table by ROM method--}}{{--
+                                        --}}{{--<td>{{$subproject->name}}</td>--}}{{--  --}}{{--After join With Query builder--}}{{--
+                                        --}}{{--<td>{{$subproject->created_at}}</td>--}}{{--
                                         @if($subproject->created_at == NULL)
                                             <td><span class="text-danger">No Date Set</span></td>
                                         @else
@@ -186,7 +352,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
     <br>
     <br>
     <br>

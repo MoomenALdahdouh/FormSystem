@@ -23,6 +23,9 @@ class UserController extends Controller
 
         if ($request->ajax()) {
             return DataTables::of($users)
+                ->addColumn('created_at', function ($projects) {
+                    return '<p>' . \Carbon\Carbon::parse($projects->created_at)->diffForHumans() . '</p>';
+                })
                 ->addColumn('type', function ($users) {
                     $type = '<p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>';
                     switch ($users->type) {
@@ -51,7 +54,7 @@ class UserController extends Controller
                            <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
-                ->rawColumns(['type'], ['status'])
+                ->rawColumns(['created_at'], ['type'], ['status'])
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }

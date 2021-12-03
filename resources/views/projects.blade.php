@@ -8,11 +8,179 @@
     </x-slot>
     <br>
     <br>
-    <div class="header-section">
+
+    <div class="container">
+        <div class="row">
+            {{--Section all projects table--}}
+            <div class="col-md-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    {{--<p><strong class="shadow alert alert-warning text-dark">All users table</strong></p>
+                    <br>--}}
+                    <div class="bg-white overflow-hidden shadow-xl ">
+                        <div class="table-responsive" style="padding: 30px">
+                            <table id="projects-table" class="text-center table table-bordered table-striped"
+                                   style="width: 100%; padding-top: 30px;margin-bottom: 15px">
+                                <thead class="text-light" style="background-color: #11101D">
+                                <tr>
+                                    <th>SL No</th>
+                                    <th>Name</th>
+                                    <th>Created By</th>
+                                    <th>Manage By</th>
+                                    <th>Created At</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {{--Section create new user--}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    @if(session('success'))
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                                <use xlink:href="#check-circle-fill"/>
+                            </svg>
+                            <strong>{{session('success')}}</strong>
+                        </div>
+                    @endif
+                    <div class="bg-white overflow-hidden shadow-xl">
+                        <div class="col-md-12">
+                            <div class="card shadow">
+                                <div class="card-header alert alert-secondary">
+                                    <h4><i class="las la-plus-square"></i>Create new project</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <ul class="ul-project">
+                                            <div class="alert alert-danger print-error-msg" style="display:none">
+                                                <ul></ul>
+                                            </div>
+
+                                            <li>
+                                                <div class="">
+                                                    <strong><i
+                                                            class="las la-signature text-primary"></i>Name
+                                                    </strong>
+                                                    &nbsp &nbsp<input
+                                                        class="rounded-md col-md-12 alert alert-secondary"
+                                                        id="name" name="name" type="text"
+                                                        placeholder="Name">
+                                                    <p id="name_error" class="alert alert-danger"
+                                                       style="display: none"></p>
+                                                </div>
+                                                <div class="">
+                                                    <strong>
+                                                        <i class="las la-signature text-primary"></i>Description
+                                                    </strong>
+                                                    &nbsp &nbsp<input
+                                                        class="rounded-md col-md-12 alert alert-secondary"
+                                                        id="email" name="description" type="text"
+                                                        placeholder="Description">
+                                                    <p id="description_error" class="alert alert-danger"
+                                                       style="display: none"></p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <strong>
+                                                    <i class="las la-hand-pointer text-primary"></i>Select Manager
+                                                </strong>
+
+                                                <div class="row alert alert-secondary"
+                                                     style=" margin: 0">
+                                                    <div class="form-check form-switch col-md-3" style="padding-left:0">
+                                                        <select name="manager" id="manager"
+                                                                class="btn-outline-primary manager-dropdown form-control input-group-lg "
+                                                                value="0">
+                                                            @php
+                                                                $count = 0;
+                                                            @endphp
+                                                            @if($users == '[]')
+                                                                <option class="alert-warning"
+                                                                        value=""> Empty All managers are busy...
+                                                                </option>
+                                                            @else
+                                                                @foreach ($users as $user)
+                                                                    @if($user->project_fk_id == 0)
+                                                                        @php
+                                                                            $count =+ 1;
+                                                                        @endphp
+                                                                        <option class="alert-dark"
+                                                                                value="{{ $user->id }}">{{ $user->name }}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                                @if($count==0)
+                                                                    <option class="alert-warning"
+                                                                            value=""> Empty All managers are busy...
+                                                                    </option>
+                                                                @endif
+                                                            @endif
+                                                        </select>
+                                                        {{csrf_field()}}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <br>
+                                            <li>
+                                                <strong><i
+                                                        class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                                <br>
+                                                <div class="row alert alert-secondary"
+                                                     style=" margin: 0; padding-left:0; padding-right: 0">
+                                                    <div class="col-md-11">
+                                                        <strong id="status-project"
+                                                                class=" paragraph-active shadow">Active</strong>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="flexSwitchCheckChecked"
+                                                                   name="flexSwitchCheckChecked" value="1" checked>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <br>
+                                            <br>
+                                            <li>
+                                                <button id="create_user" class="btn btn-primary float-right"><i
+                                                        class="las la-plus-square"></i> Create
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+        @include('modal_alert')
+        @push('js')
+            <script src="{{asset('js/project.js')}}" defer></script> {{--Must add defer to active js file--}}
+        @endpush
+    </div>
+
+
+    {{--Old--}}
+    {{--<div class="header-section">
         <div class="container">
-            {{--Section get & add projects--}}
+            Section get & add projects
             <div class="row">
-                {{--Alert actions--}}
+                Alert actions
                 @if(session('successUpdate'))
                     <div class="alert alert-success d-flex align-items-center" role="alert">
                         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
@@ -22,7 +190,7 @@
                     </div>
                 @endif
                 <button id="sdf" type="button"></button>
-                {{--Section get all project--}}
+                Section get all project
                 <div class="col-md-8">
                     <div class="card shadow">
                         <div class="card-header alert-secondary">
@@ -35,7 +203,7 @@
                         </div>
                     </div>
                 </div>
-                {{--Section add new project--}}
+               --}}{{-- Section add new project--}}{{--
                 <div class="col-md-4">
                     <div class="card shadow">
                         <div class="card-header alert-secondary text-dark"><strong>Create new Project</strong></div>
@@ -48,7 +216,7 @@
                                 </div>
                             @endif
 
-                            {{-- @include('add_project')--}}
+                             @include('add_project')
                             <form action="{{route('project.add')}}" method="POST">
                                 @csrf
                                 <div class="mb-3">
@@ -108,7 +276,7 @@
             </div>
             <br>
             <br>
-            {{--Section get all trash projects--}}
+            Section get all trash projects
             <div class="row">
                 <div class="col-md-8">
                     <div class="card shadow">
@@ -123,7 +291,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
     <br>
     <br>
     <br>

@@ -1,24 +1,24 @@
 $(function () {
-    const table = $('#projects-table');
+    const table = $('#subprojects-table');
     let status = 0;
     $(document).ready(function () {
-        get_projects_as();
+        get_subprojects_as();
         /*start Project Setting and edit*/
         $("#name").focus();
 
         $(document).on('click', '#view', function () {
             var id = $(this).data('id');
-            location.href = "/projects/view/" + id;
+            location.href = "/subprojects/view/" + id;
         });
 
         $(document).on('click', '#edit', function () {
             var id = $(this).data('id');
-            location.href = "/projects/edit/" + id;
+            location.href = "/subprojects/edit/" + id;
         });
 
         $(document).on('click', '#delete', function () {
             var id = $(this).data('id');
-            location.href = "/projects/delete/" + id;
+            location.href = "/subprojects/delete/" + id;
         });
 
         $('#update-project').click(function () {
@@ -55,10 +55,10 @@ $(function () {
         });
     })
 
-    function get_projects_as() {
+    function get_subprojects_as() {
         table.DataTable({
             ajax: {
-                "url": '/projects',
+                "url": '/subprojects',
                 "type": 'GET',
                 "data": function (d) {
                     //TODO: Use this line to filter data in the table
@@ -75,8 +75,8 @@ $(function () {
                     data: 'user_fk_id',
                     name: 'user_fk_id',
                 }, {
-                    data: 'manager_fk_id',
-                    name: 'manager_fk_id',
+                    data: 'project_fk_id',
+                    name: 'project_fk_id',
                 }, {
                     data: 'created_at',
                     name: 'created_at',
@@ -102,7 +102,7 @@ $(function () {
     function edit_project(id, name, description, status) {
         $.ajax({
             method: "POST",
-            url: "/projects/update/" + id,
+            url: "/subprojects/update/" + id,
             data: {
                 _token: $("input[name=_token]").val(),
                 action: "update",
@@ -120,7 +120,7 @@ $(function () {
     function delete_project(id) {
         $.ajax({
             type: "DELETE",
-            url: "/projects/delete/" + id,
+            url: "/subprojects/delete/" + id,
             data: {
                 _token: $("input[name=_token]").val()
             },
