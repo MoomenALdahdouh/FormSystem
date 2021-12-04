@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class SubprojectController extends Controller
@@ -42,16 +43,50 @@ class SubprojectController extends Controller
                            <button data-id="' . $subprojects->id . '" data-type="' . $subprojects->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
-                ->rawColumns(['user_fk_id'],['project_fk_id'],['created_at'],['status'])
+                ->rawColumns(['user_fk_id'], ['project_fk_id'], ['created_at'], ['status'])
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }
-        return view('subprojects', compact('subprojects', 'trash','projects'));
+        return view('subprojects', compact('subprojects', 'trash', 'projects'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            if ($request->action == "create") {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required|unique:subprojects|max:255',
+                    'description' => 'required:subprojects',
+                    'project' => 'required:subprojects',
+                ], [
+                    'name.required' => 'The name is required!',
+                    'description.required' => 'The description is required!',
+                    'project.required' => 'The project is required!',
+                ]);
+                if ($validator->passes()) {
+                    $data = new Subproject();
+                    $data->name = $request->name;
+                    $data->description = $request->description;
+                    $data->user_fk_id = Auth::user()->id;
+                    $data->project_fk_id = $request->project;
+                    $data->created_at = Carbon::now();
+                    $data->updated_at = Carbon::now();
+                    $data->status = $request->status;
+                    $data->save();
+                    return response()->json(['success' => 'Successfully create new project']);
+                }
+                return response()->json(['error' => $validator->errors()->toArray()]);
+            }
+        }
+    }
+
+    public function all(Request $request)
+    {
+        if ($request->ajax()) {
+            $project = Project::query()->find($request->project_id);
+            //$project = Subproject::query()->latest()->get();
+            return view('pagination_subproject', compact('project'))->render();
+        }
     }
 
     public function store(Request $request)

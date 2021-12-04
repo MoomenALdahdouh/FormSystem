@@ -38,7 +38,7 @@
         <br>
         <br>
         <br>
-        {{--Section create new user--}}
+        {{--Section create new subproject--}}
         <div class="row">
             <div class="col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

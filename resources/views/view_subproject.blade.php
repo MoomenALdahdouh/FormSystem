@@ -63,7 +63,7 @@
                                             @if ($subproject->description === '' || $subproject->description === NULL)
                                                 &nbsp &nbsp no description ...
                                             @else
-                                                &nbsp &nbsp {{$subproject->descriotion}}
+                                                &nbsp &nbsp {{$subproject->description}}
                                             @endif
                                         </div>
                                     </li>

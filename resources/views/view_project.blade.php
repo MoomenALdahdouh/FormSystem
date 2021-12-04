@@ -1,10 +1,11 @@
 <x-app-layout>
     <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <x-slot name="header">
-        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
+        <br>
+        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('View Project') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h2>
+        </h1>
     </x-slot>
     <br>
     <br>
@@ -22,7 +23,7 @@
                 @endif
                 <button id="sdf" type="button"></button>
                 {{--Project details--}}
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card shadow">
                         {{--<div class="card-header alert-secondary">
                             <strong>Project details</strong>
@@ -63,7 +64,7 @@
                                             @if ($project->description === '' || $project->description === NULL)
                                                 &nbsp &nbsp no description ...
                                             @else
-                                                &nbsp &nbsp {{$project->descriotion}}
+                                                &nbsp &nbsp {{$project->description}}
                                             @endif
                                         </div>
                                     </li>
@@ -95,7 +96,7 @@
                 </div>
 
                 {{--Manager details--}}
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card shadow">
                         <br>
                         <div class="text-center">
@@ -119,59 +120,122 @@
             </div>
             <br>
             <br>
-            {{--Section get all sub project projects--}}
+            {{--Section get all subprojects--}}
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card shadow">
                         <div class="card-header alert-secondary">
                             <strong>Subprojects List</strong></div>
-                        <div class="card-body">
+                        <div id="table-subprojects" class="card-body">
                             @include('pagination_subproject')
                         </div>
                     </div>
                 </div>
-                {{--create subproject--}}
-                <div class="col-md-4">
+            </div>
+            <br>
+            <br>
+            {{--Section create new subproject--}}
+            <div class="row">
+                <div class="col-md-9">
                     <div class="card shadow">
-                        <div class="card-header alert-secondary text-dark"><strong>Create new Subproject</strong></div>
+                        <div class="card-header alert alert-secondary">
+                            <h4><i class="las la-plus-square"></i>Create new Subproject</h4>
+                        </div>
                         <div class="card-body">
-                            @if(session('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{session('success')}}</strong>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                </div>
-                            @endif
-                            <form action="{{route('subproject.add')}}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Subproject Name</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           placeholder="Sub Project Name"
-                                           aria-describedby="nameHelp" required>
-                                    @error('name')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <div>
-                                    <input type="hidden" class="form-control" id="project" name="project"
-                                           value="{{$project->id}}" required>
-                                    @error('project')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                                <button type="submit" class="btn btn-primary float-right"><i
-                                        class='bx bx-add-to-queue'></i>&nbsp
-                                    Create
-                                </button>
-                            </form>
+                            <div class="container">
+                                <ul class="ul-project">
+                                    <div class="alert alert-danger print-error-msg"
+                                         style="display:none">
+                                        <ul></ul>
+                                    </div>
+
+                                    <li>
+                                        <div class="">
+                                            <strong><i
+                                                    class="las la-signature text-primary"></i>Name
+                                            </strong>
+                                            &nbsp &nbsp<input
+                                                class="rounded-md col-md-12 alert alert-secondary"
+                                                id="name" name="name" type="text"
+                                                placeholder="Name">
+                                            <p id="name_error" class="alert alert-danger"
+                                               style="display: none"></p>
+                                        </div>
+                                        <div class="">
+                                            <strong>
+                                                <i class="las la-signature text-primary"></i>Description
+                                            </strong>
+                                            &nbsp &nbsp<input
+                                                class="rounded-md col-md-12 alert alert-secondary"
+                                                id="description" name="description" type="text"
+                                                placeholder="Description">
+                                            <p id="description_error"
+                                               class="alert alert-danger"
+                                               style="display: none"></p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            <i class="las la-hand-pointer text-primary"></i>Select
+                                            Project
+                                        </strong>
+
+                                        <div class="row alert alert-secondary"
+                                             style=" margin: 0">
+                                            <div class="form-check form-switch col-md-3"
+                                                 style="padding-left:0">
+                                                <select name="project" id="project"
+                                                        class="btn-outline-primary manager-dropdown form-control input-group-lg "
+                                                        value="0">
+                                                    <option class="alert-dark"
+                                                            value="{{ $project->id }}">{{ $project->name }}</option>
+                                                </select>
+                                                {{csrf_field()}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <strong><i
+                                                class="las la-toggle-off text-primary"></i>&nbsp;Status</strong>
+                                        <br>
+                                        <div class="row alert alert-secondary"
+                                             style=" margin: 0; padding-left:0; padding-right: 0">
+                                            <div class="col-md-11">
+                                                <strong id="status-project"
+                                                        class=" paragraph-active shadow">Active</strong>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input"
+                                                           type="checkbox"
+                                                           id="flexSwitchCheckChecked"
+                                                           name="flexSwitchCheckChecked"
+                                                           value="1" checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <br>
+                                    <br>
+                                    <li>
+                                        <button id="create_subproject"
+                                                class="btn btn-primary float-right"><i
+                                                class="las la-plus-square"></i> Create
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+    @include('modal_alert')
+    @push('js')
+        <script src="{{asset('js/view_project.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @endpush
     <br>
     <br>
     <br>

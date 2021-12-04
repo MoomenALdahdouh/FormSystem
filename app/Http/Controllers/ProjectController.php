@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
 class ProjectController extends Controller
@@ -46,7 +47,7 @@ class ProjectController extends Controller
                            <button data-id="' . $projects->id . '" data-type="' . $projects->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
-                ->rawColumns(['user_fk_id'],['manager_fk_id'],['created_at'],['status'])
+                ->rawColumns(['user_fk_id'], ['manager_fk_id'], ['created_at'], ['status'])
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }
@@ -79,15 +80,32 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         if ($request->ajax()) {
-            $data = new Project();
-            $data->name = $request->name;
-            $data->user_fk_id = Auth::user()->id;
-            $data->manager_fk_id = $request->manager;
-            $data->created_at = Carbon::now();
-            $data->save();
-            $project_id = $data->id;
-            $this->updateUser($request->manager, $project_id);
-            return response()->json(['success' => 'Successfully create new Project']);
+            if ($request->action == "create") {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required|unique:projects|max:255',
+                    'description' => 'required:projects',
+                    'manager' => 'required|unique:projects',
+                ], [
+                    'name.required' => 'The name is required!',
+                    'description.required' => 'The description is required!',
+                    'manager.required' => 'The manager is required!',
+                ]);
+                if ($validator->passes()) {
+                    $data = new Project();
+                    $data->name = $request->name;
+                    $data->description = $request->description;
+                    $data->user_fk_id = Auth::user()->id;
+                    $data->manager_fk_id = $request->manager;
+                    $data->created_at = Carbon::now();
+                    $data->updated_at = Carbon::now();
+                    $data->status = $request->status;
+                    $data->save();
+                    $project_id = $data->id;
+                    $this->updateUser($request->manager, $project_id);
+                    return response()->json(['success' => 'Successfully create new project']);
+                }
+                return response()->json(['error' => $validator->errors()->toArray()]);
+            }
         }
     }
 

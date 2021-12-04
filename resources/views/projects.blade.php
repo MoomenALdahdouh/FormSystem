@@ -83,7 +83,7 @@
                                                     </strong>
                                                     &nbsp &nbsp<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
-                                                        id="email" name="description" type="text"
+                                                        id="description" name="description" type="text"
                                                         placeholder="Description">
                                                     <p id="description_error" class="alert alert-danger"
                                                        style="display: none"></p>
@@ -127,6 +127,9 @@
                                                         {{csrf_field()}}
                                                     </div>
                                                 </div>
+                                                <br>
+                                                <p id="manager_error" class="alert alert-danger"
+                                                   style="display: none"></p>
                                             </li>
                                             <br>
                                             <li>

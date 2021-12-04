@@ -53,6 +53,8 @@ $(function () {
                 $('#can-not-remove').modal('show');
             }
         });
+        create_project();
+        create_subproject();
     })
 
     function get_projects_as() {
@@ -97,6 +99,135 @@ $(function () {
                 "targets": 0
             }],
         });
+    }
+
+    function create_project() {
+
+        const name_error = $('#name_error');
+        const description_error = $('#description_error');
+        const manager_error = $('#manager_error');
+        name_error.css('display', 'none');
+        description_error.css('display', 'none');
+        manager_error.css('display', 'none');
+
+        $('#create_project').click(function () {
+            const name = $('#name').val();
+            const description = $('#description').val();
+            const manager = $('#manager').val();
+            console.log(manager);
+            const status = $('#flexSwitchCheckChecked').val();
+            //console.log(name, phone, email, type, status)
+            $.ajax({
+                type: "POST",
+                url: "/projects/create",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    action: "create",
+                    name: name,
+                    description: description,
+                    manager: manager,
+                    status: status,
+                },
+                success: function (data) {
+                    if ($.isEmptyObject(data.error)) {
+                        name_error.css('display', 'none');
+                        description_error.css('display', 'none');
+                        manager_error.css('display', 'none');
+                        $('#successfully-creat').modal('show');
+                        //in_user_type.val(4);
+                        table.DataTable().ajax.reload();
+                    } else {
+                        printErrorMsg(data.error);
+                    }
+                }
+            });
+
+            function printErrorMsg(msg) {
+                if (msg['name']) {
+                    name_error.html(msg['name']);
+                    name_error.css('display', 'block');
+                } else {
+                    name_error.css('display', 'none');
+                }
+                if (msg['description']) {
+                    $('#description_error').html(msg['description']);
+                    description_error.css('display', 'block');
+                } else {
+                    description_error.css('display', 'none');
+                }
+                if (msg['manager']) {
+                    $('#manager_error').html(msg['manager']);
+                    manager_error.css('display', 'block');
+                } else {
+                    manager_error.css('display', 'none');
+                }
+            }
+        });
+
+    }
+
+    function create_subproject() {
+        const name_error = $('#name_error');
+        const description_error = $('#description_error');
+        const project_error = $('#project_error');
+        name_error.css('display', 'none');
+        description_error.css('display', 'none');
+        project_error.css('display', 'none');
+
+        $('#create_subproject').click(function () {
+            const name = $('#name').val();
+            const description = $('#description').val();
+            const project = $('#project').val();
+            console.log(project);
+            const status = $('#flexSwitchCheckChecked').val();
+            //console.log(name, phone, email, type, status)
+            $.ajax({
+                type: "POST",
+                url: "/subprojects/create",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    action: "create",
+                    name: name,
+                    description: description,
+                    project: project,
+                    status: status,
+                },
+                success: function (data) {
+                    if ($.isEmptyObject(data.error)) {
+                        name_error.css('display', 'none');
+                        description_error.css('display', 'none');
+                        project_error.css('display', 'none');
+                        $('#successfully-creat').modal('show');
+                        //in_user_type.val(4);
+                        table.DataTable().ajax.reload();
+                    } else {
+                        printErrorMsg(data.error);
+                    }
+                }
+            });
+
+            function printErrorMsg(msg) {
+                if (msg['name']) {
+                    name_error.html(msg['name']);
+                    name_error.css('display', 'block');
+                } else {
+                    name_error.css('display', 'none');
+                }
+                if (msg['description']) {
+                    $('#description_error').html(msg['description']);
+                    description_error.css('display', 'block');
+                } else {
+                    description_error.css('display', 'none');
+                }
+                if (msg['project']) {
+                    $('#project_error').html(msg['project']);
+                    project_error.css('display', 'block');
+                } else {
+                    project_error.css('display', 'none');
+                }
+            }
+        });
+
     }
 
     function edit_project(id, name, description, status) {

@@ -83,6 +83,7 @@
                 </div>
             </div>
             <br id="edit-subproject">
+            <br id="edit_subproject">
             <br>
             {{--Section Edit project--}}
             <div class="col-md-12">
