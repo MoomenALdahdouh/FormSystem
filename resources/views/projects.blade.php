@@ -151,7 +151,7 @@
                                             <br>
                                             <br>
                                             <li>
-                                                <button id="create_user" class="btn btn-primary float-right"><i
+                                                <button id="create_project" class="btn btn-primary float-right"><i
                                                         class="las la-plus-square"></i> Create
                                                 </button>
                                             </li>

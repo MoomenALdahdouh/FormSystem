@@ -76,12 +76,15 @@ class SubprojectController extends Controller
 
     public function show($id)
     {
-        return $id ? Subproject::find($id) : Subproject::all();
+        $subproject = Subproject::query()->find($id);
+        return view('view_subproject', compact('subproject'));
     }
 
     public function edit($id)
     {
-        //
+        $subproject = Subproject::query()->find($id);
+        //$project = Project::query()->find($subproject->mainProject);
+        return view('edit_subproject', compact('subproject'));
     }
 
     public function update(Request $request, $id)

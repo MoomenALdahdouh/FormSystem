@@ -116,7 +116,7 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        $project = Project::find($id);
+        $project = Project::query()->find($id);
         return view('view_project', compact('project'));
     }
 

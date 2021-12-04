@@ -22,7 +22,7 @@
                                 <tr>
                                     <th>SL No</th>
                                     <th>Name</th>
-                                    <th>User</th>
+                                    <th>Created By</th>
                                     <th>Main Project</th>
                                     <th>Created At</th>
                                     <th>Status</th>
@@ -89,7 +89,7 @@
                                             </li>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>Select Manager
+                                                    <i class="las la-hand-pointer text-primary"></i>Select Project
                                                 </strong>
 
                                                 <div class="row alert alert-secondary"
@@ -129,7 +129,7 @@
                                             <br>
                                             <li>
                                                 <strong><i
-                                                        class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                                        class="las la-toggle-off text-primary"></i>&nbsp;Status</strong>
                                                 <br>
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
@@ -149,7 +149,7 @@
                                             <br>
                                             <br>
                                             <li>
-                                                <button id="create_user" class="btn btn-primary float-right"><i
+                                                <button id="create_subproject" class="btn btn-primary float-right"><i
                                                         class="las la-plus-square"></i> Create
                                                 </button>
                                             </li>
