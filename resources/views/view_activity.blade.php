@@ -22,7 +22,7 @@
             <button id="sdf" type="button"></button>
             {{--activity details--}}
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     {{--activity details header--}}
                     <div class="card shadow">
                         <div class="card-body">
@@ -128,8 +128,8 @@
                     </div>
                     <br>
                 </div>
-                {{--Sub project and Manager details--}}
-                <div class="col-md-4">
+                {{--Subproject and Manager details--}}
+                <div class="col-md-3">
                     <div class="card shadow">
                         <div class="card-header">
                             <br>
@@ -138,15 +138,15 @@
                                     <i class='bx bx-file' style="font-size: 30px; line-height: 60px"></i>
                                 </div>
                                 <div class="col-sm-11">
-                                    <p class="hint">Subproject</p>
-                                    <p class="paragraph-active shadow float-right">
+                                    <p class="hint">&nbsp;Subproject</p>
+                                    <p class="float-right">
                                         @if($activity->subproject->status == 1)
-                                            Active
+                                            <strong class=" paragraph-active shadow">Active</strong>
                                         @else
-                                            Pended
+                                            <strong class=" paragraph-pended shadow">Pended</strong>
                                         @endif
                                     </p>
-                                    <p><strong>{{$activity->subproject->name}}</strong>
+                                    <p>&nbsp;<strong>{{$activity->subproject->name}}</strong>
                                         <a href="{{url('/subprojects/view/'.$activity->subproject->id)}}"><i
                                                 class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
                                     </p>
@@ -163,11 +163,11 @@
                                 <a href="{{url('/users/view/'.$activity->worker->id)}}"><i
                                         class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
                             </p>
-                            <p class="paragraph-active shadow">
+                            <p>
                                 @if($activity->worker->status == 1)
-                                    Active
+                                    <strong class=" paragraph-active shadow">Active</strong>
                                 @else
-                                    Pended
+                                    <strong class=" paragraph-pended shadow">Pended</strong>
                                 @endif
                             </p>
                         </div>
@@ -175,50 +175,6 @@
                     </div>
                 </div>
             </div>
-
-            {{--<br>
-            <div class="col-md-12 alert alert-dark text-dark">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <strong><i class="las la-calendar-check text-primary"></i>Activity Type</strong>
-                                </div>
-                                <div class="col-md-1">
-                                    @switch($activity->type)
-                                        @case(0)
-                                        <p class="paragraph-admin shadow">&nbsp;Form&nbsp;</p>
-                                        @break
-                                        @case (1)
-                                        <p class="paragraph-manager shadow">Activity</p>
-                                        @break
-                                        @case (2)
-                                        <p class="paragraph-worker shadow">&nbsp; Activity &nbsp;</p>
-                                        @break
-                                    @endswitch
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <strong><i class="las la-calendar-check text-primary"></i>Status</strong>
-                                </div>
-                                <div class="col-md-1">
-                                    @switch($activity->staus)
-                                        @case (0)
-                                        <p class="paragraph-pended shadow">Pended</p>
-                                        @break
-                                        @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
-                                        @break
-                                    @endswitch
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>--}}
         </div>
     </div>
     <br>

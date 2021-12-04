@@ -183,7 +183,7 @@
                                     can not restore it.</strong>
                             </div>
                             <div class="col-md-2">
-                                <button id="remove-project" class="btn btn-danger float-right">Remove Now</button>
+                                <button id="remove-subproject" class="btn btn-danger float-right">Remove Now</button>
                             </div>
                         </div>
                     </div>

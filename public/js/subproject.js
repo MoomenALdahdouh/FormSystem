@@ -1,6 +1,7 @@
 $(function () {
     const table = $('#subprojects-table');
     let status = 0;
+    let removed = false;
     $(document).ready(function () {
         get_subprojects_as();
         /*start Project Setting and edit*/
@@ -18,7 +19,7 @@ $(function () {
 
         $(document).on('click', '#delete', function () {
             var id = $(this).data('id');
-            location.href = "/subprojects/delete/" + id;
+            delete_subproject(id);
         });
 
         $('#update-subproject').click(function () {
@@ -43,14 +44,14 @@ $(function () {
             }
         })
 
-        $('#remove-project').click(function () {
-            var project_id = document.getElementById('project-id').value;
-            var subproject_size = document.getElementById('subproject-size').value;
-            if (subproject_size === 0)
-                delete_project(project_id)
-            else {
-                $('#can-not-remove').modal('show');
-            }
+        $('#remove-subproject').click(function () {
+            removed = false;
+            var project_id = document.getElementById('subproject-id').value;
+            delete_subproject(project_id)
+            setTimeout(function () {
+                if (removed)
+                    location.href = "/subprojects";
+            }, 2000);
         });
     })
 
@@ -116,7 +117,7 @@ $(function () {
         });
     }
 
-    function delete_project(id) {
+    function delete_subproject(id) {
         $.ajax({
             type: "DELETE",
             url: "/subprojects/delete/" + id,
@@ -124,7 +125,13 @@ $(function () {
                 _token: $("input[name=_token]").val()
             },
             success: function (response) {
-
+                if (response['success']) {
+                    $('#successfully-remove').modal('show');
+                    table.DataTable().ajax.reload();
+                    removed = true;
+                } else {
+                    $('#can-not-remove-subproject').modal('show');
+                }
             }
         });
     }

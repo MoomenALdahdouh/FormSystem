@@ -38,7 +38,6 @@
         </div>
         <br>
         <br>
-        <br>
         {{--Section create new subproject--}}
         <div class="row">
             <div class="col-md-12">

@@ -11,22 +11,9 @@
     <div class="header-section">
         <div class="container">
             <div class="row">
-                {{--Alert actions--}}
-                @if(session('successUpdate'))
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                            <use xlink:href="#check-circle-fill"/>
-                        </svg>
-                        <strong>{{session('successUpdate')}}</strong>
-                    </div>
-                @endif
-                <button id="sdf" type="button"></button>
                 {{--Project details--}}
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card shadow">
-                        {{--<div class="card-header alert-secondary">
-                            <strong>Project details</strong>
-                        </div>--}}
                         <div class="card-body">
                             <div class="container">
                                 <ul class="ul-project">
@@ -39,17 +26,17 @@
                                                 <h5>{{$subproject->name}}</h5>
                                             </div>
                                             <div class="col-1 row-3">
-                                                <a href="{{url('projects/edit/'.$subproject->id.'#edit-project')}}"><i
+                                                <a href="{{url('subprojects/edit/'.$subproject->id.'#edit-project')}}"><i
                                                         class="lar la-edit btn-outline-primary sm:rounded-md"></i></a>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
-                                        <p class="paragraph-active shadow">
+                                        <p>
                                             @if($subproject->status == 1)
-                                                Active
+                                                <strong class=" paragraph-active shadow">Active</strong>
                                             @else
-                                                Pended
+                                                <strong class=" paragraph-pended shadow">Pended</strong>
                                             @endif
                                         </p>
                                         {{--<i class="las la-check-double text-primary"></i>--}}
@@ -93,9 +80,34 @@
                         </div>
                     </div>
                 </div>
-
-                {{--create by details--}}
-                <div class="col-md-4">
+                {{--Project and Create by details--}}
+                <div class="col-md-3">
+                    {{--Project details--}}
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <i class='bx bx-file' style="font-size: 30px; line-height: 60px"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <p class="hint">&nbsp;Project</p>
+                                    <p class="float-right">
+                                        @if($subproject->mainProject->status == 1)
+                                            <strong class=" paragraph-active shadow">Active</strong>
+                                        @else
+                                            <strong class=" paragraph-pended shadow">Pended</strong>
+                                        @endif
+                                    </p>
+                                    <p>&nbsp;<strong>{{$subproject->mainProject->name}}</strong>
+                                        <a href="{{url('/projects/view/'.$subproject->mainProject->id)}}"><i
+                                                class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--Create by details--}}
                     <div class="card shadow">
                         <br>
                         <div class="text-center">
@@ -123,19 +135,23 @@
             <br>
             {{--Section get all activities in this projects--}}
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="card shadow">
                         <div class="card-header alert-secondary">
-                            <strong>Subprojects List</strong></div>
-                        <div class="card-body">
+                            <strong>Activities List</strong></div>
+                        <div id="table-subprojects" class="card-body">
 
                         </div>
                     </div>
                 </div>
-                {{--create activity--}}
-                <div class="col-md-4">
+            </div>
+
+            {{--Section create activity--}}
+            <div class="row">
+                <div class="col-md-9">
                     <div class="card shadow">
-                        <div class="card-header alert-secondary text-dark"><strong>Create new Subproject</strong></div>
+                        <div class="card-header alert-secondary text-dark"><strong>Create new
+                                Subproject</strong></div>
                         <div class="card-body">
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -147,7 +163,6 @@
 
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
