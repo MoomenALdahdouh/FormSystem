@@ -1,11 +1,10 @@
 <x-app-layout>
-    @include('modal_alert')
-
     <x-slot name="header">
-        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
+        <br>
+        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Subproject Settings') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h2>
+        </h1>
     </x-slot>
     <br>
     <br>
@@ -22,7 +21,7 @@
                         <strong>{{session('successUpdate')}}</strong>
                     </div>
                 @endif
-                {{--Section get all project--}}
+                {{--Section subproject details--}}
                 <div class="col-md-12">
                     <div class="card shadow">
                         <div class="card-header alert">
@@ -83,7 +82,6 @@
                 </div>
             </div>
             <br id="edit-subproject">
-            <br id="edit_subproject">
             <br>
             {{--Section Edit project--}}
             <div class="col-md-12">
@@ -96,7 +94,8 @@
                             <div class="card-body">
                                 <div class="container">
                                     <ul class="ul-project">
-                                        <input type="hidden" id="project-id" name="project-id" value="{{$subproject->id}}">
+                                        <input type="hidden" id="subproject-id" name="subproject-id"
+                                               value="{{$subproject->id}}">
                                         <input type="hidden" id="subproject-size" name="subproject-size"
                                                value="{{$subproject->id}}">
                                         <li>
@@ -122,7 +121,8 @@
                                                      $desc = $subproject->description;
                                                  }
                                                 @endphp
-                                                <textarea placeholder="description" id="description" name="description"
+                                                <textarea rows="3" placeholder="description" id="description"
+                                                          name="description"
                                                           class="rounded-md col-md-12 alert alert-secondary"
                                                           type="text">{{$desc}}</textarea>
                                             </div>
@@ -159,7 +159,7 @@
                                         <br>
                                         <br>
                                         <li>
-                                            <button id="update-project" class="btn btn-primary float-right"><i
+                                            <button id="update-subproject" class="btn btn-primary float-right"><i
                                                     class="lar la-save"></i> Save
                                             </button>
                                         </li>
@@ -245,6 +245,7 @@
             <br>
         </div>
     </div>
+    @include('modal_alert')
     @push('js')
         <script src="{{asset('js/subproject.js')}}" defer></script> {{--Must add defer to active js file--}}
     @endpush

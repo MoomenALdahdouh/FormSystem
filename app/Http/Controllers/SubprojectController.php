@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Project;
 use App\Models\Subproject;
 use Illuminate\Http\Request;
@@ -124,13 +125,32 @@ class SubprojectController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        if ($request->action == "update") {
+            $update = Subproject::query()->find($id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'status' => $request->status,
+            ]);
+            return response()->json(['success' => 'Successfully update Project']);
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $delete = Subproject::find($id)->delete();
-        return Subproject::back()->with('successUpdate', 'Successfully Delete Subproject');
+        if ($request->ajax()) {
+            $subproject = Subproject::query()->find($id);
+            $activities = Activity::query()->where('subproject_fk_id', $id)->get();
+            if (count($activities) == 0) {
+                $subproject->delete();
+                /*$this->updateUser($project->manager, 0);
+                $managerId = $project->manager_fk_id;
+                $this->updateUser($managerId, 0);*/
+                return response()->json(['success' => 'Successfully Delete Subproject']);
+            }
+            return response()->json(['error' => 'This Subproject have activities']);
+        }
+        /*$delete = Subproject::query()->find($id)->delete();
+        return Subproject::back()->with('successUpdate', 'Successfully Delete Subproject');*/
     }
 
     public function forcedestroy($id)

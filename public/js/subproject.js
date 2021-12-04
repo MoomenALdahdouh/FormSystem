@@ -21,12 +21,11 @@ $(function () {
             location.href = "/subprojects/delete/" + id;
         });
 
-        $('#update-project').click(function () {
+        $('#update-subproject').click(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
-            var id = document.getElementById('project-id').value;
-            console.log(id, name, description, status)
-            edit_project(id, name, description, status);
+            var id = document.getElementById('subproject-id').value;
+            edit_subproject(id, name, description, status);
         });
 
         $('#flexSwitchCheckChecked').click(function () {
@@ -99,7 +98,7 @@ $(function () {
         });
     }
 
-    function edit_project(id, name, description, status) {
+    function edit_subproject(id, name, description, status) {
         $.ajax({
             method: "POST",
             url: "/subprojects/update/" + id,

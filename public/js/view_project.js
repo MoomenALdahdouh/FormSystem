@@ -1,5 +1,6 @@
 $(function () {
     let status = 0;
+    let removed = false;
     $(document).ready(function () {
         /*start Project Setting and edit*/
         //$("#name").focus();
@@ -17,7 +18,12 @@ $(function () {
                 project_status.css("background-color", "#d93f51");
                 status = 0;
             }
-        })
+        });
+
+        $('#delete-subproject').click(function () {
+            var subproject_id = document.getElementById('subproject-id').value;
+            delete_subproject(subproject_id)
+        });
 
         create_subproject();
     })
@@ -34,7 +40,6 @@ $(function () {
             const name = $('#name').val();
             const description = $('#description').val();
             const project = $('#project').val();
-            console.log(project);
             const status = $('#flexSwitchCheckChecked').val();
             //console.log(name, phone, email, type, status)
             $.ajax({
@@ -81,6 +86,7 @@ $(function () {
                     project_error.css('display', 'none');
                 }
             }
+
             /*function fetch_projects(page) {
                 $.ajax({
                     type: "GET",
@@ -90,23 +96,41 @@ $(function () {
                     }
                 });
             }*/
-            function fetch_subprojects(project_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "/subprojects/all",
-                    data:{
-                        _token: $("input[name=_token]").val(),
-                        project_id: project_id,
-                    },
-                    success: function (response) {
-                        $('#name').val("");
-                        $('#description').val("");
-                        $('#table-subprojects').html(response)
-                    }
-                });
+        });
+    }
+
+    function fetch_subprojects(project_id) {
+        $.ajax({
+            type: "GET",
+            url: "/subprojects/all",
+            data: {
+                _token: $("input[name=_token]").val(),
+                project_id: project_id,
+            },
+            success: function (response) {
+                $('#name').val("");
+                $('#description').val("");
+                $('#table-subprojects').html(response)
             }
         });
+    }
 
+    function delete_subproject(id) {
+        $.ajax({
+            type: "DELETE",
+            url: "/subprojects/delete/" + id,
+            data: {
+                _token: $("input[name=_token]").val()
+            },
+            success: function (response) {
+                if (response['success']) {
+                    $('#successfully-remove').modal('show');
+                    fetch_subprojects($('#project').val());
+                } else {
+                    $('#can-not-remove-subproject').modal('show');
+                }
+            }
+        });
     }
 
 

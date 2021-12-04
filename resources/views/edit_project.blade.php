@@ -98,7 +98,7 @@
                                     <ul class="ul-project">
                                         <input type="hidden" id="project-id" name="project-id" value="{{$project->id}}">
                                         <input type="hidden" id="subproject-size" name="subproject-size"
-                                               value="{{$project->id}}">
+                                               value="{{count($subprojects)}}">
                                         <li>
                                             <div class="">
                                                 <strong><i class='bx bx-rename'></i>&nbsp Name
@@ -122,7 +122,7 @@
                                                      $desc = $project->description;
                                                  }
                                                 @endphp
-                                                <textarea placeholder="description" id="description" name="description"
+                                                <textarea rows="3" placeholder="description" id="description" name="description"
                                                           class="rounded-md col-md-12 alert alert-secondary"
                                                           type="text">{{$desc}}</textarea>
                                             </div>
@@ -306,7 +306,7 @@
     </div>
     @push('js')
         <script src="{{asset('js/project.js')}}" defer></script> {{--Must add defer to active js file--}}
-       {{-- <script src="{{asset('js/view_project.js')}}" defer></script>--}} {{--Must add defer to active js file--}}
+        {{-- <script src="{{asset('js/view_project.js')}}" defer></script>--}} {{--Must add defer to active js file--}}
     @endpush
     <br>
     <br>

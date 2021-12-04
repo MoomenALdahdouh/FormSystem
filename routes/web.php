@@ -74,11 +74,12 @@ Route::prefix('subprojects')->group(function () {
     Route::get('/', [SubprojectController::class, 'index'])->name('subprojects');
     Route::get('/all', [SubprojectController::class, 'all'])->name('subprojects.all');
     Route::post('/add', [SubprojectController::class, 'store'])->name('subproject.add');
-    Route::get('/delete/{id}', [SubprojectController::class, 'destroy'])->name('destroy');
+    Route::delete('/delete/{id}', [SubprojectController::class, 'destroy'])->name('destroy');
     Route::get('/forcedelete/{id}', [SubprojectController::class, 'forcedestroy'])->name('forcedestroy');
     Route::get('/restore/{id}', [SubprojectController::class, 'restore'])->name('restore');
     Route::get('/view/{id}', [SubprojectController::class, 'show'])->name('subproject.view');
     Route::get('/edit/{id}', [SubprojectController::class, 'edit'])->name('subproject.edit');
+    Route::post('/update/{id}', [SubprojectController::class, 'update'])->name('subproject.update');
     Route::post('/create', [SubprojectController::class, 'create'])->name('subproject.create');
 });
 

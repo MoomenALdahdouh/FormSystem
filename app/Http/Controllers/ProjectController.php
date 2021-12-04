@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Subproject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -64,7 +65,7 @@ class ProjectController extends Controller
     public function all(Request $request)
     {
         if ($request->ajax()) {
-            $projects = Project::latest()->paginate(6);
+            $projects = Project::query()->latest()->paginate(6);
             return view('pagination_projects', compact('projects'))->render();
         }
     }
@@ -84,7 +85,7 @@ class ProjectController extends Controller
                 $validator = Validator::make($request->all(), [
                     'name' => 'required|unique:projects|max:255',
                     'description' => 'required:projects',
-                    'manager' => 'required|unique:projects',
+                    'manager' => 'required:projects',
                 ], [
                     'name.required' => 'The name is required!',
                     'description.required' => 'The description is required!',
@@ -140,14 +141,15 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $project = Project::find($id);
-        return view('edit_project', compact('project'));
+        $project = Project::query()->find($id);
+        $subprojects = Subproject::query()->where('project_fk_id', $id)->get();
+        return view('edit_project', compact('project', 'subprojects'));
     }
 
     public function update(Request $request, $id)
     {
         if ($request->action == "update") {
-            $update = Project::find($id)->update([
+            $update = Project::query()->find($id)->update([
                 'name' => $request->name,
                 'description' => $request->description,
                 'status' => $request->status,
@@ -161,23 +163,31 @@ class ProjectController extends Controller
         return Project::where("name", "like", "%" . $string . "%")->get();
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $project = Project::find($id);
-        $project->delete();
+        if ($request->ajax()) {
+            $project = Project::query()->find($id);
+            $subprojects = Subproject::query()->where('project_fk_id', $id)->get();
+            if (count($subprojects) == 0) {
+                $this->updateUser($project->manager, 0);
+                $project->delete();
+                $managerId = $project->manager_fk_id;
+                $this->updateUser($managerId, 0);
+                return response()->json(['success' => 'Successfully Delete Project']);
+            }
+            return response()->json(['error' => 'This project have subprojects']);
+        }
         //TODO: If you need to reuse the same manager to other project after delete this project hes was manager before
-        /*$managerId = $project->manager_fk_id;
-        $this->updateUser($managerId,0);*/
         //return Redirect::back()->with('successUpdate', 'Successfully Delete Project');
-        return response()->json(['success' => 'Successfully Delete Project']);
+
     }
 
     public function forcedestroy($id)
     {
         $project = Project::onlyTrashed()->find($id);
         $project->forceDelete();
-        $managerId = $project->manager_fk_id;
-        $this->updateUser($managerId, 0);
+        /*$managerId = $project->manager_fk_id;
+        $this->updateUser($managerId, 0);*/
         //return Redirect::back()->with('successUpdate', 'Successfully Force Delete Project');
         return response()->json(['success' => 'Successfully Force Delete Project']);
     }
@@ -191,7 +201,7 @@ class ProjectController extends Controller
 
     public function updateUser($id, $project_id)
     {
-        $users = User::find($id);
+        $users = User::query()->find($id);
         if ($users) {
             $users->project_fk_id = $project_id;
             $users->save();

@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <br>
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Subprojects') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create subProject') }}</button>--}}
-        </h2>
+        </h1>
     </x-slot>
     <br>
     <br>

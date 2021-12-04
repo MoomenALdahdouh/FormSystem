@@ -6,6 +6,7 @@
         <th scope="col">Main Project</th>
         <th scope="col">User</th>
         <th scope="col">Created At</th>
+        <th scope="col">Status</th>
         <th scope="col">Action</th>
     </tr>
 
@@ -27,12 +28,18 @@
                     <td><span class="text-danger">No Date Set</span></td>
                 @else
                     <td>{{\Carbon\Carbon::parse($subproject->created_at)->diffForHumans()}}</td>
+                @endif
+                @if($subproject->status == 0)
+                    <td><span class="paragraph-pended shadow">Pended</span></td>
+                @else
+                    <td><span class="paragraph-active shadow">Active</span></td>
             @endif
             <!--Use this line if you compact users from Auth-->
                 <!--Use this line if you compact users from DB to pars the date by carbon library-->
                 <td>
-                    <a href="{{url('subprojects/delete/'.$subproject->id)}}"
-                       class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></a>
+                    <input type="hidden" id="subproject-id" name="subproject-id" value="{{$subproject->id}}">
+                    <button id="delete-subproject"
+                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
                     &nbsp
                     <a href="{{url('subprojects/edit/'.$subproject->id .'#edit-subproject')}}"
                        class="btn-outline-dark sm:rounded-md" title="settings">

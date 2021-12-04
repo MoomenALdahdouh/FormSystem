@@ -1,6 +1,7 @@
 $(function () {
     const table = $('#projects-table');
     let status = 0;
+    let removed = false;
     $(document).ready(function () {
         get_projects_as();
         /*start Project Setting and edit*/
@@ -18,19 +19,18 @@ $(function () {
 
         $(document).on('click', '#delete', function () {
             var id = $(this).data('id');
-            location.href = "/projects/delete/" + id;
+            delete_project(id);
+            //location.href = "/projects/delete/" + id;
         });
 
         $('#update-project').click(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
             var id = document.getElementById('project-id').value;
-            console.log(id, name, description, status)
             edit_project(id, name, description, status);
         });
-
+        status = document.getElementById('flexSwitchCheckChecked').value;
         $('#flexSwitchCheckChecked').click(function () {
-            status = document.getElementById('flexSwitchCheckChecked').value;
             const isChecked = document.getElementById("flexSwitchCheckChecked").checked;
             const project_status = $('#status-project');
             if (isChecked) {
@@ -45,17 +45,16 @@ $(function () {
         })
 
         $('#remove-project').click(function () {
+            removed = false;
             var project_id = document.getElementById('project-id').value;
-            var subproject_size = document.getElementById('subproject-size').value;
-            if (subproject_size === 0)
-                delete_project(project_id)
-            else {
-                $('#can-not-remove').modal('show');
-            }
+            delete_project(project_id)
+            setTimeout(function () {
+                if (removed)
+                    location.href = "/projects";
+            }, 2000);
         });
         create_project();
-        create_subproject();
-    })
+    });
 
     function get_projects_as() {
         table.DataTable({
@@ -102,21 +101,17 @@ $(function () {
     }
 
     function create_project() {
-
-        const name_error = $('#name_error');
-        const description_error = $('#description_error');
-        const manager_error = $('#manager_error');
-        name_error.css('display', 'none');
-        description_error.css('display', 'none');
-        manager_error.css('display', 'none');
-
         $('#create_project').click(function () {
+            const name_error = $('#name_error');
+            const description_error = $('#description_error');
+            const manager_error = $('#manager_error');
+            name_error.css('display', 'none');
+            description_error.css('display', 'none');
+            manager_error.css('display', 'none');
             const name = $('#name').val();
             const description = $('#description').val();
             const manager = $('#manager').val();
-            console.log(manager);
-            const status = $('#flexSwitchCheckChecked').val();
-            //console.log(name, phone, email, type, status)
+            //console.log(name, description, manager, status)
             $.ajax({
                 type: "POST",
                 url: "/projects/create",
@@ -133,8 +128,9 @@ $(function () {
                         name_error.css('display', 'none');
                         description_error.css('display', 'none');
                         manager_error.css('display', 'none');
+                        $('#name').val("");
+                        $('#description').val("");
                         $('#successfully-creat').modal('show');
-                        //in_user_type.val(4);
                         table.DataTable().ajax.reload();
                     } else {
                         printErrorMsg(data.error);
@@ -150,80 +146,16 @@ $(function () {
                     name_error.css('display', 'none');
                 }
                 if (msg['description']) {
-                    $('#description_error').html(msg['description']);
+                    description_error.html(msg['description']);
                     description_error.css('display', 'block');
                 } else {
                     description_error.css('display', 'none');
                 }
                 if (msg['manager']) {
-                    $('#manager_error').html(msg['manager']);
+                    description_error.html(msg['manager']);
                     manager_error.css('display', 'block');
                 } else {
                     manager_error.css('display', 'none');
-                }
-            }
-        });
-
-    }
-
-    function create_subproject() {
-        const name_error = $('#name_error');
-        const description_error = $('#description_error');
-        const project_error = $('#project_error');
-        name_error.css('display', 'none');
-        description_error.css('display', 'none');
-        project_error.css('display', 'none');
-
-        $('#create_subproject').click(function () {
-            const name = $('#name').val();
-            const description = $('#description').val();
-            const project = $('#project').val();
-            console.log(project);
-            const status = $('#flexSwitchCheckChecked').val();
-            //console.log(name, phone, email, type, status)
-            $.ajax({
-                type: "POST",
-                url: "/subprojects/create",
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    action: "create",
-                    name: name,
-                    description: description,
-                    project: project,
-                    status: status,
-                },
-                success: function (data) {
-                    if ($.isEmptyObject(data.error)) {
-                        name_error.css('display', 'none');
-                        description_error.css('display', 'none');
-                        project_error.css('display', 'none');
-                        $('#successfully-creat').modal('show');
-                        //in_user_type.val(4);
-                        table.DataTable().ajax.reload();
-                    } else {
-                        printErrorMsg(data.error);
-                    }
-                }
-            });
-
-            function printErrorMsg(msg) {
-                if (msg['name']) {
-                    name_error.html(msg['name']);
-                    name_error.css('display', 'block');
-                } else {
-                    name_error.css('display', 'none');
-                }
-                if (msg['description']) {
-                    $('#description_error').html(msg['description']);
-                    description_error.css('display', 'block');
-                } else {
-                    description_error.css('display', 'none');
-                }
-                if (msg['project']) {
-                    $('#project_error').html(msg['project']);
-                    project_error.css('display', 'block');
-                } else {
-                    project_error.css('display', 'none');
                 }
             }
         });
@@ -256,7 +188,13 @@ $(function () {
                 _token: $("input[name=_token]").val()
             },
             success: function (response) {
-
+                if (response['success']) {
+                    $('#successfully-remove').modal('show');
+                    table.DataTable().ajax.reload();
+                    removed = true;
+                } else {
+                    $('#can-not-remove').modal('show');
+                }
             }
         });
     }

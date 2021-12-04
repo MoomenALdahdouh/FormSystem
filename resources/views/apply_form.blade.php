@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <br>
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Apply form') }}
-        </h2>
+        </h1>
     </x-slot>
     <br>
     <div class="header-section">
