@@ -1,6 +1,22 @@
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+/*Start home page*/
+.section-one .col-one{
+    height: 100%;
+}
+.section-one .col-two{
+    height: 100%;
+}
+.section-one .col-three{
+    height: 100%;
+}
+
+.group-one .list-item-two {
+    margin: -40px 24px 0 24px;
+}
+
+/*Start home page*/
 * {
     margin: 0;
     padding: 0;
@@ -507,6 +523,7 @@
     display: inline-flex;
     padding: 0 12px;
 }
+
 .paragraph-manager {
     background-color: #00a445;
     color: #FFF;
@@ -514,6 +531,7 @@
     display: inline-flex;
     padding: 0 12px;
 }
+
 .paragraph-worker {
     background-color: #f89500;
     color: #FFF;
@@ -521,9 +539,11 @@
     display: inline-flex;
     padding: 0 12px;
 }
+
 .paragraph-worker-text {
     color: #f89500;
 }
+
 /*Users types*/
 
 /*start models alert style */
@@ -545,6 +565,7 @@
     display: inline-flex;
     padding: 0 12px;
 }
+
 /*start activity page style */
 /*start view project page style */
 /*start view project page style */

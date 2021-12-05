@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\MonthlyUsersChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
 
-    public function index()
+    public function index(MonthlyUsersChart $chart)
     {
         $type = Auth::user()->type;
         switch ($type) {
             case 0:
-                return view('home');
+                return view('home', ['chart' => $chart->build()]);
             case 1:
                 return redirect('/');
         }

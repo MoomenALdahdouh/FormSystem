@@ -187,7 +187,6 @@ $(function () {
     }
 
     function create_user() {
-
         const name_error = $('#name_error');
         const email_error = $('#email_error');
         const phone_error = $('#phone_error');
@@ -219,6 +218,9 @@ $(function () {
                         name_error.css('display', 'none');
                         email_error.css('display', 'none');
                         phone_error.css('display', 'none');
+                        $('#name').val("");
+                        $('#phone').val("");
+                        $('#email').val("");
                         $('#successfully-creat').modal('show');
                         in_user_type.val(4);
                         table.DataTable().ajax.reload();

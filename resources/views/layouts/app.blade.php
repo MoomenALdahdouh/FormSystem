@@ -111,11 +111,18 @@
     @endif--}}
 <!-- Page Heading -->
     @if (isset($header))
-        <header class="bg-white shadow">
+        <header class=" shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
         </header>
+
+    @elseif(isset($header_2))
+            <header class="bg-white">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header_2 }}
+                </div>
+            </header>
 @endif
 
 <!-- Page Content -->
