@@ -37,9 +37,9 @@
             <!--Use this line if you compact users from Auth-->
                 <!--Use this line if you compact users from DB to pars the date by carbon library-->
                 <td>
-                    <input type="hidden" id="subproject-id" name="subproject-id" value="{{$subproject->id}}">
                     <button id="delete-subproject"
-                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
+                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i>
+                        <input type="hidden" id="subproject-id" name="subproject-id" value="{{$subproject->id}}"></button>
                     &nbsp
                     <a href="{{url('subprojects/edit/'.$subproject->id .'#edit-subproject')}}"
                        class="btn-outline-dark sm:rounded-md" title="settings">

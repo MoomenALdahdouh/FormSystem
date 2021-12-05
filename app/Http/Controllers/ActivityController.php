@@ -67,6 +67,14 @@ class ActivityController extends Controller
         return view('activities', compact('activities', 'subprojects', 'workers'));
     }
 
+    public function all(Request $request)
+    {
+        if ($request->ajax()) {
+            $subproject = Subproject::query()->find($request->subproject_id);
+            //$project = Subproject::query()->latest()->get();
+            return view('pagination_activities', compact('subproject'))->render();
+        }
+    }
 
     public function create(Request $request)
     {
@@ -133,10 +141,15 @@ class ActivityController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $activity = Activity::find($id);
-        $activity->delete();
-        /*return response()->json(['success' => 'Successfully remove']);*/
+        if ($request->ajax()) {
+            $activity = Activity::query()->find($id);
+            $form = Form::query()->where('activity_fk_id', $id);
+            if ($form->delete() && $activity->delete()) {
+                return response()->json(['success' => 'Successfully Delete Activity']);
+            }
+            return response()->json(['error' => 'Field to delete this activity, Try again!']);
+        }
     }
 }

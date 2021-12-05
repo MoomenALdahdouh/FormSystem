@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Project;
 use App\Models\Subproject;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -113,7 +114,9 @@ class SubprojectController extends Controller
     public function show($id)
     {
         $subproject = Subproject::query()->find($id);
-        return view('view_subproject', compact('subproject'));
+        $workers = User::query()->where('type', 2)->get();
+        $subprojects = Subproject::query()->latest()->get();
+        return view('view_subproject', compact('subproject', 'workers', 'subprojects'));
     }
 
     public function edit($id)

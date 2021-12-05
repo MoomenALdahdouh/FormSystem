@@ -25,4 +25,9 @@ class Subproject extends Model
     {
         return $this->hasOne(Project::class, 'id', 'project_fk_id');
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'subproject_fk_id', 'id');
+    }
 }

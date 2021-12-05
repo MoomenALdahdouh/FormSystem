@@ -95,10 +95,11 @@ Route::prefix('users')->group(function () {
 
 Route::prefix('activities')->group(function () {
     Route::get('/', [ActivityController::class, 'index'])->name('activities');
+    Route::get('/all', [ActivityController::class, 'all'])->name('activities.all');
     Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('activities.edit');
     Route::get('/view/{id}', [ActivityController::class, 'show'])->name('activities.view');
     Route::post('/create', [ActivityController::class, 'create'])->name('activities.create');
-    Route::get('/delete/{id}', [ActivityController::class, 'destroy'])->name('activities.delete');
+    Route::delete('/delete/{id}', [ActivityController::class, 'destroy'])->name('activities.delete');
 });
 
 Route::prefix('form')->group(function () {

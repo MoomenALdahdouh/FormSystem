@@ -36,8 +36,7 @@
                 <button
                     class="delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
                 &nbsp
-                <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}" class="btn-outline-dark sm:rounded-md"
-                   title="settings">
+                <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}" class="btn-outline-dark sm:rounded-md" title="settings">
                     <i class="las la-cog"></i></a>
                 &nbsp
                 <a href="{{url('projects/view/'.$project->id)}}" class="btn-outline-primary sm:rounded-md" title="view">

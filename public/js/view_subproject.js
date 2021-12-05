@@ -2,9 +2,6 @@ $(function () {
     let status = 0;
     let removed = false;
     $(document).ready(function () {
-        /*start Project Setting and edit*/
-        //$("#name").focus();
-
         $('#flexSwitchCheckChecked').click(function () {
             status = document.getElementById('flexSwitchCheckChecked').value;
             const isChecked = document.getElementById("flexSwitchCheckChecked").checked;
@@ -20,53 +17,54 @@ $(function () {
             }
         });
 
-        /*$('#delete-subproject').click(function () {
-            var subproject_id = document.getElementById('subproject-id').value;
-            delete_subproject(subproject_id)
-        });*/
-        Array.from(document.querySelectorAll('#delete-subproject')).forEach(bttn => {
+        Array.from(document.querySelectorAll('#delete-activity')).forEach(bttn => {
             bttn.addEventListener('click', (e) => {
                 e.preventDefault();
-                let subproject_id = e.target.parentNode.querySelector('#subproject-id').value;
-                delete_subproject(subproject_id)
+                let activity_id = e.target.parentNode.querySelector('#activity-id').value;
+                delete_activity(activity_id)
             });
         });
 
-        create_subproject();
+        /*$('#delete-activity').click(function () {
+            var activity_id = document.getElementById('activity-id').value;
+            console.log(activity_id);
+            delete_activity(activity_id)
+        });*/
+
+        create_activity();
     })
 
-    function create_subproject() {
+    function create_activity() {
         const name_error = $('#name_error');
         const description_error = $('#description_error');
-        const project_error = $('#project_error');
         name_error.css('display', 'none');
         description_error.css('display', 'none');
-        project_error.css('display', 'none');
 
-        $('#create_subproject').click(function () {
+        $('#create_activity').click(function () {
             const name = $('#name').val();
             const description = $('#description').val();
-            const project = $('#project').val();
+            const type = $('#type').val();
+            const worker = $('#worker').val();
+            const subproject = $('#subproject').val();
             const status = $('#flexSwitchCheckChecked').val();
-            //console.log(name, phone, email, type, status)
             $.ajax({
                 type: "POST",
-                url: "/subprojects/create",
+                url: "/activities/create",
                 data: {
                     _token: $("input[name=_token]").val(),
                     action: "create",
                     name: name,
                     description: description,
-                    project: project,
+                    type: type,
+                    worker: worker,
+                    subproject: subproject,
                     status: status,
                 },
                 success: function (data) {
                     if ($.isEmptyObject(data.error)) {
                         name_error.css('display', 'none');
                         description_error.css('display', 'none');
-                        project_error.css('display', 'none');
-                        $('#successfully-creat').modal('show');
-                        fetch_subprojects(project);
+                        createForm(data.activity_fk_id, worker, subproject);
                     } else {
                         printErrorMsg(data.error);
                     }
@@ -86,60 +84,67 @@ $(function () {
                 } else {
                     description_error.css('display', 'none');
                 }
-                if (msg['project']) {
-                    $('#project_error').html(msg['project']);
-                    project_error.css('display', 'block');
-                } else {
-                    project_error.css('display', 'none');
-                }
             }
 
-            /*function fetch_projects(page) {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('projects.all') }}" + "?page=" + page,
-                    success: function (response) {
-                        $('#table-data').html(response)
-                    }
-                });
-            }*/
+
         });
     }
 
-    function fetch_subprojects(project_id) {
+    function createForm(activity, worker, subproject) {
         $.ajax({
-            type: "GET",
-            url: "/subprojects/all",
+            type: "POST",
+            url: "/form/create",
             data: {
                 _token: $("input[name=_token]").val(),
-                project_id: project_id,
+                action: "create",
+                activity_fk_id: activity,
+                worker_fk_id: worker,
+                subproject_fk_id: subproject,
+            },
+            success: function (data) {
+                console.log(data)
+                $('#name').val("");
+                $('#description').val("");
+                $('#successfully-creat-activity').modal('show');
+                fetch_activities(subproject);
+            }
+        });
+    }
+
+    function fetch_activities(subproject_id) {
+        $.ajax({
+            type: "GET",
+            url: "/activities/all",
+            data: {
+                _token: $("input[name=_token]").val(),
+                subproject_id: subproject_id,
             },
             success: function (response) {
                 $('#name').val("");
                 $('#description').val("");
-                $('#table-subprojects').html(response)
-                Array.from(document.querySelectorAll('#delete-subproject')).forEach(bttn => {
+                $('#table-activities').html(response)
+                Array.from(document.querySelectorAll('#delete-activity')).forEach(bttn => {
                     bttn.addEventListener('click', (e) => {
                         e.preventDefault();
-                        let subproject_id = e.target.parentNode.querySelector('#subproject-id').value;
-                        delete_subproject(subproject_id)
+                        let activity_id = e.target.parentNode.querySelector('#activity-id').value;
+                        delete_activity(activity_id)
                     });
                 });
             }
         });
     }
 
-    function delete_subproject(id) {
+    function delete_activity(id) {
         $.ajax({
             type: "DELETE",
-            url: "/subprojects/delete/" + id,
+            url: "/activities/delete/" + id,
             data: {
                 _token: $("input[name=_token]").val()
             },
             success: function (response) {
                 if (response['success']) {
                     $('#successfully-remove').modal('show');
-                    fetch_subprojects($('#project').val());
+                    fetch_activities($('#subproject').val());
                 } else {
                     $('#can-not-remove-subproject').modal('show');
                 }

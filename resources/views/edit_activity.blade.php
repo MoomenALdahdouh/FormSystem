@@ -1,10 +1,11 @@
 <x-app-layout>
     <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <x-slot name="header">
-        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
+        <br>
+        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit Activity') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h2>
+        </h1>
     </x-slot>
     <br>
     <br>
