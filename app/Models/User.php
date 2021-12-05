@@ -77,4 +77,12 @@ class User extends Authenticatable
             return $this->defaultProfilePhotoUrl();
         }
     }
+
+    public function activities(){
+        return $this->hasMany(Activity::class, 'user_fk_id', 'id');
+    }
+
+    public function projects(){
+        return $this->hasMany(Project::class, 'user_fk_id', 'id');
+    }
 }

@@ -1,9 +1,13 @@
 /*start Project Setting and edit*/
 $(function () {
     const table = $('#users-table');
+    const is_user_page = $('#is_user_page').val();
     const in_user_type = $('#user_type');
+    let removed = false;
     $(document).ready(function () {
-        get_users_as();
+        if (is_user_page != 0)
+            get_users();
+        $("#name").focus();
         $(document).on('click', '#users-all', function () {
             in_user_type.val(4);
             table.DataTable().ajax.reload();
@@ -15,7 +19,7 @@ $(function () {
         $(document).on('click', '#users-managers', function () {
             in_user_type.val(1);
             table.DataTable().ajax.reload();
-            // get_users_as(user_type);
+            // get_users(user_type);
         });
         $(document).on('click', '#users-workers', function () {
             in_user_type.val(2);
@@ -34,24 +38,25 @@ $(function () {
 
         $(document).on('click', '#delete', function () {
             var id = $(this).data('id');
-            location.href = "/users/delete/" + id;
+            delete_user(id);
         });
 
         /*Project settings*/
         var status = 0;
-        $('#update-project').click(function () {
+        $('#update-user').click(function () {
             var name = document.getElementById('name').value;
-            var description = document.getElementById('description').value;
-            var id = document.getElementById('project-id').value;
-            console.log(id, name, description, status)
-            edit_project(id, name, description, status);
+            var nickname = document.getElementById('nickname').value;
+            var phone = document.getElementById('phone').value;
+            var id = document.getElementById('user-id').value;
+            status = document.getElementById('flexSwitchCheckChecked').value;
+            edit_user(id, name, nickname, phone, status);
         });
 
-        const switch_status = document.getElementById('flexSwitchCheckChecked');
         $('#flexSwitchCheckChecked').click(function () {
+            const switch_status = document.getElementById('flexSwitchCheckChecked');
             status = switch_status.value;
             const isChecked = switch_status.checked;
-            const status_input = $('#status-project');
+            const status_input = $('#status-user');
             if (isChecked) {
                 status_input.html("Active");
                 status_input.css("background-color", "#3fd9cb");
@@ -81,27 +86,22 @@ $(function () {
             }
         })
 
-        $('#remove-project').click(function () {
-            var project_id = document.getElementById('project-id').value;
-            var subproject_size = document.getElementById('subproject-size').value;
-            if (subproject_size === 0)
-                delete_project(project_id)
-            else {
-                $('#can-not-remove').modal('show');
-            }
+        $('#remove-user').click(function () {
+            var user_id = document.getElementById('user-id').value;
+            removed = false;
+            delete_user(user_id)
+            setTimeout(function () {
+                if (removed)
+                    location.href = "/users";
+            }, 2000);
         });
         create_user();
 
 
     })
 
-    function get_users_as() {
+    function get_users() {
         table.DataTable({
-            /*processing: true,
-            serverSide: true,
-            pageLength: 10,
-            sDom: 'lrtip',
-            "order": [[0, "desc"]],*/
             ajax: {
                 "url": '/users',
                 "type": 'GET',
@@ -143,32 +143,45 @@ $(function () {
         });
     }
 
-    function edit_project(id, name, description, status) {
+    function edit_user(id, name, nickname, phone, status) {
+        console.log(id, name, nickname, phone, status)
         $.ajax({
             method: "POST",
-            url: "/projects/update/" + id,
+            url: "/users/update/" + id,
             data: {
                 _token: $("input[name=_token]").val(),
                 action: "update",
                 name: name,
-                description: description,
+                nickname: nickname,
+                phone: phone,
                 status: status
             },
             success: function (response) {
-                $('#successfully-save').modal('show');
+                if (response['success'])
+                    $('#successfully-save').modal('show');
+                else
+                    $('#something-wrong').modal('show');
             }
         });
     }
 
-    function delete_project(id) {
+    function delete_user(id) {
         $.ajax({
             type: "DELETE",
-            url: "/projects/delete/" + id,
+            url: "/users/delete/" + id,
             data: {
                 _token: $("input[name=_token]").val()
             },
             success: function (response) {
-
+                if (response['success']) {
+                    $('#successfully-remove').modal('show');
+                    $('#successfully-remove #message').html(response['success']);
+                    table.DataTable().ajax.reload();
+                } else if (response['error']) {
+                    console.log(response['error']);
+                    $('#something-wrong').modal('show');
+                    $('#something-wrong #message').html(response['error']);
+                }
             }
         });
     }

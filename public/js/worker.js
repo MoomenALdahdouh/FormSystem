@@ -47,8 +47,8 @@ $(function () {
             edit_project(id, name, description, status);
         });
 
-        const switch_status = document.getElementById('flexSwitchCheckChecked');
         $('#flexSwitchCheckChecked').click(function () {
+            const switch_status = document.getElementById('flexSwitchCheckChecked');
             status = switch_status.value;
             const isChecked = switch_status.checked;
             const status_input = $('#status-project');

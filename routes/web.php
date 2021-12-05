@@ -86,6 +86,8 @@ Route::prefix('subprojects')->group(function () {
 Route::prefix('users')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('users');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy');
     Route::get('/view/{id}', [UserController::class, 'show'])->name('users.view');
     Route::get('/admin', [UserController::class, 'admin'])->name('users.admin');
     Route::get('/managers', [UserController::class, 'managers'])->name('users.managers');

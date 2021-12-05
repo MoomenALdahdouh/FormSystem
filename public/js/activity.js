@@ -45,11 +45,12 @@ $(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
             var id = document.getElementById('project-id').value;
+            status = document.getElementById('flexSwitchCheckChecked').value;
             edit_project(id, name, description, status);
         });
 
-        const switch_status = document.getElementById('flexSwitchCheckChecked');
         $('#flexSwitchCheckChecked').click(function () {
+            const switch_status = document.getElementById('flexSwitchCheckChecked');
             status = switch_status.value;
             const isChecked = switch_status.checked;
             const status_input = $('#status-project');

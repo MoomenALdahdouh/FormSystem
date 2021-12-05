@@ -189,12 +189,54 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            if ($request->action == "update") {
+                $update = User::query()->find($id);
+                $update->name = $request->name;
+                $update->nickname = $request->nickname;
+                $update->phone = $request->phone;
+                $update->status = $request->status;
+                $update->save();
+                if ($update)
+                    return response()->json(['success' => 'Successfully update User']);
+                else
+                    return response()->json(['error' => 'Field to update this user!']);
+            }
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $user = User::query()->find($id);
+            switch ($user->type) {
+                case 0:
+                    if (count($user->projects) == 0) {
+                        if ($user->delete()) {
+                            return response()->json(['success' => 'Successfully Delete admin']);
+                        } else
+                            return response()->json(['error' => 'Field to delete this admin']);
+                    }else
+                        return response()->json(['error' => 'Can not remove this admin!, he manage some projects!']);
+                case 1:
+                    if ($user->project_fk_id == 0) {
+                        if ($user->delete()) {
+                            return response()->json(['success' => 'Successfully Delete manager']);
+                        } else
+                            return response()->json(['error' => 'Field to delete this manager']);
+                    } else
+                        return response()->json(['error' => 'Can not remove this manager, he manage some projects!']);
+                case 2:
+                    if (count($user->activities) == 0) {
+                        if ($user->delete()) {
+                            return response()->json(['success' => 'Successfully Delete worker']);
+                        } else
+                            return response()->json(['error' => 'Field to delete this worker']);
+                    } else
+                        return response()->json(['error' => 'Can not remove this worker, he manage some activities!']);
+            }
+            return response()->json(['error' => 'Field to delete the user']);
+        }
     }
 
     function randomPassword()

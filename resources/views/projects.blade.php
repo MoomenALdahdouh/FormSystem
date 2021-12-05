@@ -170,15 +170,11 @@
         </div>
         <br>
         <br>
-
-
         @include('modal_alert')
         @push('js')
             <script src="{{asset('js/project.js')}}" defer></script> {{--Must add defer to active js file--}}
         @endpush
     </div>
-
-
     {{--Old--}}
     {{--<div class="header-section">
         <div class="container">

@@ -103,6 +103,8 @@
                         <div class="container">
                             <ul class="ul-project">
                                 <li>
+                                    <input type="hidden" id="user-id" name="user-id"
+                                           value="{{$user->id}}">
                                     <div class="">
                                         <strong><i
                                                 class="las la-signature text-primary"></i>Name
@@ -116,10 +118,10 @@
                                         </strong>
                                         @if ($user->nickname === '' || $user->nickname === NULL)
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              type="text" value="no nickname ...">
+                                                              id="nickname" type="text" value="no nickname ...">
                                         @else
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              type="text" value="{{$user->nickname}}">
+                                                              id="nickname" type="text" value="{{$user->nickname}}">
                                         @endif
                                     </div>
                                     <div class="">
@@ -128,10 +130,10 @@
                                         </strong>
                                         @if ($user->phone === '' || $user->phone === NULL)
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              type="text" value="no nickname ...">
+                                                              id="phone" type="text" value="no phone ...">
                                         @else
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              type="text" value="{{$user->phone}}">
+                                                              id="phone" type="text" value="{{$user->phone}}">
                                         @endif
                                     </div>
                                 </li>
@@ -142,10 +144,10 @@
                                          style=" margin: 0; padding-left:0; padding-right: 0">
                                         <div class="col-md-11">
                                             @if($user->status == 1)
-                                                <strong id="status-project"
+                                                <strong id="status-user"
                                                         class=" paragraph-active shadow">Active</strong>
                                             @else
-                                                <strong id="status-project"
+                                                <strong id="status-user"
                                                         class=" paragraph-pended shadow">Pended</strong>
                                             @endif
                                         </div>
@@ -165,7 +167,7 @@
                                 <br>
                                 <br>
                                 <li>
-                                    <button id="update-project" class="btn btn-primary float-right"><i
+                                    <button id="update-user" class="btn btn-primary float-right"><i
                                             class="lar la-save"></i> Save
                                     </button>
                                 </li>
@@ -186,23 +188,20 @@
                                     can not restore it.</strong>
                             </div>
                             <div class="col-md-2">
-                                <button id="remove-project" class="btn btn-danger float-right">Remove Now</button>
+                                <button id="remove-user" class="btn btn-danger float-right">Remove Now</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
-
         </div>
-        <script>
-            $(function () {
-                $(document).ready(function () {
-                    $("#name").focus();
-                });
-            });
-        </script>
+        <input type="hidden" value="0" id="is_user_page">
     </div>
+    @include('modal_alert')
+    @push('js')
+        <script src="{{asset('js/user.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @endpush
     <br>
     <br>
     <br>

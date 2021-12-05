@@ -26,6 +26,7 @@ $(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
             var id = document.getElementById('subproject-id').value;
+            status = document.getElementById('flexSwitchCheckChecked').value;
             edit_subproject(id, name, description, status);
         });
 
