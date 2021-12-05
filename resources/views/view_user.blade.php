@@ -1,25 +1,15 @@
 <x-app-layout>
     <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <x-slot name="header">
-        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
+        <br>
+        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('View User') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h2>
+        </h1>
     </x-slot>
-    <br>
     <br>
     <div class="header-section">
         <div class="container">
-            {{--Alert actions--}}
-            @if(session('successUpdate'))
-                <div class="alert alert-success d-flex align-items-center" role="alert">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                        <use xlink:href="#check-circle-fill"/>
-                    </svg>
-                    <strong>{{session('successUpdate')}}</strong>
-                </div>
-            @endif
-            <button id="sdf" type="button"></button>
             {{--User details header--}}
             <div class="col-md-12">
                 <div class="card shadow">
@@ -118,8 +108,7 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="col-md-12 alert alert-dark text-dark">
+            <div class="col-md-12 alert alert-dark">
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="container">
@@ -161,6 +150,101 @@
                 </div>
             </div>
             <br>
+            {{--Section user, Here list all activites for all user as his type--}}
+            <div class="col-md-12">
+                {{--First step check the user type--}}
+                @switch($user->type)
+                    {{--Admin--}}
+                    @case(0)
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-tie"></i>&nbsp;Admin Projects List</strong>
+                        </div>
+                        <div class="card-body">
+                            @include('pagination_projects')
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-tie"></i>&nbsp;Admin Subprojects List</strong>
+                        </div>
+                        <div class="card-body">
+                            <div id="table-subprojects" class="card-body">
+                                @include('pagination_subproject2')
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-tag"></i>&nbsp;Admin Activities List</strong>
+                        </div>
+                        <div class="card-body">
+                            <div id="table-activities" class="card-body">
+                                @include('pagination_activities2')
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-tag"></i>&nbsp;Admin Users List</strong>
+                        </div>
+                        <div class="card-body">
+                            @include('pagination_users')
+                        </div>
+                    </div>
+
+                    @break
+                    {{--Manager--}}
+                    @case(1)
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-cog"></i>&nbsp;Manager Projects List</strong>
+                        </div>
+                        <div class="card-body">
+                            @include('pagination_projects')
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-cog"></i>&nbsp;Manager Subprojects List</strong>
+                        </div>
+                        <div class="card-body">
+                            @include('pagination_subproject2')
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-tag"></i>&nbsp;Manager Activities List</strong>
+                        </div>
+                        <div class="card-body">
+                            <div id="table-activities" class="card-body">
+                                @include('pagination_activities2')
+                            </div>
+                        </div>
+                    </div>
+                    @break
+                    {{--Worker--}}
+                    @case(2)
+                    <div class="card shadow">
+                        <div class="card-header alert alert-secondary">
+                            <strong><i class="las la-user-tag"></i>&nbsp;Worker Activities List</strong>
+                        </div>
+                        <div class="card-body">
+                            <div id="table-activities" class="card-body">
+                                @include('pagination_activities2')
+                            </div>
+                        </div>
+                    </div>
+
+                    @break
+                @endswitch
+
+            </div>
         </div>
     </div>
     <br>

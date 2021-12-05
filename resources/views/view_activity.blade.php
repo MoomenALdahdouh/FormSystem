@@ -120,7 +120,7 @@
                                         <strong><i class="lab la-wpforms"></i>&nbsp View Form Questions</strong>
                                     </div>
                                     <div class="col-md-2">
-                                        <a href="{{url("/form/edit/0")}}" class="btn btn-success float-right">View</a>
+                                        <a href="{{url("/form/apply/$activity->id")}}" class="btn btn-success float-right">View</a>
                                     </div>
                                 </div>
                             </div>

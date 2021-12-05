@@ -8,6 +8,7 @@ use App\Models\Subproject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -98,6 +99,7 @@ class ActivityController extends Controller
                     $data->type = $request->type;
                     $data->status = $request->status;
                     $data->created_at = Carbon::now();
+                    $data->create_by_id = Auth::user()->id;
                     $data->save();
                     $activity_fk_id = $data->id;
                     //$this->createForm($activity_fk_id, $request->worker, $request->subproject);

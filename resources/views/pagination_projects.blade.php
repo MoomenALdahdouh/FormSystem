@@ -6,50 +6,61 @@
         <th scope="col">Created By</th>
         <th scope="col">Manage By</th>
         <th scope="col">Created At</th>
+        <th scope="col">Status</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
-    {{--<tbody></tbody>--}}
-    <tbody>
-    @php($count = 1) {{--Here this way to show columen number not work with paging so we use other way $projects->firstItem()+$loop->index--}}
-    @foreach($projects as $project)
-        <tr>
-            {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
-            <th scope="row">{{$projects->firstItem()+$loop->index}}</th>
-            {{--<td>{{$project->name}}</td>--}} {{--After join with Quiry builder --}}
-            <td>{{$project->name}}</td>
-            {{--<td>{{$project->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived--}}
-            <td>{{$project->createBy->name}}</td> {{--Use this when join table by ROM method--}}
-            <td>{{@$project->manageBy->name}}</td>
-            {{--<td>{{$project->created_at}}</td>--}}
-            @if($project->created_at == NULL)
-                <td><span class="text-danger">No Date Set</span></td>
-            @else
-                <td>{{\Carbon\Carbon::parse($project->created_at)->diffForHumans()}}</td>
-        @endif
-        <!--Use this line if you compact users from Auth-->
-            <!--Use this line if you compact users from DB to pars the date by carbon library-->
-            <td>
-                {{--<a href="{{url('projects/delete/'.$project->id)}}"
-                   class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>--}}
-                <input value="{{$project->id}}" type="hidden" id="project_id">
-                <button
-                    class="delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i></button>
-                &nbsp
-                <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}" class="btn-outline-dark sm:rounded-md" title="settings">
-                    <i class="las la-cog"></i></a>
-                &nbsp
-                <a href="{{url('projects/view/'.$project->id)}}" class="btn-outline-primary sm:rounded-md" title="view">
-                    <i class="las la-external-link-alt"></i></a>
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
+    @if(count($projects) >0)
+        <tbody>
+        @php($count = 1) {{--Here this way to show columen number not work with paging so we use other way $projects->firstItem()+$loop->index--}}
+        @foreach($projects as $project)
+            <tr>
+                {{--<th scope="row">{{$count++}}</th>--}} {{--not work with paging--}}
+                <th scope="row">{{$count++}}</th>
+                {{--<td>{{$project->name}}</td>--}} {{--After join with Quiry builder --}}
+                <td>{{$project->name}}</td>
+                {{--<td>{{$project->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived--}}
+                <td>{{$project->createBy->name}}</td> {{--Use this when join table by ROM method--}}
+                <td>{{@$project->manageBy->name}}</td>
+                {{--<td>{{$project->created_at}}</td>--}}
+                @if($project->created_at == NULL)
+                    <td><span class="text-danger">No Date Set</span></td>
+                @else
+                    <td>{{\Carbon\Carbon::parse($project->created_at)->diffForHumans()}}</td>
+                    @if($project->status == 0)
+                        <td><span class="paragraph-pended shadow">Pended</span></td>
+                    @else
+                        <td><span class="paragraph-active shadow">Active</span></td>
+                @endif
+            @endif
+            <!--Use this line if you compact users from Auth-->
+                <!--Use this line if you compact users from DB to pars the date by carbon library-->
+                <td>
+                    {{--<a href="{{url('projects/delete/'.$project->id)}}"
+                       class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>--}}
+                    <input value="{{$project->id}}" type="hidden" id="project_id">
+                    <button
+                        class="delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i>
+                    </button>
+                    &nbsp
+                    <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}"
+                       class="btn-outline-dark sm:rounded-md"
+                       title="settings">
+                        <i class="las la-cog"></i></a>
+                    &nbsp
+                    <a href="{{url('projects/view/'.$project->id)}}" class="btn-outline-primary sm:rounded-md"
+                       title="view">
+                        <i class="las la-external-link-alt"></i></a>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    @else
+        <th class="alert alert-light" scope="row"><br>not found any data ...</th>
+    @endif
 </table>
-{{ $projects->links() }}
-{{--{!! $projects->links() !!}--}}
-
-<script type="text/javascript">
+{{--{{ $projects->links() }}--}}
+{{--<script type="text/javascript">
     $(function () {
         $(document).ready(function () {
             $('body').on('click', '#table-data .pagination a', function () {
@@ -168,7 +179,7 @@
             });
         }
     });
-</script>
+</script>--}}
 
 
 

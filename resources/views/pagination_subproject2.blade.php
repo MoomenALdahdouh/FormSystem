@@ -11,13 +11,13 @@
     </tr>
 
     </thead>
-    @if(count($project->subproject) >0)
+    @if(count($subprojects) >0)
         <tbody>
         @php($count = 1) {{--Here this way to show columen number not work with paging so we use other way $subprojects->firstItem()+$loop->index--}}
-        @foreach($project->subproject as $subproject)
+        @foreach($subprojects as $subproject)
             <tr>
                 <th scope="row">{{$count++}}</th> {{--not work with paging--}}
-                {{--<th scope="row">{{$project->subproject->firstItem()+$loop->index}}</th>--}}
+                {{--<th scope="row">{{$subprojects->firstItem()+$loop->index}}</th>--}}
                 <td>{{$subproject->name}}</td>
                 {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
                 <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
@@ -55,8 +55,8 @@
         @endforeach
         </tbody>
     @else
-        <th class="alert alert-light" scope="row"><br>this project not have any subproject ...</th>
+        <th class="alert alert-light" scope="row"><br>not found any data ...</th>
     @endif
 </table>
 
-{{--{{$project->subproject->links()}}--}}
+{{--{{$subprojects->links()}}--}}

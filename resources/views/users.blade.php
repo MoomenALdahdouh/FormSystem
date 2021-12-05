@@ -14,10 +14,10 @@
             <div class="col-md-12">
                 <div class="container justify-content-start">
                     <input id="user_type" type="hidden" value="4">
-                    <button id="users-all" class="btn btn-outline-success me-2">All</button>
-                    <button id="users-admins" class="btn btn-sm btn-outline-secondary">Admins</button>
-                    <button id="users-managers" class="btn btn-sm btn-outline-secondary">Managers</button>
-                    <button id="users-workers" class="btn btn-sm btn-outline-secondary">Workers</button>
+                    <button id="users-all" class="btn btn-outline-success me-2"><i class="las la-user"></i>&nbsp;All</button>
+                    <button id="users-admins" class="btn btn-sm btn-outline-secondary"><i class="las la-user-tie"></i>&nbsp;Admins</button>
+                    <button id="users-managers" class="btn btn-sm btn-outline-secondary"><i class="las la-user-cog"></i>&nbsp;Managers</button>
+                    <button id="users-workers" class="btn btn-sm btn-outline-secondary"><i class="las la-user-tag"></i>&nbsp;Workers</button>
                 </div>
             </div>
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\Subproject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -161,6 +163,7 @@ class UserController extends Controller
                     $data->status = $request->status;
                     $data->password = Hash::make("123456789");//(string)$this->randomPassword()
                     $data->created_at = Carbon::now();
+                    $data->create_by_id = Auth::user()->id;
                     $data->save();
                     return response()->json(['success' => 'Successfully create new User']);
                 }
@@ -177,13 +180,33 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id);
-        return view('view_user', compact('user'));
+        $user = User::query()->find($id);
+        $users = $user->users;
+        $projects = '';
+        $subprojects = '';
+        $activities = '';
+        switch ($user->type) {
+            case 0:
+                $projects = $user->projects;
+                $subprojects = $user->subprojects;
+                $activities = $user->activity;
+                break;
+            case 1:
+                $projects = $user->manager;
+                $userManageProject = $user->manager;
+                $activities = $user->activity;
+                $subprojects = Subproject::query()->where('project_fk_id', $userManageProject[0]['id'])->get();
+                break;
+            case 2:
+                $activities = $user->activities;
+                break;
+        }
+        return view('view_user', compact('user', 'projects', 'subprojects', 'activities', 'users'));
     }
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::query()->find($id);
         return view('edit_user', compact('user'));
     }
 
@@ -216,7 +239,7 @@ class UserController extends Controller
                             return response()->json(['success' => 'Successfully Delete admin']);
                         } else
                             return response()->json(['error' => 'Field to delete this admin']);
-                    }else
+                    } else
                         return response()->json(['error' => 'Can not remove this admin!, he manage some projects!']);
                 case 1:
                     if ($user->project_fk_id == 0) {

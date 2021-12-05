@@ -3,33 +3,33 @@
     <tr>
         <th scope="col">SL No</th>
         <th scope="col">Name</th>
-        <th scope="col">Created By</th>
-        <th scope="col">Main Project</th>
+        <th scope="col">Subproject</th>
+        <th scope="col">User</th>
         <th scope="col">Created At</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
     </tr>
 
     </thead>
-    @if(count($project->subproject) >0)
+    @if(count($activities) >0)
         <tbody>
         @php($count = 1) {{--Here this way to show columen number not work with paging so we use other way $subprojects->firstItem()+$loop->index--}}
-        @foreach($project->subproject as $subproject)
+        @foreach($activities as $activity)
             <tr>
                 <th scope="row">{{$count++}}</th> {{--not work with paging--}}
-                {{--<th scope="row">{{$project->subproject->firstItem()+$loop->index}}</th>--}}
-                <td>{{$subproject->name}}</td>
+                {{--<th scope="row">{{$subproject->subproject->firstItem()+$loop->index}}</th>--}}
+                <td>{{$activity->name}}</td>
                 {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
-                <td>{{$subproject->user->name}}</td> {{--Use this when join table by ROM method--}}
-                <td>{{@$subproject->mainProject->name}}</td>
+                <td>{{@$activity->subproject->name}}</td>
+                <td>{{$activity->worker->name}}</td> {{--Use this when join table by ROM method--}}
                 {{--<td>{{$subproject->name}}</td>--}}  {{--After join with Quiry builder --}}
                 {{--<td>{{$subproject->created_at}}</td>--}}
-                @if($subproject->created_at == NULL)
+                @if($activity->created_at == NULL)
                     <td><span class="text-danger">No Date Set</span></td>
                 @else
-                    <td>{{\Carbon\Carbon::parse($subproject->created_at)->diffForHumans()}}</td>
+                    <td>{{\Carbon\Carbon::parse($activity->created_at)->diffForHumans()}}</td>
                 @endif
-                @if($subproject->status == 0)
+                @if($activity->status == 0)
                     <td><span class="paragraph-pended shadow">Pended</span></td>
                 @else
                     <td><span class="paragraph-active shadow">Active</span></td>
@@ -37,15 +37,16 @@
             <!--Use this line if you compact users from Auth-->
                 <!--Use this line if you compact users from DB to pars the date by carbon library-->
                 <td>
-                    <button id="delete-subproject"
-                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i>
-                        <input type="hidden" id="subproject-id" name="subproject-id" value="{{$subproject->id}}"></button>
+                    <button id="delete-activity"
+                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'><input
+                                type="hidden" id="activity-id" name="activity-id" value="{{$activity->id}}"></i>
+                    </button>
                     &nbsp
-                    <a href="{{url('subprojects/edit/'.$subproject->id .'#edit-subproject')}}"
+                    <a href="{{url('activities/edit/'.$activity->id .'#edit-activity')}}"
                        class="btn-outline-dark sm:rounded-md" title="settings">
                         <i class="las la-cog"></i></a>
                     &nbsp
-                    <a href="{{url('subprojects/view/'.$subproject->id)}}" class="btn-outline-primary sm:rounded-md"
+                    <a href="{{url('activities/view/'.$activity->id)}}" class="btn-outline-primary sm:rounded-md"
                        title="view">
                         <i class="las la-external-link-alt"></i></a>
                 </td>
@@ -59,4 +60,4 @@
     @endif
 </table>
 
-{{--{{$project->subproject->links()}}--}}
+{{--{{$subproject->subproject->links()}}--}}

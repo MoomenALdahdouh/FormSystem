@@ -65,24 +65,44 @@ class User extends Authenticatable
 
         $path = $this->profile_photo_path;
 
-        if (Storage::disk($this->profilePhotoDisk())->exists($path)){
+        if (Storage::disk($this->profilePhotoDisk())->exists($path)) {
             return Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path);
-        }
-        elseif (!empty($path)){
+        } elseif (!empty($path)) {
             // Use Photo URL from Social sites link...
             return $path;
-        }
-        else {
+        } else {
             //empty path. Use defaultProfilePhotoUrl
             return $this->defaultProfilePhotoUrl();
         }
     }
 
-    public function activities(){
+    public function activities()
+    {
         return $this->hasMany(Activity::class, 'user_fk_id', 'id');
     }
 
-    public function projects(){
+    public function activity()
+    {
+        return $this->hasMany(Activity::class, 'create_by_id', 'id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'create_by_id', 'id');
+    }
+
+    public function projects()
+    {
         return $this->hasMany(Project::class, 'user_fk_id', 'id');
+    }
+
+    public function manager()
+    {
+        return $this->hasMany(Project::class, 'manager_fk_id', 'id');
+    }
+
+    public function subprojects()
+    {
+        return $this->hasMany(Subproject::class, 'user_fk_id', 'id');
     }
 }
