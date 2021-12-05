@@ -140,7 +140,24 @@ class ActivityController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            if ($request->action == "update") {
+                $update = Activity::query()->find($id);
+                $update->name = $request->name;
+                $update->description = $request->description;
+                $update->status = $request->status;
+                $update->save();
+               /* $update = Activity::query()->find($id)->update([
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'status' => $request->status,
+                ]);*/
+                if ($update)
+                    return response()->json(['success' => 'Successfully update Project']);
+                else
+                    return response()->json(['error' => 'Field to update! Please try again.']);
+            }
+        }
     }
 
     public function destroy(Request $request, $id)

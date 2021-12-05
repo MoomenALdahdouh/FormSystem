@@ -117,7 +117,9 @@
                         <div class="container">
                             <ul class="ul-project">
                                 <li>
-                                    <div class="">
+                                    <div>
+                                        <input type="hidden" id="activity-id" name="activity-id"
+                                               value="{{$activity->id}}">
                                         <strong><i
                                                 class="las la-signature text-primary"></i>Name
                                         </strong>
@@ -130,10 +132,10 @@
                                         </strong>
                                         @if ($activity->description === '' || $activity->description === NULL)
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              type="text" value="no description ...">
+                                                             id="description" type="text" value="no description ...">
                                         @else
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              type="text" value="{{$activity->description}}">
+                                                             id="description" type="text" value="{{$activity->description}}">
                                         @endif
                                     </div>
                                 </li>
@@ -167,7 +169,7 @@
                                 <br>
                                 <br>
                                 <li>
-                                    <button id="update-project" class="btn btn-primary float-right"><i
+                                    <button id="update-activity" class="btn btn-primary float-right"><i
                                             class="lar la-save"></i> Save
                                     </button>
                                 </li>
@@ -188,7 +190,7 @@
                                     can not restore it.</strong>
                             </div>
                             <div class="col-md-2">
-                                <button id="remove-project" class="btn btn-danger float-right">Remove Now</button>
+                                <button id="remove-activity" class="btn btn-danger float-right">Remove Now</button>
                             </div>
                         </div>
                     </div>
@@ -197,14 +199,12 @@
             <br>
 
         </div>
-        <script>
-            $(function () {
-                $(document).ready(function () {
-                    $("#name").focus();
-                });
-            });
-        </script>
+        <input type="hidden" value="0" id="is_activity_page">
     </div>
+    @include('modal_alert')
+    @push('js')
+        <script src="{{asset('js/activity.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @endpush
     <br>
     <br>
     <br>

@@ -99,6 +99,7 @@ Route::prefix('activities')->group(function () {
     Route::get('/', [ActivityController::class, 'index'])->name('activities');
     Route::get('/all', [ActivityController::class, 'all'])->name('activities.all');
     Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('activities.edit');
+    Route::post('/update/{id}', [ActivityController::class, 'update'])->name('activities.update');
     Route::get('/view/{id}', [ActivityController::class, 'show'])->name('activities.view');
     Route::post('/create', [ActivityController::class, 'create'])->name('activities.create');
     Route::delete('/delete/{id}', [ActivityController::class, 'destroy'])->name('activities.delete');

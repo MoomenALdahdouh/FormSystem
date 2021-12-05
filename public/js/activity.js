@@ -1,11 +1,12 @@
 /*start Project Setting and edit*/
 $(function () {
     const table = $('#activities-table');
-
+    const is_activity_page = $('#is_activity_page').val();
+    let removed = false;
     $(document).ready(function () {
         $("#name").focus();
-        get_activities_as();
-
+        if (is_activity_page != 0)
+            get_activities_as();
         $(document).on('click', '#form', function () {
             var id = $(this).data('id');
             location.href = "/form/edit/" + id;
@@ -27,26 +28,27 @@ $(function () {
         });
 
         $(document).on('click', '#delete', function () {
-            var id = $(this).data('id');
-            //location.href = "/activities/delete/" + id;
-            $.ajax({
-                type: "get",
-                url: "/activities/delete/" + id,
-                success: function (response) {
-                    $('#successfully-remove').modal('show');
-                    table.DataTable().ajax.reload();
-                }
-            });
+            var activity_id = $(this).data('id');
+            delete_activity(activity_id);
+            /* //location.href = "/activities/delete/" + id;
+             $.ajax({
+                 type: "get",
+                 url: "/activities/delete/" + id,
+                 success: function (response) {
+                     $('#successfully-remove').modal('show');
+                     table.DataTable().ajax.reload();
+                 }
+             });*/
         });
 
         /*Project settings*/
         var status = 0;
-        $('#update-project').click(function () {
+        $('#update-activity').click(function () {
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
-            var id = document.getElementById('project-id').value;
+            var id = document.getElementById('activity-id').value;
             status = document.getElementById('flexSwitchCheckChecked').value;
-            edit_project(id, name, description, status);
+            edit_activity(id, name, description, status);
         });
 
         $('#flexSwitchCheckChecked').click(function () {
@@ -83,19 +85,16 @@ $(function () {
             }
         })
 
-        $('#remove-project').click(function () {
-            var project_id = document.getElementById('project-id').value;
-            var subproject_size = document.getElementById('subproject-size').value;
-            if (subproject_size === 0)
-                delete_project(project_id)
-            else {
-                $('#can-not-remove').modal('show');
-            }
+        $('#remove-activity').click(function () {
+            var activity_id = document.getElementById('activity-id').value;
+            removed = false;
+            delete_activity(activity_id);
+            setTimeout(function () {
+                if (removed)
+                    location.href = "/activities";
+            }, 2000);
         });
-
         create_activity();
-
-
     })
 
     function get_activities_as() {
@@ -152,7 +151,7 @@ $(function () {
         });
     }
 
-    function edit_project(id, name, description, status) {
+    function edit_activity(id, name, description, status) {
         $.ajax({
             method: "POST",
             url: "/activities/update/" + id,
@@ -164,12 +163,19 @@ $(function () {
                 status: status
             },
             success: function (response) {
-                $('#successfully-save').modal('show');
+                console.log(response)
+                if (response['success']) {
+                    $('#successfully-save').modal('show');
+                    $('#successfully-save #message').html(response['success']);
+                } else if (response['error']) {
+                    $('#something-wrong').modal('show');
+                    $('#something-wrong #message').html(response['error']);
+                }
             }
         });
     }
 
-    function delete_project(id) {
+    function delete_activity(id) {
         $.ajax({
             type: "DELETE",
             url: "/activities/delete/" + id,
@@ -177,7 +183,15 @@ $(function () {
                 _token: $("input[name=_token]").val()
             },
             success: function (response) {
-
+                if (response['success']) {
+                    $('#successfully-remove').modal('show');
+                    $('#successfully-remove #message').html(response['success'])
+                    removed = true;
+                    table.DataTable().ajax.reload();
+                } else if (response['error']) {
+                    $('#something-wrong').modal('show');
+                    $('#something-wrong #message').html(response['error'])
+                }
             }
         });
     }
