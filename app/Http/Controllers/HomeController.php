@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\DyalyFormChart;
 use App\Charts\MonthlyUsersChart;
 use App\Models\Activity;
 use App\Models\Form;
@@ -14,13 +15,14 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     //TODO:: MOOMEN S. ALDAHDOUH 12/6/2021
-    public function index(MonthlyUsersChart $chart)
+    public function index(MonthlyUsersChart $chart, DyalyFormChart $formChart)
     {
         if (Auth::user()) {
             $type = Auth::user()->type;
             switch ($type) {
                 case 0:
                     //Users statistics
+                    $users = User::query()->latest()->get();
                     $admins = User::query()->where('type', 0)->get();
                     $managers = User::query()->where('type', 1)->get();
                     $workers = User::query()->where('type', 2)->get();
@@ -31,10 +33,12 @@ class HomeController extends Controller
                     $forms = Form::query()->get();
                     $data = [
                         'chart' => $chart->build(count($admins), count($managers), count($workers)),
+                        'formChart' => $formChart->build(),
                         'projects' => $projects,
                         'subprojects' => $subprojects,
                         'activities' => $activities,
-                        'forms' => $forms
+                        'forms' => $forms,
+                        'users' => $users
                     ];
                     return view('home', $data);
                 case 1:
