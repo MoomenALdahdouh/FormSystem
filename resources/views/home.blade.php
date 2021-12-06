@@ -56,7 +56,33 @@
                         <li>
                             <br>
                         <li class="col-one-second-list">
+                            <ul class="col-two-group-one">
+                                <li>
+                                    <p><i class="lab la-wpforms"></i>&nbsp;<strong>Latest Projects</strong></p>
+                                </li>
+                                <div>
+                                    @foreach($latestProjects as $form)
+                                        <li class="m-3">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    @php
+                                                        $date=date_create($form->created_at);
 
+                                                    @endphp
+                                                    <strong>{{date_format($date,"H:i")}}</strong>
+                                                </div>
+                                                <div class="col-2">
+                                                    &nbsp;&nbsp;<i class="size-icon fa fa-genderless text-warning"></i>
+                                                </div>
+                                                <div class="col-9">
+                                                    {{$form->name}}
+                                                </div>
+                                            </div>
+                                            {{-- <p><span class=" paragraph--span">&nbsp;&nbsp;</span></p>--}}
+                                        </li>
+                                    @endforeach
+                                </div>
+                            </ul>
                         </li>
                         </li>
                     </ul>
@@ -82,7 +108,7 @@
                                                     <strong>{{date_format($date,"H:i")}}</strong>
                                                 </div>
                                                 <div class="col-2">
-                                                    <i class="size-icon fa fa-genderless text-warning"></i>
+                                                    &nbsp;<i class="size-icon fa fa-genderless text-warning"></i>
                                                 </div>
                                                 <div class="col-9">
                                                     {{$form->name}}

@@ -11,6 +11,7 @@ use App\Models\Subproject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
                     //Users statistics
                     $users = User::query()->latest()->get();
                     $latestUsers = User::query()->latest()->limit(10)->get();
+                    $latestProjects = Project::query()->latest()->limit(5)->get();
                     $admins = User::query()->where('type', 0)->get();
                     $managers = User::query()->where('type', 1)->get();
                     $workers = User::query()->where('type', 2)->get();
@@ -31,18 +33,23 @@ class HomeController extends Controller
                     $projects = Project::query()->get();
                     $subprojects = Subproject::query()->get();
                     $activities = Activity::query()->get();
-                    $forms = Form::query()->get();
+                    $forms = Form::query()->latest()->get();
+                    $formss = Form::query()->orderBy('created_at', 'asc')->get();
                     $latestForms = Form::query()->latest()->limit(10)->get();
+
+                    //$formname= DB::select('SELECT name FROM form');
+                    //$formdate= DB::select('SELECT created_at FROM form');
                     $data = [
                         'chart' => $chart->build(count($admins), count($managers), count($workers)),
-                        'formChart' => $formChart->build(),
+                        'formChart' => $formChart->build($formss),
                         'projects' => $projects,
                         'subprojects' => $subprojects,
                         'activities' => $activities,
                         'forms' => $forms,
                         'latestForms' => $latestForms,
                         'users' => $users,
-                        'latestUsers' => $latestUsers
+                        'latestUsers' => $latestUsers,
+                        'latestProjects' => $latestProjects
                     ];
                     return view('home', $data);
                 case 1:
