@@ -117,7 +117,7 @@
                                 <div class="row alert alert-success text-dark"
                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                     <div class="col-md-10">
-                                        <strong><i class="lab la-wpforms"></i>&nbsp View Form Questions</strong>
+                                        <strong><i class="lab la-wpforms"></i>&nbsp; View Form Questions</strong>
                                     </div>
                                     <div class="col-md-2">
                                         <a href="{{url("/form/apply/$activity->id")}}" class="btn btn-success float-right">View</a>

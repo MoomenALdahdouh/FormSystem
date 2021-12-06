@@ -96,7 +96,7 @@
 .form-chart {
     background-color: #FFFFFF;
     border-radius: 15px;
-    padding: 15px;
+    padding: 13px;
     list-style-type: none;
 }
 
@@ -109,7 +109,11 @@
     background-color: #FFF;
     border-radius: 15px;
 }
-
+.section-tow{
+    background-color: #FFF;
+    border-radius: 15px;
+    height: 500px;
+}
 /*End home page*/
 * {
     margin: 0;
@@ -581,6 +585,16 @@
     border-radius: 12px;
     display: inline-flex;
     padding: 0 12px;
+}
+
+.paragraph--span {
+    border-color: #e75264;
+    border-radius: 15px;
+    background-color: #e75264;
+}
+
+.size-icon{
+    font-size: 25px;
 }
 
 .hint {

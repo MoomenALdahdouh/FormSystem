@@ -23,6 +23,7 @@ class HomeController extends Controller
                 case 0:
                     //Users statistics
                     $users = User::query()->latest()->get();
+                    $latestUsers = User::query()->latest()->limit(10)->get();
                     $admins = User::query()->where('type', 0)->get();
                     $managers = User::query()->where('type', 1)->get();
                     $workers = User::query()->where('type', 2)->get();
@@ -31,6 +32,7 @@ class HomeController extends Controller
                     $subprojects = Subproject::query()->get();
                     $activities = Activity::query()->get();
                     $forms = Form::query()->get();
+                    $latestForms = Form::query()->latest()->limit(10)->get();
                     $data = [
                         'chart' => $chart->build(count($admins), count($managers), count($workers)),
                         'formChart' => $formChart->build(),
@@ -38,7 +40,9 @@ class HomeController extends Controller
                         'subprojects' => $subprojects,
                         'activities' => $activities,
                         'forms' => $forms,
-                        'users' => $users
+                        'latestForms' => $latestForms,
+                        'users' => $users,
+                        'latestUsers' => $latestUsers
                     ];
                     return view('home', $data);
                 case 1:
