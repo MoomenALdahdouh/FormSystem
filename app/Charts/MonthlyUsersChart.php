@@ -3,7 +3,9 @@
 namespace App\Charts;
 
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use ArielMejiaDev\LarapexCharts\PieChart;
 
+//TODO:: MOOMEN S. ALDAHDOUH 12/5/2021
 class MonthlyUsersChart
 {
     protected $chart;
@@ -13,12 +15,13 @@ class MonthlyUsersChart
         $this->chart = $chart;
     }
 
-    public function build(): \ArielMejiaDev\LarapexCharts\PieChart
+    public function build($admins, $managers, $workers): PieChart
     {
         return $this->chart->pieChart()
-            ->setTitle('Top 3 scorers of the team.')
-            ->setSubtitle('Season 2021.')
-            ->addData([40, 50, 30])
-            ->setLabels(['Player 7', 'Player 10', 'Player 9']);
+            ->setTitle('Site Statistics')
+            ->setSubtitle('Users')
+            ->addData([$admins, $managers, $workers])
+            ->setLabels(['Admins', 'Managers', 'Workers'])
+            ->setFontColor("#FFF");
     }
 }

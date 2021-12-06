@@ -3,21 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Charts\MonthlyUsersChart;
+use App\Models\Activity;
+use App\Models\Form;
+use App\Models\Project;
+use App\Models\Subproject;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-
+    //TODO:: MOOMEN S. ALDAHDOUH 12/6/2021
     public function index(MonthlyUsersChart $chart)
     {
-        $type = Auth::user()->type;
-        switch ($type) {
-            case 0:
-                return view('home', ['chart' => $chart->build()]);
-            case 1:
-                return redirect('/');
-        }
+        if (Auth::user()) {
+            $type = Auth::user()->type;
+            switch ($type) {
+                case 0:
+                    //Users statistics
+                    $admins = User::query()->where('type', 0)->get();
+                    $managers = User::query()->where('type', 1)->get();
+                    $workers = User::query()->where('type', 2)->get();
+                    //Projects statistics
+                    $projects = Project::query()->get();
+                    $subprojects = Subproject::query()->get();
+                    $activities = Activity::query()->get();
+                    $forms = Form::query()->get();
+                    $data = [
+                        'chart' => $chart->build(count($admins), count($managers), count($workers)),
+                        'projects' => $projects,
+                        'subprojects' => $subprojects,
+                        'activities' => $activities,
+                        'forms' => $forms
+                    ];
+                    return view('home', $data);
+                case 1:
+                    return redirect('/');
+            }
+        } else
+            return redirect('/');
     }
 
     /**

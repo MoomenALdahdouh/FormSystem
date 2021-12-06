@@ -5,13 +5,16 @@
             {{ __('Home') }}
         </h1>
     </x-slot>
+
+    {{--//TODO:: MOOMEN S. ALDAHDOUH 11/15/2021--}}
+
     <div class="header-section">
         <div class="container">
             <div class="row section-one">
                 <div class="col-sm-12 col-md-4 col-lg-4 col-one">
-                    <div class="card">
-                        <ul class="list-group group-one">
-                            <li class="alert-success">
+                    <div class="">
+                        <ul class="group-one">
+                            <li class="list-one">
                                 {{--Larapex chart--}}
                                 <div class="pt-3">
                                     {!! $chart->container() !!}
@@ -21,51 +24,36 @@
                             </li>
                             <li class="list-item-two">
                                 <div class="row">
-                                    <div class="card-style col-sm-6 col-md-6 col-lg-6  ">
-                                        <div class="card text-white bg-primary o-hidden h-75">
-                                            <div class="card-body">
-                                                <div class="card-body-icon">
-                                                    <i class='bx bxs-bar-chart-alt-2'></i>
-                                                </div>
-                                                <div class="mr-5">26 New Messages!</div>
-                                            </div>
+                                    <div class="h-75 card-style-1 col-sm-6 col-md-6 col-lg-6  ">
+                                        <i class='icon-size bx bx-folder'></i>
+                                        <div class="mr-5">
+                                            <p>Projects</p>
+                                            <p>{{count($projects)}}</p>
                                         </div>
                                     </div>
-                                    <div class="card-style col-sm-6 col-md-6 col-lg-6  ">
-                                        <div class="card text-white bg-warning o-hidden h-75">
-                                            <div class="card-body">
-                                                <div class="card-body-icon">
-                                                    <i class='bx bxs-bar-chart-alt-2'></i>
-                                                </div>
-                                                <div class="mr-5">11 New Tasks!</div>
-                                            </div>
-                                        </div>
+                                    <div class="h-75 card-style-2 col-sm-6 col-md-6 col-lg-6  ">
+                                        <i class='icon-size bx bx-file'></i>
+                                        <p>Subprojects</p>
+                                        <p>{{count($subprojects)}}</p>
+
                                     </div>
-                                    <div class="card-style col-sm-6 col-md-6 col-lg-6  ">
-                                        <div class="card text-white bg-success o-hidden h-75">
-                                            <div class="card-body">
-                                                <div class="card-body-icon">
-                                                    <i class='bx bxs-bar-chart-alt-2'></i>
-                                                </div>
-                                                <div class="mr-5">123 New Orders!</div>
-                                            </div>
-                                        </div>
+                                    <div class="card-style-3 col-sm-6 col-md-6 col-lg-6  ">
+                                        <i class='icon-size bx bxl-react'></i>
+                                        <p>Activities</p>
+                                        <p>{{count($activities)}}</p>
+
                                     </div>
-                                    <div class="card-style col-sm-6 col-md-6 col-lg-6  ">
-                                        <div class="card text-white bg-danger o-hidden h-75">
-                                            <div class="card-body">
-                                                <div class="card-body-icon">
-                                                    <i class='bx bxs-bar-chart-alt-2'></i>
-                                                </div>
-                                                <div class="mr-5">13 New Tickets!</div>
-                                            </div>
-                                        </div>
+                                    <div class="card-style-4 col-sm-6 col-md-6 col-lg-6  ">
+                                        <i class="icon-size lab la-wpforms"></i>
+                                        <p>Forms</p>
+                                        <p>{{count($forms)}}</p>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
+                {{--Latest form submitions--}}
                 <div class="col-sm-12 col-md-4 col-lg-4 col-two">
                     <div class="caaa card">
 

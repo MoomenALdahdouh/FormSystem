@@ -14,16 +14,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//TODO:: MOOMEN S. ALDAHDOUH 11/13/2021
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -32,29 +23,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-/*Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'type:0', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-        Route::get('/home', [HomeController::class, 'index']);
-    });
-    Route::group(['middleware' => 'type:1', 'prefix' => 'manager', 'as' => 'manager.'], function () {
-        Route::get('/home', [ManagerHomeController::class, 'index']);
-    });
-});*/
-
 Route::get('/redirects', [RedirectsController::class, 'index'])->name('redirects');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/manager', [ManagerHomeController::class, 'index'])->name('manager');
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
-    return view('home');
-})->name('home');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/manager', function () {
-    return view('manager.manager_home');
-})->name('manager');*/
-
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/16/2021
 Route::prefix('projects')->group(function () {
     Route::get('/', [ProjectController::class, 'index'])->name('projects');
     Route::get('/all', [ProjectController::class, 'all'])->name('projects.all');
@@ -69,7 +42,7 @@ Route::prefix('projects')->group(function () {
     Route::post('/create', [ProjectController::class, 'create'])->name('project.create');
 });
 
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/18/2021
 Route::prefix('subprojects')->group(function () {
     Route::get('/', [SubprojectController::class, 'index'])->name('subprojects');
     Route::get('/all', [SubprojectController::class, 'all'])->name('subprojects.all');
@@ -82,7 +55,7 @@ Route::prefix('subprojects')->group(function () {
     Route::post('/update/{id}', [SubprojectController::class, 'update'])->name('subproject.update');
     Route::post('/create', [SubprojectController::class, 'create'])->name('subproject.create');
 });
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/23/2021
 Route::prefix('users')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('users');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
@@ -94,7 +67,7 @@ Route::prefix('users')->group(function () {
     Route::get('/workers', [UserController::class, 'workers'])->name('users.workers');
     Route::post('/create', [UserController::class, 'create'])->name('users.create');
 });
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/26/2021
 Route::prefix('activities')->group(function () {
     Route::get('/', [ActivityController::class, 'index'])->name('activities');
     Route::get('/all', [ActivityController::class, 'all'])->name('activities.all');
@@ -104,82 +77,23 @@ Route::prefix('activities')->group(function () {
     Route::post('/create', [ActivityController::class, 'create'])->name('activities.create');
     Route::delete('/delete/{id}', [ActivityController::class, 'destroy'])->name('activities.delete');
 });
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/25/2021
 Route::prefix('form')->group(function () {
     Route::post('/create', [FormController::class, 'create'])->name('form.create');
     Route::get('/edit/{id}', [FormController::class, 'edit'])->name('form.edit');
     Route::get('/apply/{id}', [FormController::class, 'apply'])->name('form.apply');
 });
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/28/2021
 Route::prefix('questions')->group(function () {
     Route::get('/', [QuestionController::class, 'index'])->name('questions');
     Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
 });
 
-
+//TODO:: MOOMEN S. ALDAHDOUH 11/30/2021
 Route::middleware(['auth:sanctum', 'verified'])->get('/workers', function () {
     return view('workers');
 })->name('workers');
 
 
 
-
-
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-/*Route::get('/', function () {
-    return view('index');
-});*/
-
-/*Route::name('projects')->group(function () {
-    Route::get('/projects', [ProjectController::class, 'index']);
-});*/
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/activities', function () {
-    return view('activities');
-})->name('activities');*/
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/users', function () {
-    return view('users');
-})->name('users');*/
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/admins', function () {
-    return view('admins');
-})->name('admins');*/
-
-/*Route::prefix('projects')->group(function () {
-
-    Route::get('/', [ProjectController::class, 'index']);
-
-    Route::get('/{id}', [ProjectController::class, 'show']);
-
-    Route::post('add', [ProjectController::class, 'store']);
-
-    Route::put('edit/{id}', [ProjectController::class, 'update']);
-
-    Route::get('search/{string}', [ProjectController::class, 'search']);
-
-    Route::delete('delete/{id}', [ProjectController::class, 'destroy']);
-
-});*/
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/projects', function () {
-    Route::get('/', [ProjectController::class, 'index']);
-
-    Route::get('/{id}', [ProjectController::class, 'show']);
-
-    Route::post('/add', [ProjectController::class, 'store']);
-
-    Route::put('/edit/{id}', [ProjectController::class, 'update']);
-
-    Route::get('/search/{string}', [ProjectController::class, 'search']);
-
-    Route::delete('/delete/{id}', [ProjectController::class, 'destroy']);
-})->name('projects');*/
-
-/*Route::middleware(['auth:sanctum', 'verified'])->get('/subprojects', function () {
-    return view('subprojects');
-})->name('subprojects');*/
+//TODO:: MOOMEN S. ALDAHDOUH 11/12/2021
