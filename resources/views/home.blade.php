@@ -7,7 +7,7 @@
     </x-slot>
 
     {{--//TODO:: MOOMEN S. ALDAHDOUH 11/15/2021--}}
-
+    <br>
     <div class="header-section">
         <div class="container">
             <div class=" row section-one">
@@ -179,8 +179,26 @@
     <div class="header-section ml-1">
         <div class="container">
             <div class="row section-tow">
+                <p class="mt-3"><i class='bx bxl-react'></i>&nbsp;<strong>Forms Activity</strong></p>
                 <div class="col-md-12">
-
+                    <div class="table-responsive" style="padding: 30px">
+                        <table id="activities-table" class="text-center table table-bordered table-striped"
+                               style="width: 100%; padding-top: 30px;margin-bottom: 15px">
+                            <thead class="text-light btn-primary">
+                            <tr>
+                                <th>SL No</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Subproject</th>
+                                <th>Worker</th>
+                                <th>Created At</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,6 +207,10 @@
     <script src="{{ $formChart->cdn() }}"></script>
     {{ $chart->script() }}
     {{ $formChart->script() }}
+    @include('modal_alert')
+    @push('js')
+        <script src="{{asset('js/activity.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @endpush
     <br>
     <br>
     <br>

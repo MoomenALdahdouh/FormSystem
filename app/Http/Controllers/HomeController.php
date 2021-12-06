@@ -24,7 +24,7 @@ class HomeController extends Controller
                 case 0:
                     //Users statistics
                     $users = User::query()->latest()->get();
-                    $latestUsers = User::query()->latest()->limit(10)->get();
+                    $latestUsers = User::query()->latest()->limit(7)->get();
                     $latestProjects = Project::query()->latest()->limit(5)->get();
                     $admins = User::query()->where('type', 0)->get();
                     $managers = User::query()->where('type', 1)->get();
@@ -33,7 +33,7 @@ class HomeController extends Controller
                     $projects = Project::query()->get();
                     $subprojects = Subproject::query()->get();
                     $activities = Activity::query()->get();
-                    $forms = Form::query()->latest()->get();
+                    $forms = Form::query()->latest()->limit(7)->get();
                     $formss = Form::query()->orderBy('created_at', 'asc')->get();
                     $latestForms = Form::query()->latest()->limit(10)->get();
 

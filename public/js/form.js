@@ -277,12 +277,10 @@ $(function () {
                 form_fk_id: form_id,
             },
             success: function (response) {
-                //console.log(response)
-                console.log(questionsList)
+                $('#successfully-save').modal('show');
             },
             error: function (response) {
-                //console.log("error")
-
+                $('#something-wrong').modal('show');
             }
         });
     }
