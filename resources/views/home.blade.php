@@ -1,15 +1,55 @@
 <x-app-layout>
     <x-slot name="header_2">
         <br>
-        <h1 class="home-section font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Home') }}
-        </h1>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Home') }}
+                    {{--<h3>{{__('strings.welcome')}}</h3>--}}
+                </h1>
+            </div>
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+
+                {{--<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {{ Config::get('language')[App::getLocale()] }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </li>--}}
+
+            </div>
+        </div>
     </x-slot>
 
     {{--//TODO:: MOOMEN S. ALDAHDOUH 11/15/2021--}}
     <br>
     <div class="header-section">
         <div class="container">
+            {{--<h1>Admin Dashboard</h1>--}}
             <div class=" row section-one">
                 <div class="col-sm-12 col-md-4 col-lg-4 col-one">
                     <ul class="main-ul">

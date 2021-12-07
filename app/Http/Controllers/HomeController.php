@@ -124,4 +124,8 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function languageDemo(){
+        return view('languageDemo');
+    }
 }

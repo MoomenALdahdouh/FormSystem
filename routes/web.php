@@ -11,6 +11,7 @@ use App\Http\Controllers\SubprojectController;
 use App\Http\Controllers\UserController;
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
+/*Route::get('/{lang}', function ($lang) {
+    if (Auth::check()) {
+        App::setLocale($lang);
+        return redirect()->route('redirects');
+    }
+    return view('welcome');
+})->name('welcome');*/
+Route::get('/languageDemo', 'App\Http\Controllers\HomeController@languageDemo');
 Route::get('/redirects', [RedirectsController::class, 'index'])->name('redirects');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

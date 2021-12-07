@@ -421,7 +421,7 @@
                         <div class="brand-wrapper">
                             <img src="{{asset('images/logo.svg')}}" alt="logo" class="logo">
                         </div>
-                        <p class="login-card-description">Sign into your account</p>
+                        <p class="login-card-description">{{__('Sign into your account')}}</p>
                         @include('auth.loginstyle')
                     </div>
                 </div>
