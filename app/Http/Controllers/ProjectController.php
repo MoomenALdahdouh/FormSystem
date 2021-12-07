@@ -37,9 +37,9 @@ class ProjectController extends Controller
                 ->addColumn('status', function ($projects) {
                     $status = '';
                     if ($projects->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __("strings.pended") . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __("strings.active") . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($projects) {
@@ -87,9 +87,9 @@ class ProjectController extends Controller
                     'description' => 'required:projects',
                     'manager' => 'required:projects',
                 ], [
-                    'name.required' => 'The name is required!',
-                    'description.required' => 'The description is required!',
-                    'manager.required' => 'The manager is required!',
+                    'name.required' => __('strings.name_required'),
+                    'description.required' => __('strings.description_required'),
+                    'manager.required' => __('strings.manager_required'),
                 ]);
                 if ($validator->passes()) {
                     $data = new Project();
@@ -103,7 +103,7 @@ class ProjectController extends Controller
                     $data->save();
                     $project_id = $data->id;
                     $this->updateUser($request->manager, $project_id);
-                    return response()->json(['success' => 'Successfully create new project']);
+                    return response()->json(['success' => __('strings.successfully_create_project')]);
                 }
                 return response()->json(['error' => $validator->errors()->toArray()]);
             }
@@ -117,9 +117,9 @@ class ProjectController extends Controller
             'name' => 'required|unique:projects|max:255',
             'manager' => 'required|unique:projects,manager_fk_id|max:11|exists:users,id'
         ], [
-            'name.required' => 'Please Input Project Name!',
-            'name.max' => 'Max Length 255Chars!',
-            'manager_fk_id.required' => 'Please Select User Manager!'
+            'name.required' => __('strings.project_name'),
+            'name.max' => __('strings.name_length'),
+            'manager_fk_id.required' => __('strings.user_manager')
         ]);
 
         $data = new Project();
@@ -130,7 +130,7 @@ class ProjectController extends Controller
         $data->save();
         $project_id = $data->id;
         $this->updateUser($request->manager, $project_id);
-        return Redirect()->back()->with('success', 'Successfully Add Project');
+        return Redirect()->back()->with('success', __('strings.successfully_create_project'));
     }
 
     public function show($id)
@@ -154,7 +154,7 @@ class ProjectController extends Controller
                 'description' => $request->description,
                 'status' => $request->status,
             ]);
-            return response()->json(['success' => 'Successfully update Project']);
+            return response()->json(['success' => __('strings.successfully_update_project')]);
         }
     }
 
@@ -173,9 +173,9 @@ class ProjectController extends Controller
                 $project->delete();
                 $managerId = $project->manager_fk_id;
                 $this->updateUser($managerId, 0);
-                return response()->json(['success' => 'Successfully Delete Project']);
+                return response()->json(['success' => __('strings.successfully_delete_project')]);
             }
-            return response()->json(['error' => 'This project have subprojects']);
+            return response()->json(['error' => __('strings.have_subprojects')]);
         }
         //TODO: If you need to reuse the same manager to other project after delete this project hes was manager before
         //return Redirect::back()->with('successUpdate', 'Successfully Delete Project');

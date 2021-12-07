@@ -8,10 +8,10 @@
                 <br>
                 <p><i class="alert-icon text-success las la-check-circle"></i></p>
                 <br>
-                <h6 id="message">Successfully save new updates</h6>
+                <h6 id="message">{{__('strings.saved')}}</h6>
                 <br>
             </div>
-            <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-success" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}
@@ -29,10 +29,10 @@
                 <br>
                 <p><i class="alert-icon text-primary las la-check-circle"></i></p>
                 <br>
-                <h6 id="message">Successfully create new user</h6>
+                <h6 id="message">{{__('strings.created_user')}}</h6>
                 <br>
             </div>
-            <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-primary" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}
@@ -50,10 +50,10 @@
                 <br>
                 <p><i class="alert-icon text-primary las la-check-circle"></i></p>
                 <br>
-                <h6 id="message">Successfully create new activity</h6>
+                <h6 id="message">{{__('strings.created_activity')}}</h6>
                 <br>
             </div>
-            <button class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-primary" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}
@@ -71,11 +71,11 @@
                 <br>
                 <p><i class="alert-icon text-warning las la-exclamation-triangle"></i></p>
                 <br>
-                <h6 id="message">You can not remove this project because it's have subprojects!</h6>
+                <h6 id="message">{{__('strings.can_not_remove_project')}}</h6>
                 <br>
 
             </div>
-            <button class="btn btn-warning" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-warning" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}
@@ -92,11 +92,13 @@
                 <br>
                 <p><i class="alert-icon text-warning las la-exclamation-triangle"></i></p>
                 <br>
-                <h6 id="message">You can not remove this <strong>subproject</strong> because it's have <strong>activities!</strong></h6>
+                <h6 id="message">{{__('strings.can_not')}}
+                    <strong>{{__('strings.subproject')}}</strong> {{__('strings.have')}}
+                    <strong>{{__('strings.activities')}}</strong></h6>
                 <br>
 
             </div>
-            <button class="btn btn-warning" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-warning" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}
@@ -115,10 +117,10 @@
                 <br>
                 <p><i class="alert-icon text-info las la-check-circle"></i></p>
                 <br>
-                <h6 id="message">Successfully removed the item</h6>
+                <h6 id="message">{{__('strings.successfully_removed')}}</h6>
                 <br>
             </div>
-            <button class="btn btn-info" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-info" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}
@@ -136,10 +138,11 @@
                 <br>
                 <p><i class="alert-icon text-danger las la-question"></i></p>
                 <br>
-                <h6 id="message">Are you sure you want to remove all questions?</h6>
+                <h6 id="message">{{__('strings.are_you_sure_remove_all')}}</h6>
                 <br>
             </div>
-            <button id="confirm-remove" class="selector btn btn-danger" data-bs-dismiss="modal">Yes, Clear All</button>
+            <button id="confirm-remove" class="selector btn btn-danger"
+                    data-bs-dismiss="modal">{{__('strings.yes_clear_all')}}</button>
         </div>
     </div>
 </div>
@@ -153,10 +156,11 @@
                 <br>
                 <p><i class="alert-icon text-danger las la-question"></i></p>
                 <br>
-                <h6 id="message">Are you sure you want to remove this questions?</h6>
+                <h6 id="message">{{__('strings.are_you_sure_remove_this')}}</h6>
                 <br>
             </div>
-            <button id="confirm-remove-question" class="selector btn btn-danger" data-bs-dismiss="modal">Yes, Clear All</button>
+            <button id="confirm-remove-question" class="selector btn btn-danger"
+                    data-bs-dismiss="modal">{{__('strings.yes_remove')}}</button>
         </div>
     </div>
 </div>
@@ -171,10 +175,10 @@
                 <br>
                 <p><i class="alert-icon text-warning las la-exclamation-triangle"></i></p>
                 <br>
-                <h6 id="message">Something wrong! <strong>Please try again.</strong></h6>
+                <h6 id="message">{{__('strings.wrong')}}<strong>{{__('strings.try_again')}}</strong></h6>
                 <br>
             </div>
-            <button class="btn btn-warning" data-bs-dismiss="modal">OK</button>
+            <button class="btn btn-warning" data-bs-dismiss="modal">{{__('strings.ok')}}</button>
             {{--<div class="modal-footer">
                 <button id="close" class="btn" type="button" data-bs-dismiss="modal">Close</button>
             </div>--}}

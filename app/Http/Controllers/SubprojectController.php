@@ -34,9 +34,9 @@ class SubprojectController extends Controller
                 ->addColumn('status', function ($subprojects) {
                     $status = '';
                     if ($subprojects->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">'.__('strings.pended').'</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;'.__('strings.active').'&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($subprojects) {
@@ -61,9 +61,9 @@ class SubprojectController extends Controller
                     'description' => 'required:subprojects',
                     'project' => 'required:subprojects',
                 ], [
-                    'name.required' => 'The name is required!',
-                    'description.required' => 'The description is required!',
-                    'project.required' => 'The project is required!',
+                    'name.required' => __('strings.name_required'),
+                    'description.required' => __('strings.description_required'),
+                    'project.required' => __('strings.project_required'),
                 ]);
                 if ($validator->passes()) {
                     $data = new Subproject();
@@ -75,7 +75,7 @@ class SubprojectController extends Controller
                     $data->updated_at = Carbon::now();
                     $data->status = $request->status;
                     $data->save();
-                    return response()->json(['success' => 'Successfully create new project']);
+                    return response()->json(['success' => __('strings.successfully_create_subproject')]);
                 }
                 return response()->json(['error' => $validator->errors()->toArray()]);
             }
@@ -97,9 +97,9 @@ class SubprojectController extends Controller
             'name' => 'required|unique:subprojects|max:255',
             'project' => 'required:subprojects,project_fk_id|max:255|exists:projects,id'
         ], [
-            'name.required' => 'Please Input Subproject Name!',
-            'name.max' => 'Max Length 255Chars!',
-            'project_fk_id.required' => 'Please Select Project Name!'
+            'name.required' => __('strings.subproject_name'),
+            'name.max' => __('strings.name_length'),
+            'project_fk_id.required' => __('strings.project_required')
         ]);
         $data = array();
         $data['name'] = $request->name;
@@ -108,7 +108,7 @@ class SubprojectController extends Controller
         $data['project_fk_id'] = $request->project;
         $data['created_at'] = Carbon::now();
         DB::table('subprojects')->insert($data);
-        return Redirect()->back()->with('success', 'Successfully Add Subproject');
+        return Redirect()->back()->with('success', __('strings.successfully_create_subproject'));
     }
 
     public function show($id)
@@ -134,7 +134,7 @@ class SubprojectController extends Controller
                 'description' => $request->description,
                 'status' => $request->status,
             ]);
-            return response()->json(['success' => 'Successfully update Project']);
+            return response()->json(['success' => __('strings.successfully_update_subproject')]);
         }
     }
 
@@ -148,9 +148,9 @@ class SubprojectController extends Controller
                 /*$this->updateUser($project->manager, 0);
                 $managerId = $project->manager_fk_id;
                 $this->updateUser($managerId, 0);*/
-                return response()->json(['success' => 'Successfully Delete Subproject']);
+                return response()->json(['success' => __('strings.successfully_delete_subproject')]);
             }
-            return response()->json(['error' => 'This Subproject have activities']);
+            return response()->json(['error' => __('strings.have_activity')]);
         }
         /*$delete = Subproject::query()->find($id)->delete();
         return Subproject::back()->with('successUpdate', 'Successfully Delete Subproject');*/

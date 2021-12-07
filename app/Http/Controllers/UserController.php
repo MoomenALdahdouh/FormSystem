@@ -29,25 +29,25 @@ class UserController extends Controller
                     return '<p>' . \Carbon\Carbon::parse($projects->created_at)->diffForHumans() . '</p>';
                 })
                 ->addColumn('type', function ($users) {
-                    $type = '<p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>';
+                    $type = '<p class="paragraph-admin shadow">&nbsp;' . __('strings.admin') . '&nbsp;</p>';
                     switch ($users->type) {
                         case 0:
-                            $type = '<p class="paragraph-admin shadow">&nbsp;&nbsp;Admin&nbsp;&nbsp;</p>';
+                            $type = '<p class="paragraph-admin shadow">&nbsp;&nbsp;' . __('strings.admin') . '&nbsp;&nbsp;</p>';
                             break;
                         case 1:
-                            $type = '<p class="paragraph-manager shadow">Manager</p>';
+                            $type = '<p class="paragraph-manager shadow">' . __('strings.manager') . '</p>';
                             break;
                         case 2:
-                            $type = '<p class="paragraph-worker shadow">&nbsp;Worker&nbsp;</p>';
+                            $type = '<p class="paragraph-worker shadow">&nbsp;' . __('strings.worker') . '&nbsp;</p>';
                     }
                     return $type;
                 })
                 ->addColumn('status', function ($users) {
                     $status = '';
                     if ($users->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __('strings.pended') . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __('strings.active') . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
@@ -77,9 +77,9 @@ class UserController extends Controller
                 ->addColumn('status', function ($users) {
                     $status = '';
                     if ($users->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __('strings.pended') . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __('strings.active') . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
@@ -101,9 +101,9 @@ class UserController extends Controller
                 ->addColumn('status', function ($users) {
                     $status = '';
                     if ($users->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __('strings.pended') . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __('strings.active') . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
@@ -124,9 +124,9 @@ class UserController extends Controller
                 ->addColumn('status', function ($users) {
                     $status = '';
                     if ($users->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __('strings.pended') . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __('strings.active') . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
@@ -148,9 +148,9 @@ class UserController extends Controller
                     'email' => 'required|unique:users',
                     'phone' => 'required|unique:users',
                 ], [
-                    'name.required' => 'The name is required!',
-                    'email.required' => 'The email is required!',
-                    'phone.required' => 'The phone is required!'
+                    'name.required' => __('strings.name_required'),
+                    'email.required' => __('strings.email_required'),
+                    'phone.required' => __('strings.phone_required')
                 ]);
 
 
@@ -165,7 +165,7 @@ class UserController extends Controller
                     $data->created_at = Carbon::now();
                     $data->create_by_id = Auth::user()->id;
                     $data->save();
-                    return response()->json(['success' => 'Successfully create new User']);
+                    return response()->json(['success' => __('strings.successfully_create_user')]);
                 }
                 return response()->json(['error' => $validator->errors()->toArray()]);
                 //return response()->json(['error' => $validator->errors()->all()]);
@@ -221,9 +221,9 @@ class UserController extends Controller
                 $update->status = $request->status;
                 $update->save();
                 if ($update)
-                    return response()->json(['success' => 'Successfully update User']);
+                    return response()->json(['success' => __('strings.successfully_update_user')]);
                 else
-                    return response()->json(['error' => 'Field to update this user!']);
+                    return response()->json(['error' => __('strings.field_update__user')]);
             }
         }
     }
@@ -236,29 +236,29 @@ class UserController extends Controller
                 case 0:
                     if (count($user->projects) == 0) {
                         if ($user->delete()) {
-                            return response()->json(['success' => 'Successfully Delete admin']);
+                            return response()->json(['success' => __('strings.successfully_delete_admin')]);
                         } else
-                            return response()->json(['error' => 'Field to delete this admin']);
+                            return response()->json(['error' => __('strings.field_delete_admin')]);
                     } else
-                        return response()->json(['error' => 'Can not remove this admin!, he manage some projects!']);
+                        return response()->json(['error' => __('strings.can_not_remove_admin')]);
                 case 1:
                     if ($user->project_fk_id == 0) {
                         if ($user->delete()) {
-                            return response()->json(['success' => 'Successfully Delete manager']);
+                            return response()->json(['success' => __('strings.successfully_delete_manager')]);
                         } else
-                            return response()->json(['error' => 'Field to delete this manager']);
+                            return response()->json(['error' => __('strings.field_delete_manager')]);
                     } else
-                        return response()->json(['error' => 'Can not remove this manager, he manage some projects!']);
+                        return response()->json(['error' => __('strings.can_not_remove_manager')]);
                 case 2:
                     if (count($user->activities) == 0) {
                         if ($user->delete()) {
-                            return response()->json(['success' => 'Successfully Delete worker']);
+                            return response()->json(['success' => __('strings.successfully_delete_worker')]);
                         } else
-                            return response()->json(['error' => 'Field to delete this worker']);
+                            return response()->json(['error' => __('strings.field_delete_worker')]);
                     } else
-                        return response()->json(['error' => 'Can not remove this worker, he manage some activities!']);
+                        return response()->json(['error' => __('strings.can_not_remove_worker')]);
             }
-            return response()->json(['error' => 'Field to delete the user']);
+            return response()->json(['error' => __('strings.field_delete_user')]);
         }
     }
 

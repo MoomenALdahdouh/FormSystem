@@ -24,7 +24,7 @@ class FormController extends Controller
                 $form->user_fk_id = $request->worker_fk_id;
                 $form->subproject_fk_id = $request->subproject_fk_id;
                 $form->save();
-                return response()->json(['success' => 'Successfully create new Form']);
+                return response()->json(['success' => __('strings.successfully_create_form')]);
             }
         }
     }

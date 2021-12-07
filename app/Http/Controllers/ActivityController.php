@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+
 //TODO:: MOOMEN S. ALDAHDOUH 12/1/2021
 class ActivityController extends Controller
 {
@@ -30,25 +31,26 @@ class ActivityController extends Controller
                     return '<p>' . \Carbon\Carbon::parse($activities->created_at)->diffForHumans() . '</p>';
                 })
                 ->addColumn('type', function ($activities) {
-                    $type = '<p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>';
+                    $type = '<p class="paragraph-admin shadow">&nbsp;' . __("strings.admin") . '&nbsp;</p>';
                     switch ($activities->type) {
                         case 0:
-                            $type = '<p class="activity-type shadow">&nbsp;&nbsp;Form&nbsp;&nbsp;</p>';
+                            $type = '<p class="activity-type shadow">&nbsp;&nbsp; ' . __("strings.form") . ' &nbsp;&nbsp;</p>';
                             break;
                         case 1:
-                            $type = '<p class="paragraph-manager shadow">Manager</p>';
+                            $type = '<p class="paragraph-manager shadow">' . __("strings.manager") . '</p>';
                             break;
                         case 2:
-                            $type = '<p class="paragraph-worker shadow">&nbsp;Worker&nbsp;</p>';
+                            $type = '<p class="paragraph-worker shadow">&nbsp;' . __("strings.worker") . '&nbsp;</p>';
                     }
                     return $type;
                 })
                 ->addColumn('status', function ($activities) {
                     $status = '';
+
                     if ($activities->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">Pended</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __("strings.pended") . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __("strings.active") . ' &nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($activities) {
@@ -85,8 +87,8 @@ class ActivityController extends Controller
                     'name' => 'required|unique:activities|max:255',
                     'description' => 'required',
                 ], [
-                    'name.required' => 'The name is required!',
-                    'description.required' => 'The description is required!',
+                    'name.required' => __('strings.name_required'),
+                    'description.required' => __('strings.description_required'),
                 ]);
 
 
@@ -103,7 +105,7 @@ class ActivityController extends Controller
                     $data->save();
                     $activity_fk_id = $data->id;
                     //$this->createForm($activity_fk_id, $request->worker, $request->subproject);
-                    return response()->json(['success' => 'Successfully create new User', 'activity_fk_id' => $activity_fk_id]);
+                    return response()->json(['success' => __('strings.created_user'), 'activity_fk_id' => $activity_fk_id]);
                 }
                 return response()->json(['error' => $validator->errors()->toArray()]);
                 //return response()->json(['error' => $validator->errors()->all()]);
@@ -147,15 +149,15 @@ class ActivityController extends Controller
                 $update->description = $request->description;
                 $update->status = $request->status;
                 $update->save();
-               /* $update = Activity::query()->find($id)->update([
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'status' => $request->status,
-                ]);*/
+                /* $update = Activity::query()->find($id)->update([
+                     'name' => $request->name,
+                     'description' => $request->description,
+                     'status' => $request->status,
+                 ]);*/
                 if ($update)
-                    return response()->json(['success' => 'Successfully update Project']);
+                    return response()->json(['success' => __('strings.successfully_update_project')]);
                 else
-                    return response()->json(['error' => 'Field to update! Please try again.']);
+                    return response()->json(['error' => __('strings.field_update_project')]);
             }
         }
     }
@@ -166,9 +168,9 @@ class ActivityController extends Controller
             $activity = Activity::query()->find($id);
             $form = Form::query()->where('activity_fk_id', $id);
             if ($form->delete() && $activity->delete()) {
-                return response()->json(['success' => 'Successfully Delete Activity']);
+                return response()->json(['success' => __('strings.successfully_delete_project')]);
             }
-            return response()->json(['error' => 'Field to delete this activity, Try again!']);
+            return response()->json(['error' => 'strings.field_delete_activity']);
         }
     }
 }
