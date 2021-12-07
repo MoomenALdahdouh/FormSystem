@@ -2,7 +2,7 @@
     <x-slot name="header">
         <br>
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Subprojects') }}
+            {{ __('strings.subprojects') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create subProject') }}</button>--}}
         </h1>
     </x-slot>
@@ -21,13 +21,13 @@
                                    style="width: 100%; padding-top: 30px;margin-bottom: 15px">
                                 <thead class="text-light" style="background-color: #11101D">
                                 <tr>
-                                    <th>SL No</th>
-                                    <th>Name</th>
-                                    <th>Created By</th>
-                                    <th>Main Project</th>
-                                    <th>Created At</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>{{ __('strings.sl_no') }}</th>
+                                    <th>{{ __('strings.name') }}</th>
+                                    <th>{{ __('strings.created_by') }}</th>
+                                    <th>{{ __('strings.main_project') }}</th>
+                                    <th>{{ __('strings.created_at') }}</th>
+                                    <th>{{ __('strings.status') }}</th>
+                                    <th>{{ __('strings.action') }}</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -54,7 +54,7 @@
                         <div class="col-md-12">
                             <div class="card shadow">
                                 <div class="card-header alert alert-secondary">
-                                    <h4><i class="las la-plus-square"></i>Create new Subproject</h4>
+                                    <h4><i class="las la-plus-square"></i>{{ __('strings.create_new_subproject') }}</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="container">
@@ -66,30 +66,30 @@
                                             <li>
                                                 <div class="">
                                                     <strong><i
-                                                            class="las la-signature text-primary"></i>Name
+                                                            class="las la-signature text-primary"></i>{{ __('strings.name') }}
                                                     </strong>
                                                     &nbsp &nbsp<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="name" name="name" type="text"
-                                                        placeholder="Name">
+                                                        placeholder="{{ __('strings.name') }}">
                                                     <p id="name_error" class="alert alert-danger"
                                                        style="display: none"></p>
                                                 </div>
                                                 <div class="">
                                                     <strong>
-                                                        <i class="las la-signature text-primary"></i>Description
+                                                        <i class="las la-signature text-primary"></i>{{ __('strings.description') }}
                                                     </strong>
                                                     &nbsp &nbsp<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="email" name="description" type="text"
-                                                        placeholder="Description">
+                                                        placeholder="{{ __('strings.description') }}">
                                                     <p id="description_error" class="alert alert-danger"
                                                        style="display: none"></p>
                                                 </div>
                                             </li>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>Select Project
+                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_project') }}
                                                 </strong>
 
                                                 <div class="row alert alert-secondary"
@@ -103,7 +103,7 @@
                                                             @endphp
                                                             @if($projects == '[]')
                                                                 <option class="alert-warning"
-                                                                        value=""> Empty All managers are busy...
+                                                                        value=""> {{ __('strings.empty_all_managers_are_busy') }}
                                                                 </option>
                                                             @else
                                                                 @foreach ($projects as $project)
@@ -117,7 +117,7 @@
                                                                 @endforeach
                                                                 @if($count==0)
                                                                     <option class="alert-warning"
-                                                                            value=""> Empty All managers are busy...
+                                                                            value=""> {{ __('strings.empty_all_managers_are_busy') }}
                                                                     </option>
                                                                 @endif
                                                             @endif
@@ -129,13 +129,14 @@
                                             <br>
                                             <li>
                                                 <strong><i
-                                                        class="las la-toggle-off text-primary"></i>&nbsp;Status</strong>
+                                                        class="las la-toggle-off text-primary"></i>&nbsp;{{ __('strings.status') }}
+                                                </strong>
                                                 <br>
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                                     <div class="col-md-11">
                                                         <strong id="status-project"
-                                                                class=" paragraph-active shadow">Active</strong>
+                                                                class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-check form-switch">
@@ -150,7 +151,7 @@
                                             <br>
                                             <li>
                                                 <button id="create_subproject" class="btn btn-primary float-right"><i
-                                                        class="las la-plus-square"></i> Create
+                                                        class="las la-plus-square"></i> {{ __('strings.create') }}
                                                 </button>
                                             </li>
                                         </ul>

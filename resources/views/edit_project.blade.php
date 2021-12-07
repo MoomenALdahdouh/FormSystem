@@ -4,7 +4,7 @@
     <x-slot name="header">
         <br>
         <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Project Settings') }}
+            {{ __('strings.project_settings') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
         </h1>
     </x-slot>
@@ -50,32 +50,35 @@
                                         </div>
                                     </div>
                                     <br>--}}
-                                    <strong><i class="las la-user-tie text-primary"></i>&nbsp Create By
+                                    <strong><i
+                                            class="las la-user-tie text-primary"></i>&nbsp; {{ __('strings.created_by') }}
                                     </strong>
                                     <br>
                                     <p> &nbsp &nbsp {{$project->createBy->name}}</p>
 
                                     <div class="">
-                                        <strong><i class="las la-calendar-check text-primary"></i>&nbsp Created
-                                            At
+                                        <strong><i
+                                                class="las la-calendar-check text-primary"></i>&nbsp; {{ __('strings.created_at') }}
                                         </strong>
                                         <br>
-                                        &nbsp &nbsp {{$project->created_at}}
+                                        &nbsp; &nbsp; {{$project->created_at}}
                                     </div>
                                     <br>
                                     <div class="">
-                                        <strong><i class="las la-clock text-primary"></i></i>&nbsp Update At
+                                        <strong><i
+                                                class="las la-clock text-primary"></i></i>&nbsp; {{ __('strings.update_at') }}
                                         </strong>
                                         <br>
-                                        &nbsp &nbsp {{$project->updated_at}}
+                                        &nbsp; &nbsp; {{$project->updated_at}}
                                     </div>
 
                                     <br>
                                     <div class="">
-                                        <strong><i class="las la-user-check text-primary"></i>&nbsp Manage By
+                                        <strong><i
+                                                class="las la-user-check text-primary"></i>&nbsp {{ __('strings.manage_by') }}
                                         </strong>
                                         <br>
-                                        &nbsp &nbsp {{$project->manageBy->name}}
+                                        &nbsp; &nbsp; {{$project->manageBy->name}}
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +94,7 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header alert alert-secondary">
-                                <h4><i class="las la-pen-square"></i>Edit</h4>
+                                <h4><i class="las la-pen-square"></i>{{ __('strings.edit') }}</h4>
                             </div>
                             <div class="card-body">
                                 <div class="container">
@@ -101,7 +104,7 @@
                                                value="{{count($subprojects)}}">
                                         <li>
                                             <div class="">
-                                                <strong><i class='bx bx-rename'></i>&nbsp Name
+                                                <strong><i class='bx bx-rename'></i>&nbsp; {{ __('strings.name') }}
                                                 </strong>
                                                 <br>
                                                 <input placeholder="name" id="name" name="name"
@@ -112,24 +115,26 @@
                                         <li>
                                             <div class="">
                                                 <strong>
-                                                    <i class="las la-audio-description"></i>&nbsp
-                                                    Description
+                                                    <i class="las la-audio-description"></i>&nbsp;
+                                                    {{ __('strings.description') }}
                                                 </strong>
                                                 <br>
                                                 @php
-                                                    $desc = "no description ...";
+                                                    $desc =  __('strings.no_description');
                                                  if(!empty($project->description) ){
                                                      $desc = $project->description;
                                                  }
                                                 @endphp
-                                                <textarea rows="3" placeholder="description" id="description" name="description"
+                                                <textarea rows="3" placeholder="{{ __('strings.description') }}"
+                                                          id="description"
+                                                          name="description"
                                                           class="rounded-md col-md-12 alert alert-secondary"
                                                           type="text">{{$desc}}</textarea>
                                             </div>
                                         </li>
                                         <li>
                                             <strong>
-                                                <i class="las la-toggle-off"></i>&nbsp Status
+                                                <i class="las la-toggle-off"></i>&nbsp; {{ __('strings.status') }}
                                             </strong>
                                             <br>
                                             <div class="row alert alert-secondary"
@@ -137,10 +142,10 @@
                                                 <div class="col-md-11">
                                                     @if($project->status == 1)
                                                         <strong id="status-project"
-                                                                class=" paragraph-active shadow">Active</strong>
+                                                                class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                                     @else
                                                         <strong id="status-project"
-                                                                class=" paragraph-pended shadow">Pended</strong>
+                                                                class=" paragraph-pended shadow">{{ __('strings.pended') }}</strong>
                                                     @endif
                                                 </div>
                                                 <div class="col-md-1">
@@ -160,7 +165,7 @@
                                         <br>
                                         <li>
                                             <button id="update-project" class="btn btn-primary float-right"><i
-                                                    class="lar la-save"></i> Save
+                                                    class="lar la-save"></i> {{ __('strings.save') }}
                                             </button>
                                         </li>
                                     </ul>
@@ -179,11 +184,11 @@
                         <div class="row alert alert-danger text-dark"
                              style=" margin: 0; padding-left:0; padding-right: 0">
                             <div class="col-md-10">
-                                <strong><i class="las la-trash"></i>&nbsp Remove this project! you
-                                    can not restore it.</strong>
+                                <strong><i class="las la-trash"></i>&nbsp; {{ __('strings.remove_project') }}</strong>
                             </div>
                             <div class="col-md-2">
-                                <button id="remove-project" class="btn btn-danger float-right">Remove Now</button>
+                                <button id="remove-project"
+                                        class="btn btn-danger float-right">{{ __('strings.remove_now') }}</button>
                             </div>
                         </div>
                     </div>
@@ -191,122 +196,13 @@
             </div>
             <br>
             <br>
-            {{--Section get all subprojects--}}
-            {{--<div class="row">
-                <div class="col-md-12">
-                    <div class="card shadow">
-                        <div class="card-header alert-secondary">
-                            <strong>Subprojects List</strong></div>
-                        <div id="table-subprojects" class="card-body">
-                            @include('pagination_subproject')
-                        </div>
-                    </div>
-                </div>
-            </div>--}}
             <br>
             <br>
-            {{--Section create new subproject--}}
-            {{--<div class="row">
-                <div class="col-md-12">
-                    <div class="card shadow">
-                        <div class="card-header alert alert-secondary">
-                            <h4><i class="las la-plus-square"></i>Create new Subproject</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="container">
-                                <ul class="ul-project">
-                                    <div class="alert alert-danger print-error-msg"
-                                         style="display:none">
-                                        <ul></ul>
-                                    </div>
-
-                                    <li>
-                                        <div class="">
-                                            <strong><i
-                                                    class="las la-signature text-primary"></i>Name
-                                            </strong>
-                                            &nbsp &nbsp<input
-                                                class="rounded-md col-md-12 alert alert-secondary"
-                                                id="name" name="name" type="text"
-                                                placeholder="Name">
-                                            <p id="name_error" class="alert alert-danger"
-                                               style="display: none"></p>
-                                        </div>
-                                        <div class="">
-                                            <strong>
-                                                <i class="las la-signature text-primary"></i>Description
-                                            </strong>
-                                            &nbsp &nbsp<input
-                                                class="rounded-md col-md-12 alert alert-secondary"
-                                                id="description" name="description" type="text"
-                                                placeholder="Description">
-                                            <p id="description_error"
-                                               class="alert alert-danger"
-                                               style="display: none"></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <strong>
-                                            <i class="las la-hand-pointer text-primary"></i>Select
-                                            Project
-                                        </strong>
-
-                                        <div class="row alert alert-secondary"
-                                             style=" margin: 0">
-                                            <div class="form-check form-switch col-md-3"
-                                                 style="padding-left:0">
-                                                <select name="project" id="project"
-                                                        class="btn-outline-primary manager-dropdown form-control input-group-lg "
-                                                        value="0">
-                                                    <option class="alert-dark"
-                                                            value="{{ $project->id }}">{{ $project->name }}</option>
-                                                </select>
-                                                {{csrf_field()}}
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <br>
-                                    <li>
-                                        <strong><i
-                                                class="las la-toggle-off text-primary"></i>&nbsp;Status</strong>
-                                        <br>
-                                        <div class="row alert alert-secondary"
-                                             style=" margin: 0; padding-left:0; padding-right: 0">
-                                            <div class="col-md-11">
-                                                <strong id="status-project"
-                                                        class=" paragraph-active shadow">Active</strong>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input"
-                                                           type="checkbox"
-                                                           id="flexSwitchCheckChecked"
-                                                           name="flexSwitchCheckChecked"
-                                                           value="1" checked>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <br>
-                                    <br>
-                                    <li>
-                                        <button id="create_subproject"
-                                                class="btn btn-primary float-right"><i
-                                                class="las la-plus-square"></i> Create
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>--}}
             <br>
         </div>
     </div>
     @push('js')
         <script src="{{asset('js/project.js')}}" defer></script> {{--Must add defer to active js file--}}
-        {{-- <script src="{{asset('js/view_project.js')}}" defer></script>--}} {{--Must add defer to active js file--}}
     @endpush
     <br>
     <br>
