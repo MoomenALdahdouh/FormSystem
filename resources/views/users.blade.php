@@ -2,7 +2,7 @@
     <x-slot name="header">
         <br>
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
+            {{ __('strings.users') }}
         </h1>
     </x-slot>
     <br>
@@ -14,10 +14,14 @@
             <div class="col-md-12">
                 <div class="container justify-content-start">
                     <input id="user_type" type="hidden" value="4">
-                    <button id="users-all" class="btn btn-outline-success me-2"><i class="las la-user"></i>&nbsp;All</button>
-                    <button id="users-admins" class="btn btn-sm btn-outline-secondary"><i class="las la-user-tie"></i>&nbsp;Admins</button>
-                    <button id="users-managers" class="btn btn-sm btn-outline-secondary"><i class="las la-user-cog"></i>&nbsp;Managers</button>
-                    <button id="users-workers" class="btn btn-sm btn-outline-secondary"><i class="las la-user-tag"></i>&nbsp;Workers</button>
+                    <button id="users-all" class="btn btn-outline-success me-2"><i
+                            class="las la-user"></i>&nbsp;{{ __('strings.all') }}</button>
+                    <button id="users-admins" class="btn btn-sm btn-outline-secondary"><i class="las la-user-tie"></i>&nbsp;{{ __('strings.admins') }}
+                    </button>
+                    <button id="users-managers" class="btn btn-sm btn-outline-secondary"><i class="las la-user-cog"></i>&nbsp;{{ __('strings.managers') }}
+                    </button>
+                    <button id="users-workers" class="btn btn-sm btn-outline-secondary"><i class="las la-user-tag"></i>&nbsp;{{ __('strings.workers') }}
+                    </button>
                 </div>
             </div>
 
@@ -35,13 +39,13 @@
                                    style="width: 100%; padding-top: 30px;margin-bottom: 15px">
                                 <thead class="text-light" style="background-color: #11101D">
                                 <tr>
-                                    <th>SL No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Created At</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>{{ __('strings.sl_no') }}</th>
+                                    <th>{{ __('strings.name') }}</th>
+                                    <th>{{ __('strings.email') }}</th>
+                                    <th>{{ __('strings.created_at') }}</th>
+                                    <th>{{ __('strings.type') }}</th>
+                                    <th>{{ __('strings.status') }}</th>
+                                    <th>{{ __('strings.action') }}</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -68,7 +72,7 @@
                         <div class="col-md-12">
                             <div class="card shadow">
                                 <div class="card-header alert alert-secondary">
-                                    <h4><i class="las la-plus-square"></i>Create new user</h4>
+                                    <h4><i class="las la-plus-square"></i>{{ __('strings.create_new_user') }}</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="container">
@@ -80,43 +84,47 @@
                                             <li>
                                                 <div class="">
                                                     <strong><i
-                                                            class="las la-signature text-primary"></i>Name
+                                                            class="las la-signature text-primary"></i>{{ __('strings.name') }}
                                                     </strong>
-                                                    &nbsp &nbsp<input
+                                                    &nbsp; &nbsp;<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="name" name="name" type="text"
-                                                        placeholder="Name">
-                                                    <p id="name_error" class="alert alert-danger" style="display: none"></p>
+                                                        placeholder="{{ __('strings.name') }}">
+                                                    <p id="name_error" class="alert alert-danger"
+                                                       style="display: none"></p>
                                                 </div>
                                                 <div class="">
                                                     <strong>
-                                                        <i class="las la-signature text-primary"></i>Email
+                                                        <i class="las la-signature text-primary"></i>{{ __('strings.email') }}
                                                     </strong>
-                                                    &nbsp &nbsp<input
+                                                    &nbsp; &nbsp;<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="email" name="email" type="text"
-                                                        placeholder="Email">
-                                                    <p id="email_error" class="alert alert-danger" style="display: none"></p>
+                                                        placeholder="{{ __('strings.email') }}">
+                                                    <p id="email_error" class="alert alert-danger"
+                                                       style="display: none"></p>
                                                 </div>
                                                 <div class="">
                                                     <strong>
-                                                        <i class="las la-phone text-primary"></i>Phone
+                                                        <i class="las la-phone text-primary"></i>{{ __('strings.phone') }}
                                                     </strong>
-                                                    &nbsp &nbsp<input
+                                                    &nbsp; &nbsp;<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="phone" name="phone" type="text"
-                                                        placeholder="Phone">
-                                                    <p id="phone_error" class="alert alert-danger" style="display: none"></p>
+                                                        placeholder="{{ __('strings.phone') }}">
+                                                    <p id="phone_error" class="alert alert-danger"
+                                                       style="display: none"></p>
                                                 </div>
                                             </li>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>User type
+                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.user_type') }}
                                                 </strong>
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                                     <div class="col-md-10">
-                                                        <strong id="user_type_strong" class="paragraph-admin shadow">Admin</strong>
+                                                        <strong id="user_type_strong"
+                                                                class="paragraph-admin shadow">{{ __('strings.admin') }}</strong>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-check form-switch">
@@ -125,13 +133,13 @@
                                                                     value="0">
                                                                 {{--<option hidden>User type</option>--}}
                                                                 <option class="alert-light"
-                                                                        value="0"> Admin
+                                                                        value="0"> {{ __('strings.admin') }}
                                                                 </option>
                                                                 <option class="alert-light"
-                                                                        value="1"> Manager
+                                                                        value="1"> {{ __('strings.manager') }}
                                                                 </option>
                                                                 <option class="alert-light"
-                                                                        value="2"> Worker
+                                                                        value="2"> {{ __('strings.worker') }}
                                                                 </option>
                                                             </select>
                                                             {{csrf_field()}}
@@ -142,13 +150,14 @@
                                             <br>
                                             <li>
                                                 <strong><i
-                                                        class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                                        class="las la-toggle-off text-primary"></i>&nbsp;{{ __('strings.status') }}
+                                                </strong>
                                                 <br>
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                                     <div class="col-md-11">
                                                         <strong id="status-project"
-                                                                class=" paragraph-active shadow">Active</strong>
+                                                                class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-check form-switch">
@@ -163,7 +172,7 @@
                                             <br>
                                             <li>
                                                 <button id="create_user" class="btn btn-primary float-right"><i
-                                                        class="las la-plus-square"></i> Create
+                                                        class="las la-plus-square"></i> {{ __('strings.create') }}
                                                 </button>
                                             </li>
                                         </ul>

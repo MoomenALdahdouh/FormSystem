@@ -56,7 +56,7 @@
         @endforeach
         </tbody>
     @else
-        <th class="alert alert-light" scope="row"><br>{{__('no_subprojects')}}</th>
+        <th class="alert alert-light" scope="row"><br>{{__('strings.no_subprojects')}}</th>
     @endif
 </table>
 

@@ -1,13 +1,13 @@
 <table id="project_table" class="table">
     <thead>
     <tr class=" text-dark">
-        <th scope="col">SL No</th>
-        <th scope="col">Name</th>
-        <th scope="col">Created By</th>
-        <th scope="col">Manage By</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
+        <th scope="col">{{__('strings.sl_no')}}</th>
+        <th scope="col">{{__('strings.name')}}</th>
+        <th scope="col">{{__('strings.created_by')}}</th>
+        <th scope="col">{{__('strings.manage_by')}}</th>
+        <th scope="col">{{__('strings.created_at')}}</th>
+        <th scope="col">{{__('strings.status')}}</th>
+        <th scope="col">{{__('strings.action')}}</th>
     </tr>
     </thead>
     @if(count($projects) >0)
@@ -24,13 +24,13 @@
                 <td>{{@$project->manageBy->name}}</td>
                 {{--<td>{{$project->created_at}}</td>--}}
                 @if($project->created_at == NULL)
-                    <td><span class="text-danger">No Date Set</span></td>
+                    <td><span class="text-danger">{{__('strings.no_date_set')}}</span></td>
                 @else
                     <td>{{\Carbon\Carbon::parse($project->created_at)->diffForHumans()}}</td>
                     @if($project->status == 0)
-                        <td><span class="paragraph-pended shadow">Pended</span></td>
+                        <td><span class="paragraph-pended shadow">{{__('strings.pended')}}</span></td>
                     @else
-                        <td><span class="paragraph-active shadow">Active</span></td>
+                        <td><span class="paragraph-active shadow">{{__('strings.active')}}</span></td>
                 @endif
             @endif
             <!--Use this line if you compact users from Auth-->
@@ -56,7 +56,7 @@
         @endforeach
         </tbody>
     @else
-        <th class="alert alert-light" scope="row"><br>not found any data ...</th>
+        <th class="alert alert-light" scope="row"><br>{{__('strings.no_subprojects')}}</th>
     @endif
 </table>
 {{--{{ $projects->links() }}--}}

@@ -1,25 +1,14 @@
 <x-app-layout>
-    <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+    {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>--}}
     <x-slot name="header">
         <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit User') }}
-            {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
+            {{ __('strings.edit_user') }}
         </h2>
     </x-slot>
     <br>
     <br>
     <div class="header-section">
         <div class="container">
-            {{--Alert actions--}}
-            @if(session('successUpdate'))
-                <div class="alert alert-success d-flex align-items-center" role="alert">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                        <use xlink:href="#check-circle-fill"/>
-                    </svg>
-                    <strong>{{session('successUpdate')}}</strong>
-                </div>
-            @endif
-            <button id="sdf" type="button"></button>
             {{--User details header--}}
             <div class="col-md-12">
                 <div class="card shadow">
@@ -33,21 +22,21 @@
                                     <h5 class="name">{{$user->name}}</h5>
                                     @switch($user->type)
                                         @case(0)
-                                        <p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>
+                                        <p class="paragraph-admin shadow">{{__('strings.admin')}}</p>
                                         @break
                                         @case (1)
-                                        <p class="paragraph-manager shadow">Manager</p>
+                                        <p class="paragraph-manager shadow">{{__('strings.manager')}}</p>
                                         @break
                                         @case (2)
-                                        <p class="paragraph-worker shadow">&nbsp; Worker &nbsp;</p>
+                                        <p class="paragraph-worker shadow">{{__('strings.worker')}}</p>
                                         @break
                                     @endswitch
                                     @switch($user->staus)
                                         @case (0)
-                                        <p class="paragraph-pended shadow">Pended</p>
+                                        <p class="paragraph-pended shadow">{{__('strings.pended')}}</p>
                                         @break
                                         @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                        <p class="paragraph-active shadow">&nbsp;{{__('strings.active')}}&nbsp;</p>
                                         @break
                                     @endswitch
                                 </div>
@@ -58,31 +47,33 @@
 
                                 <div class="alert alert-light">
                                     <div class="alert alert-secondary">
-                                        <strong><i class="las la-user-tie text-primary"></i>Email
+                                        <strong><i class="las la-user-tie text-primary"></i>{{__('strings.email')}}
                                         </strong>
                                         <br>
                                         <p> &nbsp &nbsp {{$user->email}}</p>
-                                        <strong><i class="las la-phone text-primary"></i>Phone
+                                        <strong><i class="las la-phone text-primary"></i>{{__('strings.phone')}}
                                         </strong>
                                         <br>
                                         @if($user->phone==''||$user->phone==NULL)
-                                            <p> &nbsp &nbsp no phone ...</p>
+                                            <p> &nbsp; &nbsp; {{__('strings.no_phone')}}</p>
                                         @else
-                                            <p> &nbsp &nbsp {{@$user->phone}}</p>
+                                            <p> &nbsp; &nbsp; {{@$user->phone}}</p>
                                         @endif
                                     </div>
                                     <div class="alert alert-secondary">
                                         <div class="">
-                                            <strong><i class="las la-calendar-check text-primary"></i>Created At
+                                            <strong><i
+                                                    class="las la-calendar-check text-primary"></i>{{__('strings.created_at')}}
                                             </strong>
                                             <br>
-                                            <p>&nbsp &nbsp {{$user->created_at}}</p>
+                                            <p>&nbsp; &nbsp; {{$user->created_at}}</p>
                                         </div>
                                         <div class="">
-                                            <strong><i class="las la-clock text-primary"></i></i>&nbspUpdate At
+                                            <strong><i
+                                                    class="las la-clock text-primary"></i></i>&nbsp;{{__('strings.update_at')}}
                                             </strong>
                                             <br>
-                                            <p>&nbsp &nbsp {{$user->updated_at}}</p>
+                                            <p>&nbsp; &nbsp; {{$user->updated_at}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +88,7 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header alert alert-secondary">
-                        <h4><i class="las la-pen-square"></i>Edit</h4>
+                        <h4><i class="las la-pen-square"></i>{{__('strings.edit')}}</h4>
                     </div>
                     <div class="card-body">
                         <div class="container">
@@ -107,48 +98,50 @@
                                            value="{{$user->id}}">
                                     <div class="">
                                         <strong><i
-                                                class="las la-signature text-primary"></i>Name
+                                                class="las la-signature text-primary"></i>{{__('strings.name')}}
                                         </strong>
-                                        &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                          id="name" type="text" value="{{$user->name}}">
+                                        &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                            id="name" type="text" value="{{$user->name}}">
                                     </div>
                                     <div class="">
                                         <strong>
-                                            <i class="las la-signature text-primary"></i>Nickname
+                                            <i class="las la-signature text-primary"></i>{{__('strings.nickname')}}
                                         </strong>
                                         @if ($user->nickname === '' || $user->nickname === NULL)
-                                            &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              id="nickname" type="text" value="no nickname ...">
+                                            &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                                id="nickname" type="text" value="no nickname ...">
                                         @else
-                                            &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              id="nickname" type="text" value="{{$user->nickname}}">
+                                            &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                                id="nickname" type="text" value="{{$user->nickname}}">
                                         @endif
                                     </div>
                                     <div class="">
                                         <strong>
-                                            <i class="las la-phone text-primary"></i>Phone
+                                            <i class="las la-phone text-primary"></i>{{__('strings.phone')}}
                                         </strong>
                                         @if ($user->phone === '' || $user->phone === NULL)
-                                            &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              id="phone" type="text" value="no phone ...">
+                                            &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                                id="phone" type="text"
+                                                                value="{{__('strings.no_phone')}}">
                                         @else
-                                            &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                              id="phone" type="text" value="{{$user->phone}}">
+                                            &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                                id="phone" type="text" value="{{$user->phone}}">
                                         @endif
                                     </div>
                                 </li>
                                 <li>
-                                    <strong><i class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                    <strong><i class="las la-toggle-off text-primary"></i>&nbsp;{{__('strings.status')}}
+                                    </strong>
                                     <br>
                                     <div class="row alert alert-secondary"
                                          style=" margin: 0; padding-left:0; padding-right: 0">
                                         <div class="col-md-11">
                                             @if($user->status == 1)
                                                 <strong id="status-user"
-                                                        class=" paragraph-active shadow">Active</strong>
+                                                        class=" paragraph-active shadow">{{__('strings.active')}}</strong>
                                             @else
                                                 <strong id="status-user"
-                                                        class=" paragraph-pended shadow">Pended</strong>
+                                                        class=" paragraph-pended shadow">{{__('strings.pended')}}</strong>
                                             @endif
                                         </div>
                                         <div class="col-md-1">
@@ -168,7 +161,7 @@
                                 <br>
                                 <li>
                                     <button id="update-user" class="btn btn-primary float-right"><i
-                                            class="lar la-save"></i> Save
+                                            class="lar la-save"></i> {{__('strings.save')}}
                                     </button>
                                 </li>
                             </ul>
@@ -184,11 +177,11 @@
                         <div class="row alert alert-danger text-dark"
                              style=" margin: 0; padding-left:0; padding-right: 0">
                             <div class="col-md-10">
-                                <strong><i class="las la-trash"></i>&nbsp Remove this user! you
-                                    can not restore it.</strong>
+                                <strong><i class="las la-trash"></i>&nbsp; {{__('strings.remove_user')}}</strong>
                             </div>
                             <div class="col-md-2">
-                                <button id="remove-user" class="btn btn-danger float-right">Remove Now</button>
+                                <button id="remove-user"
+                                        class="btn btn-danger float-right">{{__('strings.remove_now')}}</button>
                             </div>
                         </div>
                     </div>

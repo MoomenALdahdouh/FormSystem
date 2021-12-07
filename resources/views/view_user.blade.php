@@ -3,7 +3,7 @@
     <x-slot name="header">
         <br>
         <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('View User') }}
+            {{ __('strings.view_user') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
         </h1>
     </x-slot>
@@ -23,21 +23,21 @@
                                     <h5 class="name">{{$user->name}}</h5>
                                     @switch($user->type)
                                         @case(0)
-                                        <p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>
+                                        <p class="paragraph-admin shadow">&nbsp;{{ __('strings.admin') }}&nbsp;</p>
                                         @break
                                         @case (1)
-                                        <p class="paragraph-manager shadow">Manager</p>
+                                        <p class="paragraph-manager shadow">{{ __('strings.manager') }}</p>
                                         @break
                                         @case (2)
-                                        <p class="paragraph-worker shadow">&nbsp; Worker &nbsp;</p>
+                                        <p class="paragraph-worker shadow">&nbsp; {{ __('strings.worker') }} &nbsp;</p>
                                         @break
                                     @endswitch
                                     @switch($user->staus)
                                         @case (0)
-                                        <p class="paragraph-pended shadow">Pended</p>
+                                        <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                         @break
                                         @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                        <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
                                         @break
                                     @endswitch
                                 </div>
@@ -60,45 +60,47 @@
                                 <li>
                                     <div class="alert alert-secondary">
                                         <strong><i
-                                                class="las la-audio-description text-primary"></i>Nickname
+                                                class="las la-audio-description text-primary"></i>{{ __('strings.nickname') }}
                                         </strong>
                                         <br>
                                         @if ($user->nickname === '' || $user->nickname === NULL)
-                                            <p>&nbsp &nbsp no nickname ...</p>
+                                            <p>&nbsp; &nbsp; {{ __('strings.no_nickname') }}</p>
                                         @else
-                                            <p>&nbsp &nbsp {{$user->nickname}}</p>
+                                            <p>&nbsp; &nbsp; {{$user->nickname}}</p>
                                         @endif
                                     </div>
                                 </li>
                                 <li>
                                     <div class="alert alert-secondary">
-                                        <strong><i class="las la-user-tie text-primary"></i>Email
+                                        <strong><i class="las la-user-tie text-primary"></i>{{ __('strings.email') }}
                                         </strong>
                                         <br>
                                         <p> &nbsp &nbsp {{$user->email}}</p>
-                                        <strong><i class="las la-user-tie text-primary"></i>Phone
+                                        <strong><i class="las la-user-tie text-primary"></i>{{ __('strings.phone') }}
                                         </strong>
                                         <br>
                                         @if($user->phone==''||$user->phone==NULL)
-                                            <p> &nbsp &nbsp no phone ...</p>
+                                            <p> &nbsp; &nbsp; {{ __('strings.no_phone') }}</p>
                                         @else
-                                            <p> &nbsp &nbsp {{@$user->phone}}</p>
+                                            <p> &nbsp; &nbsp; {{@$user->phone}}</p>
                                         @endif
                                     </div>
                                 </li>
                                 <li>
                                     <div class="alert alert-secondary">
                                         <div class="">
-                                            <strong><i class="las la-calendar-check text-primary"></i>Created At
+                                            <strong><i
+                                                    class="las la-calendar-check text-primary"></i>{{ __('strings.created_at') }}
                                             </strong>
                                             <br>
-                                            <p>&nbsp &nbsp {{$user->created_at}}</p>
+                                            <p>&nbsp; &nbsp; {{$user->created_at}}</p>
                                         </div>
                                         <div class="">
-                                            <strong><i class="las la-clock text-primary"></i></i>&nbspUpdate At
+                                            <strong><i
+                                                    class="las la-clock text-primary"></i></i>&nbsp;{{ __('strings.update_at') }}
                                             </strong>
                                             <br>
-                                            <p>&nbsp &nbsp {{$user->updated_at}}</p>
+                                            <p>&nbsp; &nbsp; {{$user->updated_at}}</p>
                                         </div>
                                     </div>
 
@@ -114,33 +116,36 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <strong><i class="las la-calendar-check text-primary"></i>Account Type</strong>
+                                    <strong><i
+                                            class="las la-calendar-check text-primary"></i>{{ __('strings.account_type') }}
+                                    </strong>
                                 </div>
                                 <div class="col-md-1">
                                     @switch($user->type)
                                         @case(0)
-                                        <p class="paragraph-admin shadow">&nbsp;Admin&nbsp;</p>
+                                        <p class="paragraph-admin shadow">&nbsp;{{ __('strings.admin') }}&nbsp;</p>
                                         @break
                                         @case (1)
-                                        <p class="paragraph-manager shadow">Manager</p>
+                                        <p class="paragraph-manager shadow">{{ __('strings.manager') }}</p>
                                         @break
                                         @case (2)
-                                        <p class="paragraph-worker shadow">Worker</p>
+                                        <p class="paragraph-worker shadow">{{ __('strings.worker') }}</p>
                                         @break
                                     @endswitch
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-11">
-                                    <strong><i class="las la-calendar-check text-primary"></i>Status</strong>
+                                    <strong><i class="las la-calendar-check text-primary"></i>{{ __('strings.status') }}
+                                    </strong>
                                 </div>
                                 <div class="col-md-1">
                                     @switch($user->staus)
                                         @case (0)
-                                        <p class="paragraph-pended shadow">Pended</p>
+                                        <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                         @break
                                         @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                        <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
                                         @break
                                     @endswitch
                                 </div>
@@ -158,7 +163,8 @@
                     @case(0)
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-tie"></i>&nbsp;Admin Projects List</strong>
+                            <strong><i class="las la-user-tie"></i>&nbsp;{{ __('strings.admin_projects_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             @include('pagination_projects')
@@ -167,7 +173,8 @@
                     <br>
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-tie"></i>&nbsp;Admin Subprojects List</strong>
+                            <strong><i class="las la-user-tie"></i>&nbsp;{{ __('strings.admin_subprojects_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             <div id="table-subprojects" class="card-body">
@@ -178,7 +185,8 @@
                     <br>
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-tag"></i>&nbsp;Admin Activities List</strong>
+                            <strong><i class="las la-user-tag"></i>&nbsp;{{ __('strings.admin_activities_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             <div id="table-activities" class="card-body">
@@ -189,7 +197,7 @@
                     <br>
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-tag"></i>&nbsp;Admin Users List</strong>
+                            <strong><i class="las la-user-tag"></i>&nbsp;{{ __('strings.admin_users_list') }}</strong>
                         </div>
                         <div class="card-body">
                             @include('pagination_users')
@@ -201,7 +209,8 @@
                     @case(1)
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-cog"></i>&nbsp;Manager Projects List</strong>
+                            <strong><i class="las la-user-cog"></i>&nbsp;{{ __('strings.manager_projects_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             @include('pagination_projects')
@@ -210,7 +219,8 @@
                     <br>
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-cog"></i>&nbsp;Manager Subprojects List</strong>
+                            <strong><i class="las la-user-cog"></i>&nbsp;{{ __('strings.manager_subprojects_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             @include('pagination_subproject2')
@@ -219,7 +229,8 @@
                     <br>
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-tag"></i>&nbsp;Manager Activities List</strong>
+                            <strong><i class="las la-user-tag"></i>&nbsp;{{ __('strings.manager_activities_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             <div id="table-activities" class="card-body">
@@ -232,7 +243,8 @@
                     @case(2)
                     <div class="card shadow">
                         <div class="card-header alert alert-secondary">
-                            <strong><i class="las la-user-tag"></i>&nbsp;Worker Activities List</strong>
+                            <strong><i class="las la-user-tag"></i>&nbsp;{{ __('strings.worker_activities_list') }}
+                            </strong>
                         </div>
                         <div class="card-body">
                             <div id="table-activities" class="card-body">

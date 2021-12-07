@@ -1,13 +1,13 @@
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">SL No</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Type</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
+        <th scope="col">{{__('strings.sl_no')}}</th>
+        <th scope="col">{{__('strings.name')}}</th>
+        <th scope="col">{{__('strings.email')}}</th>
+        <th scope="col">{{__('strings.created_at')}}</th>
+        <th scope="col">{{__('strings.type')}}</th>
+        <th scope="col">{{__('strings.status')}}</th>
+        <th scope="col">{{__('strings.action')}}</th>
     </tr>
 
     </thead>
@@ -28,19 +28,19 @@
                 @endif
                 @switch($user->type)
                     @case(0)
-                    <td><span class="paragraph-admin shadow">&nbsp;Admin&nbsp;</span></td>
+                    <td><span class="paragraph-admin shadow">{{__('strings.admin')}}</span></td>
                     @break
                     @case (1)
-                    <td><span class="paragraph-manager shadow">Manager</span></td>
+                    <td><span class="paragraph-manager shadow">{{__('strings.manager')}}</span></td>
                     @break
                     @case (2)
-                    <td><span class="paragraph-worker shadow">Worker</span></td>
+                    <td><span class="paragraph-worker shadow">{{__('strings.worker')}}</span></td>
                     @break
                 @endswitch
                 @if($user->status == 0)
-                    <td><span class="paragraph-pended shadow">Pended</span></td>
+                    <td><span class="paragraph-pended shadow">{{__('strings.pended')}}</span></td>
                 @else
-                    <td><span class="paragraph-active shadow">Active</span></td>
+                    <td><span class="paragraph-active shadow">{{__('strings.active')}}</span></td>
             @endif
             <!--Use this line if you compact users from Auth-->
                 <!--Use this line if you compact users from DB to pars the date by carbon library-->
@@ -64,7 +64,7 @@
         @endforeach
         </tbody>
     @else
-        <th class="alert alert-light" scope="row"><br>this project not have any subproject ...</th>
+        <th class="alert alert-light" scope="row"><br>{{__('strings.no_subprojects')}}</th>
     @endif
 </table>
 
