@@ -3,7 +3,7 @@
     <x-slot name="header">
         <br>
         <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Activity') }}
+            {{ __('strings.edit_activity') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
         </h1>
     </x-slot>
@@ -34,7 +34,7 @@
                                     <h5 class="name">{{$activity->name}}</h5>
                                     @switch($activity->type)
                                         @case(0)
-                                        <p class="activity-type shadow">&nbsp;Form&nbsp;</p>
+                                        <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
                                         @break
                                         @case (1)
                                         <p class="activity-type shadow">Activity</p>
@@ -45,10 +45,10 @@
                                     @endswitch
                                     @switch($activity->staus)
                                         @case (0)
-                                        <p class="paragraph-pended shadow">Pended</p>
+                                        <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                         @break
                                         @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                        <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
                                         @break
                                     @endswitch
                                 </div>
@@ -59,27 +59,29 @@
 
                                 <div class="alert alert-light">
                                     <div class="alert alert-secondary">
-                                        <strong><i class="las la-phone text-primary"></i>Description
+                                        <strong><i class="las la-phone text-primary"></i>{{ __('strings.description') }}
                                         </strong>
                                         <br>
                                         @if($activity->description==''||$activity->description==NULL)
-                                            <p> &nbsp &nbsp no phone ...</p>
+                                            <p> &nbsp; &nbsp; {{ __('strings.no_description') }}</p>
                                         @else
-                                            <p> &nbsp &nbsp {{@$activity->description}}</p>
+                                            <p> &nbsp; &nbsp; {{@$activity->description}}</p>
                                         @endif
                                     </div>
                                     <div class="alert alert-secondary">
                                         <div class="">
-                                            <strong><i class="las la-calendar-check text-primary"></i>Created At
+                                            <strong><i
+                                                    class="las la-calendar-check text-primary"></i>{{ __('strings.created_at') }}
                                             </strong>
                                             <br>
-                                            <p>&nbsp &nbsp {{$activity->created_at}}</p>
+                                            <p>&nbsp; &nbsp; {{$activity->created_at}}</p>
                                         </div>
                                         <div class="">
-                                            <strong><i class="las la-clock text-primary"></i></i>&nbspUpdate At
+                                            <strong><i
+                                                    class="las la-clock text-primary"></i></i>&nbsp;{{ __('strings.update_at') }}
                                             </strong>
                                             <br>
-                                            <p>&nbsp &nbsp {{$activity->updated_at}}</p>
+                                            <p>&nbsp; &nbsp; {{$activity->updated_at}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,10 +98,12 @@
                         <div class="row alert alert-success text-dark"
                              style=" margin: 0; padding-left:0; padding-right: 0">
                             <div class="col-md-10">
-                                <strong><i class="lab la-wpforms"></i>&nbsp View Form Questions</strong>
+                                <strong><i class="lab la-wpforms"></i>&nbsp; {{ __('strings.view_form_questions') }}
+                                </strong>
                             </div>
                             <div class="col-md-2">
-                                <a href="{{url("/form/edit/0")}}" class="btn btn-success float-right">View</a>
+                                <a href="{{url("/form/edit/0")}}"
+                                   class="btn btn-success float-right">{{ __('strings.view') }}</a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +115,7 @@
                 {{--Activity edit--}}
                 <div class="card shadow">
                     <div class="card-header alert alert-secondary">
-                        <h4><i class="las la-pen-square"></i>Edit</h4>
+                        <h4><i class="las la-pen-square"></i>{{ __('strings.edit') }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="container">
@@ -121,36 +125,39 @@
                                         <input type="hidden" id="activity-id" name="activity-id"
                                                value="{{$activity->id}}">
                                         <strong><i
-                                                class="las la-signature text-primary"></i>Name
+                                                class="las la-signature text-primary"></i>{{ __('strings.name') }}
                                         </strong>
-                                        &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                          id="name" type="text" value="{{$activity->name}}">
+                                        &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                            id="name" type="text" value="{{$activity->name}}">
                                     </div>
                                     <div class="">
                                         <strong>
-                                            <i class="las la-signature text-primary"></i>description
+                                            <i class="las la-signature text-primary"></i>{{ __('strings.description') }}
                                         </strong>
                                         @if ($activity->description === '' || $activity->description === NULL)
-                                            &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                             id="description" type="text" value="no description ...">
+                                            &nbsp; &nbsp;<input class="rounded-md col-md-12 alert alert-secondary"
+                                                                id="description" type="text" value="no description ...">
                                         @else
                                             &nbsp &nbsp<input class="rounded-md col-md-12 alert alert-secondary"
-                                                             id="description" type="text" value="{{$activity->description}}">
+                                                              id="description" type="text"
+                                                              value="{{$activity->description}}">
                                         @endif
                                     </div>
                                 </li>
                                 <li>
-                                    <strong><i class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                    <strong><i
+                                            class="las la-toggle-off text-primary"></i>&nbsp;{{ __('strings.status') }}
+                                    </strong>
                                     <br>
                                     <div class="row alert alert-secondary"
                                          style=" margin: 0; padding-left:0; padding-right: 0">
                                         <div class="col-md-11">
                                             @if($activity->status == 1)
                                                 <strong id="status-project"
-                                                        class=" paragraph-active shadow">Active</strong>
+                                                        class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                             @else
                                                 <strong id="status-project"
-                                                        class=" paragraph-pended shadow">Pended</strong>
+                                                        class=" paragraph-pended shadow">{{ __('strings.pended') }}</strong>
                                             @endif
                                         </div>
                                         <div class="col-md-1">
@@ -170,7 +177,7 @@
                                 <br>
                                 <li>
                                     <button id="update-activity" class="btn btn-primary float-right"><i
-                                            class="lar la-save"></i> Save
+                                            class="lar la-save"></i> {{ __('strings.save') }}
                                     </button>
                                 </li>
                             </ul>
@@ -186,11 +193,11 @@
                         <div class="row alert alert-danger text-dark"
                              style=" margin: 0; padding-left:0; padding-right: 0">
                             <div class="col-md-10">
-                                <strong><i class="las la-trash"></i>&nbsp Remove this Activity! you
-                                    can not restore it.</strong>
+                                <strong><i class="las la-trash"></i>&nbsp; {{ __('strings.remove_activity') }}</strong>
                             </div>
                             <div class="col-md-2">
-                                <button id="remove-activity" class="btn btn-danger float-right">Remove Now</button>
+                                <button id="remove-activity"
+                                        class="btn btn-danger float-right">{{ __('strings.remove_now') }}</button>
                             </div>
                         </div>
                     </div>

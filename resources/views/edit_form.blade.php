@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit form') }}
+            {{ __('strings.edit_form') }}
         </h1>
     </x-slot>
     <br>
@@ -21,7 +21,7 @@
                                         <h5 class="name">{{$activity->name}}</h5>
                                         @switch($activity->type)
                                             @case(0)
-                                            <p class="activity-type shadow">&nbsp;Form&nbsp;</p>
+                                            <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
                                             @break
                                             @case (1)
                                             <p class="activity-type shadow">activity2</p>
@@ -32,10 +32,10 @@
                                         @endswitch
                                         @switch($activity->staus)
                                             @case (0)
-                                            <p class="paragraph-pended shadow">Pended</p>
+                                            <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                             @break
                                             @case(1)
-                                            <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                            <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
                                             @break
                                         @endswitch
                                     </div>
@@ -57,7 +57,7 @@
                 <div class="col-md-3">
                     <div class="card shadow">
                         <div class="card-header alert-light">
-                            <i class="las la-border-style shadow"></i> <strong>Components</strong>
+                            <i class="las la-border-style shadow"></i> <strong>{{ __('strings.components') }}</strong>
                         </div>
                         <div class="card-body">
                             <ul class="component-list list-group-item">
@@ -69,22 +69,22 @@
                                 </li>
                                 <li>
                                     <button id="text-area-button" class="selector btn btn-secondary shadow"><i
-                                            class="button_icon las la-align-justify float-left"></i><span>Text Area</span>
+                                            class="button_icon las la-align-justify float-left"></i><span>{{ __('strings.text_area') }}</span>
                                     </button>
                                 </li>
                                 <li>
                                     <button id="number-button" class="selector btn btn-secondary shadow"><i
-                                            class="button_icon las la-sort-numeric-down float-left"></i><span>Number</span>
+                                            class="button_icon las la-sort-numeric-down float-left"></i><span>{{ __('strings.number') }}</span>
                                     </button>
                                 </li>
                                 <li>
                                     <button id="calender-button" class="selector btn btn-secondary shadow">
-                                        <i class="button_icon las la-calendar-plus float-left"></i><span>Calender</span>
+                                        <i class="button_icon las la-calendar-plus float-left"></i><span>{{ __('strings.calender') }}</span>
                                     </button>
                                 </li>
                                 <li>
                                     <button id="form-button" class="selector btn btn-secondary shadow">
-                                        <i class="button_icon las la-image float-left"></i><span>Image</span>
+                                        <i class="button_icon las la-image float-left"></i><span>{{ __('strings.image') }}</span>
                                     </button>
                                 </li>
                             </ul>
@@ -95,7 +95,7 @@
                 <div class="col-md-9">
                     <div class="card shadow">
                         <div class="card-body">
-                            <i class="las la-border-style shadow"></i> <strong>Form Area</strong>
+                            <i class="las la-border-style shadow"></i> <strong>{{ __('strings.form_area') }}</strong>
                             <a href="{{url('/form/apply/'.$activity->id)}}">
                                 <i class="apply-icon las la-feather-alt rounded-md btn-outline-primary float-right"
                                    title="apply"></i></a>
@@ -117,7 +117,7 @@
                                         <br>
                                         <div>
                                             <i class="las la-boxes" style="font-size: 50px"></i>
-                                            <p>Drag Components here!</p>
+                                            <p>{{ __('strings.drag_components') }}</p>
                                         </div>
                                         <br>
                                         <br>
@@ -132,39 +132,39 @@
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
-                                            <i class="las la-border-style shadow"></i>&nbsp; Components
+                                            <i class="las la-border-style shadow"></i>&nbsp; {{ __('strings.components') }}
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
                                                 <button id="text-field-button"
                                                         class="selector btn btn-outline-secondary col-md-12 mb-1">
                                                     <i class="button_icon las la-align-left float-left"></i>
-                                                    <span>Text Field</span>
+                                                    <span>{{ __('strings.text_field') }}</span>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button id="text-area-button"
                                                         class="selector btn btn-outline-secondary col-md-12 mb-1">
                                                     <i
-                                                        class="button_icon las la-align-justify float-left"></i><span>Text Area</span>
+                                                        class="button_icon las la-align-justify float-left"></i><span>{{ __('strings.text_area') }}</span>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button id="number-button"
                                                         class="selector btn btn-outline-secondary col-md-12 mb-1"><i
-                                                        class="button_icon las la-sort-numeric-down float-left"></i><span>Number</span>
+                                                        class="button_icon las la-sort-numeric-down float-left"></i><span>{{ __('strings.number') }}</span>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button id="calender-button"
                                                         class="selector btn btn-outline-secondary col-md-12 mb-1">
-                                                    <i class="button_icon las la-calendar-plus float-left"></i><span>Calender</span>
+                                                    <i class="button_icon las la-calendar-plus float-left"></i><span>{{ __('strings.calender') }}</span>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button id="form-button"
                                                         class="selector btn btn-outline-secondary col-md-12 mb-1">
-                                                    <i class="button_icon las la-image float-left"></i><span>Image</span>
+                                                    <i class="button_icon las la-image float-left"></i><span>{{ __('strings.image') }}</span>
                                                 </button>
                                             </li>
                                         </ul>
@@ -172,11 +172,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <button id="save_form" class="selector shadow btn btn-primary float-right"><i
-                                            class="las la-plus-square"></i> Save
+                                            class="las la-plus-square"></i> {{ __('strings.save') }}
                                     </button>
                                     <button id="clean_form"
                                             class="selector clear-button shadow btn btn-danger float-right">
-                                        <i class="las la-eraser"></i> Clear
+                                        <i class="las la-eraser"></i> {{ __('strings.clear') }}
                                     </button>
                                 </div>
                             </div>
@@ -198,21 +198,21 @@
             <div class="modal-dialog">
                 <div class="modal-content model-style">
                     <div class="modal-header">
-                        <strong class="col-sm-11"><i class="las la-edit"></i>Edit question</strong>
+                        <strong class="col-sm-11"><i class="las la-edit"></i>{{ __('strings.edit_question') }}</strong>
                         <button class="btn float-right" data-bs-dismiss="modal"><i class="las la-times"></i>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <strong>Enter question title</strong>
+                        <strong>{{ __('strings.enter_question_title') }}</strong>
                         <input id="title" class="rounded-md alert col-sm-12 alert-secondary" type="text"
                                name="title"
-                               placeholder="Question title">
+                               placeholder="{{ __('strings.question_title') }}">
                         <br>
-                        <p class="alert alert-warning"><i class="las la-key"></i>&nbsp;question key &nbsp; <strong
-                                id="question_key">key</strong>
+                        <p class="alert alert-warning"><i class="las la-key"></i>&nbsp;{{ __('strings.question_key') }} &nbsp; <strong
+                                id="question_key">{{ __('strings.key') }}</strong>
                         </p>
                     </div>
-                    <button id="save_edit_question" class="selector btn btn-primary" data-bs-dismiss="modal">Save
+                    <button id="save_edit_question" class="selector btn btn-primary" data-bs-dismiss="modal">{{ __('strings.save') }}
                     </button>
                 </div>
             </div>

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <br>
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Apply form') }}
+            {{ __('strings.apply_form') }}
         </h1>
     </x-slot>
     <br>
@@ -21,7 +21,7 @@
                                     <h5 class="name">{{$activity->name}}</h5>
                                     @switch($activity->type)
                                         @case(0)
-                                        <p class="activity-type shadow">&nbsp;Form&nbsp;</p>
+                                        <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
                                         @break
                                         @case (1)
                                         <p class="activity-type shadow">activity2</p>
@@ -32,10 +32,10 @@
                                     @endswitch
                                     @switch($activity->staus)
                                         @case (0)
-                                        <p class="paragraph-pended shadow">Pended</p>
+                                        <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                         @break
                                         @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                        <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
                                         @break
                                     @endswitch
                                 </div>
@@ -53,9 +53,9 @@
                     <br>
                     <div class="card shadow">
                         <div class="card-body alert-secondary">
-                            <strong>Submission title</strong>
+                            <strong>{{ __('strings.submission_title') }}</strong>
                             <input data-question-id="{{$form->id}}" class="rounded-md col-md-12 alert alert-light"
-                                   type="text" placeholder="Submission Title">
+                                   type="text" placeholder="{{ __('strings.submission_title') }}">
                         </div>
                     </div>
                     <div class="card shadow">
@@ -71,35 +71,40 @@
                                             @case(0)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <input data-question-id="{{$question->id}}" class="rounded-md col-md-12 alert alert-secondary"
+                                                <input data-question-id="{{$question->id}}"
+                                                       class="rounded-md col-md-12 alert alert-secondary"
                                                        type="text" placeholder="{{$question->title}}">
                                             </li>
                                             @break
                                             @case(1)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <textarea data-question-id="{{$question->id}}" rows="4" class="rounded-md col-md-12 alert alert-secondary"
+                                                <textarea data-question-id="{{$question->id}}" rows="4"
+                                                          class="rounded-md col-md-12 alert alert-secondary"
                                                           type="text" placeholder="{{$question->title}}"></textarea>
                                             </li>
                                             @break
                                             @case(2)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <input data-question-id="{{$question->id}}" class="rounded-md col-md-12 alert alert-secondary"
+                                                <input data-question-id="{{$question->id}}"
+                                                       class="rounded-md col-md-12 alert alert-secondary"
                                                        type="number" placeholder="{{$question->title}}">
                                             </li>
                                             @break
                                             @case(3)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <input data-question-id="{{$question->id}}" class="rounded-md col-md-12 alert alert-secondary"
+                                                <input data-question-id="{{$question->id}}"
+                                                       class="rounded-md col-md-12 alert alert-secondary"
                                                        type="date" placeholder="{{$question->title}}">
                                             </li>
                                             @break
                                             @case(4)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <input data-question-id="{{$question->id}}" class="rounded-md col-md-12 alert alert-secondary"
+                                                <input data-question-id="{{$question->id}}"
+                                                       class="rounded-md col-md-12 alert alert-secondary"
                                                        type="image" placeholder="{{$question->title}}">
                                             </li>
                                             @break
@@ -113,7 +118,7 @@
                                         <br>
                                         <div>
                                             <i class="las la-boxes" style="font-size: 50px"></i>
-                                            <p>Drag Components here!</p>
+                                            <p>{{ __('strings.no_questions') }}</p>
                                         </div>
                                         <br>
                                         <br>
@@ -121,7 +126,7 @@
                                 @endif
                             </ul>
                             <button id="save_form" class="selector shadow btn btn-primary float-right"><i
-                                    class="las la-save"></i> Submit
+                                    class="las la-save"></i> {{ __('strings.submit') }}
                             </button>
                         </div>
                     </div>

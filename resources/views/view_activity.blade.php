@@ -84,7 +84,8 @@
                                     </li>
                                     <li>
                                         <div class="alert alert-secondary">
-                                            <strong><i class="las la-activity-tie text-primary"></i>{{ __('strings.description') }}
+                                            <strong><i
+                                                    class="las la-activity-tie text-primary"></i>{{ __('strings.description') }}
                                             </strong>
                                             <br>
                                             <p> &nbsp; &nbsp; {{$activity->description}}</p>
@@ -93,13 +94,15 @@
                                     <li>
                                         <div class="alert alert-secondary">
                                             <div class="">
-                                                <strong><i class="las la-calendar-check text-primary"></i>{{ __('strings.created_at') }}
+                                                <strong><i
+                                                        class="las la-calendar-check text-primary"></i>{{ __('strings.created_at') }}
                                                 </strong>
                                                 <br>
                                                 <p>&nbsp &nbsp {{$activity->created_at}}</p>
                                             </div>
                                             <div class="">
-                                                <strong><i class="las la-clock text-primary"></i></i>&nbsp;{{ __('strings.update_at') }}
+                                                <strong><i
+                                                        class="las la-clock text-primary"></i></i>&nbsp;{{ __('strings.update_at') }}
                                                 </strong>
                                                 <br>
                                                 <p>&nbsp; &nbsp; {{$activity->updated_at}}</p>
@@ -119,11 +122,13 @@
                                 <div class="row alert alert-success text-dark"
                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                     <div class="col-md-10">
-                                        <strong><i class="lab la-wpforms"></i>&nbsp; View Form Questions</strong>
+                                        <strong><i
+                                                class="lab la-wpforms"></i>&nbsp; {{ __('strings.view_form_questions') }}
+                                        </strong>
                                     </div>
                                     <div class="col-md-2">
                                         <a href="{{url("/form/apply/$activity->id")}}"
-                                           class="btn btn-success float-right">View</a>
+                                           class="btn btn-success float-right">{{ __('strings.view') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -141,12 +146,12 @@
                                     <i class='bx bx-file' style="font-size: 30px; line-height: 60px"></i>
                                 </div>
                                 <div class="col-sm-11">
-                                    <p class="hint">&nbsp;Subproject</p>
+                                    <p class="hint">&nbsp;{{ __('strings.subproject') }}</p>
                                     <p class="float-right">
                                         @if($activity->subproject->status == 1)
-                                            <strong class=" paragraph-active shadow">Active</strong>
+                                            <strong class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                         @else
-                                            <strong class=" paragraph-pended shadow">Pended</strong>
+                                            <strong class=" paragraph-pended shadow">{{ __('strings.pended') }}</strong>
                                         @endif
                                     </p>
                                     <p>&nbsp;<strong>{{$activity->subproject->name}}</strong>
@@ -161,16 +166,16 @@
                         <br>
                         <div class="text-center">
                             <img class="user-image" width="80" src="{{asset('images/user.png')}}">
-                            <p class="hint">worker name</p>
+                            <p class="hint">{{ __('strings.worker_name') }}</p>
                             <p><strong>{{$activity->worker->name}}</strong>
                                 <a href="{{url('/users/view/'.$activity->worker->id)}}"><i
                                         class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
                             </p>
                             <p>
                                 @if($activity->worker->status == 1)
-                                    <strong class=" paragraph-active shadow">Active</strong>
+                                    <strong class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                 @else
-                                    <strong class=" paragraph-pended shadow">Pended</strong>
+                                    <strong class=" paragraph-pended shadow">{{ __('strings.pended') }}</strong>
                                 @endif
                             </p>
                         </div>
