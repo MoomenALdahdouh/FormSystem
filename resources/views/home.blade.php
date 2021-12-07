@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-11">
                 <h1 class="home-section font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Home') }}
+                    {{ __('strings.home') }}
                     {{--<h3>{{__('strings.welcome')}}</h3>--}}
                 </h1>
             </div>
@@ -26,21 +26,6 @@
                         @endforeach
                     </ul>
                 </div>
-
-                {{--<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        {{ Config::get('language')[App::getLocale()] }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        @foreach (Config::get('language') as $lang => $language)
-                            @if ($lang != App::getLocale())
-                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
-                            @endif
-                        @endforeach
-                    </div>
-                </li>--}}
-
             </div>
         </div>
     </x-slot>
@@ -68,25 +53,25 @@
                                         <div class="h-75 card-style-1 col-sm-6 col-md-6 col-lg-6  ">
                                             <i class='icon-size bx bx-folder'></i>
                                             <div class="mr-5">
-                                                <p>Projects</p>
+                                                <p>{{__('strings.projects')}}</p>
                                                 <p>{{count($projects)}}</p>
                                             </div>
                                         </div>
                                         <div class="h-75 card-style-2 col-sm-6 col-md-6 col-lg-6  ">
                                             <i class='icon-size bx bx-file'></i>
-                                            <p>Subprojects</p>
+                                            <p>{{__('strings.subprojects')}}</p>
                                             <p>{{count($subprojects)}}</p>
 
                                         </div>
                                         <div class="card-style-3 col-sm-6 col-md-6 col-lg-6  ">
                                             <i class='icon-size bx bxl-react'></i>
-                                            <p>Activities</p>
+                                            <p>{{__('strings.activities')}}</p>
                                             <p>{{count($activities)}}</p>
 
                                         </div>
                                         <div class="card-style-4 col-sm-6 col-md-6 col-lg-6  ">
                                             <i class="icon-size lab la-wpforms"></i>
-                                            <p>Forms</p>
+                                            <p>{{__('strings.forms')}}</p>
                                             <p>{{count($forms)}}</p>
                                         </div>
                                     </div>
@@ -98,7 +83,7 @@
                         <li class="col-one-second-list">
                             <ul class="col-two-group-one">
                                 <li>
-                                    <p><i class="lab la-wpforms"></i>&nbsp;<strong>Latest Projects</strong></p>
+                                    <p><i class="lab la-wpforms"></i>&nbsp;<strong>{{__('strings.latest_projects')}}</strong></p>
                                 </li>
                                 <div>
                                     @foreach($latestProjects as $form)
@@ -134,7 +119,9 @@
                         <div class="col-sm-6 col-md-6 col-lg-6 col-two">
                             <ul class="col-two-group-one">
                                 <li>
-                                    <p><i class="lab la-wpforms"></i>&nbsp;<strong>Latest submission forms</strong></p>
+                                    <p>
+                                        <i class="lab la-wpforms"></i>&nbsp;<strong>{{__('strings.latest_forms')}}</strong>
+                                    </p>
                                 </li>
                                 <div>
                                     @foreach($latestForms as $form)
@@ -163,7 +150,8 @@
                         <div class="col-sm-6 col-md-6 col-lg-6 col-three">
                             <ul class="col-two-group-one">
                                 <li>
-                                    <p><i class="las la-user"></i>&nbsp;<strong>Latest Users</strong></p>
+                                    <p><i class="las la-user"></i>&nbsp;<strong>{{__('strings.latest_users')}}</strong>
+                                    </p>
                                 </li>
                                 {{--@for ($i = 0; $i < 3; $i++)
                                 @endfor--}}
@@ -172,9 +160,9 @@
                                         <div class="row">
                                             <div class="col-1">
                                                 @if($user->status == 0)
-                                                    <span class=" paragraph-pended shadow">P</span>
+                                                    <span class=" paragraph-pended shadow">{{__('strings.p')}}</span>
                                                 @else
-                                                    <span class=" paragraph-active shadow">A</span>
+                                                    <span class=" paragraph-active shadow">{{__('strings.a')}}</span>
                                                 @endif
                                             </div>
                                             <div class="col-7 text-left">
@@ -183,13 +171,13 @@
                                             <div class="col-4">
                                                 @switch($user->type)
                                                     @case(0)
-                                                    <span class="hint paragraph-admin shadow">Admin</span>
+                                                    <span class="hint paragraph-admin shadow">{{__('strings.admin')}}</span>
                                                     @break
                                                     @case (1)
-                                                    <span class="hint paragraph-manager shadow">Manager</span>
+                                                    <span class="hint paragraph-manager shadow">{{__('strings.manager')}}</span>
                                                     @break
                                                     @case (2)
-                                                    <span class="hint paragraph-worker shadow">Worker</span>
+                                                    <span class="hint paragraph-worker shadow">{{__('strings.worker')}}</span>
                                                     @break
                                                 @endswitch
                                             </div>
@@ -219,22 +207,22 @@
     <div class="header-section ml-1">
         <div class="container">
             <div class="row section-tow">
-                <p class="mt-3"><i class='bx bxl-react'></i>&nbsp;<strong>Forms Activity</strong></p>
+                <p class="mt-3"><i class='bx bxl-react'></i>&nbsp;<strong>{{__('strings.forms_activity')}}</strong></p>
                 <div class="col-md-12">
                     <div class="table-responsive" style="padding: 30px">
                         <table id="activities-table" class="text-center table table-bordered table-striped"
                                style="width: 100%; padding-top: 30px;margin-bottom: 15px">
                             <thead class="text-light btn-primary">
                             <tr>
-                                <th>SL No</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Subproject</th>
-                                <th>Worker</th>
-                                <th>Created At</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{__('strings.sl_no')}}</th>
+                                <th>{{__('strings.name')}}</th>
+                                <th>{{__('strings.description')}}</th>
+                                <th>{{__('strings.subproject')}}</th>
+                                <th>{{__('strings.worker')}}</th>
+                                <th>{{__('strings.created_at')}}</th>
+                                <th>{{__('strings.type')}}</th>
+                                <th>{{__('strings.status')}}</th>
+                                <th>{{__('strings.action')}}</th>
                             </tr>
                             </thead>
                         </table>

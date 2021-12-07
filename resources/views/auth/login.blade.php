@@ -399,12 +399,53 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">--}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    {{--<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}" defer></script>--}}
+
+
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
 </head>
 <body class="antialiased">
+<div class="container">
+    <div class="mt-10 ml-4">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach (Config::get('language') as $lang => $language)
+                    @if ($lang != App::getLocale())
+                        <li>
+                            <a class="dropdown-item"
+                               href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
 
-<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+<main class="d-flex align-items-center mt-4 py-3 py-md-0">{{--min-vh-100--}}
     <div class="container">
         <div class="card login-card">
             <div class="row no-gutters">
@@ -419,9 +460,17 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <div class="brand-wrapper">
-                            <img src="{{asset('images/logo.svg')}}" alt="logo" class="logo">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <img src="{{asset('images/logo.png')}}" alt="logo" class="logo">
+                                </div>
+                                <div class="col-md-11" style="padding: 0; font-family: Arial Black,serif">
+                                    <strong style="font-size: 25px; font-weight: bold; height: 100%">DIRCAMS</strong>
+                                </div>
+                            </div>
+
                         </div>
-                        <p class="login-card-description">{{__('Sign into your account')}}</p>
+                        <p class="login-card-description">{{__('strings.sign_into_your_account')}}</p>
                         @include('auth.loginstyle')
                     </div>
                 </div>
@@ -429,7 +478,12 @@
         </div>
     </div>
 </main>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

@@ -9,15 +9,20 @@ class RedirectsController extends Controller
 {
     public function index()
     {
-        $type = Auth::user()->type;
-        switch ($type) {
-            case 0:
-                return redirect('/home');
-            case 1:
-                return redirect('/manager');
-            case 2:
-                break;
+        if (Auth::user()) {
+            $type = Auth::user()->type;
+            switch ($type) {
+                case 0:
+                    return redirect('/home');
+                case 1:
+                    return redirect('/manager');
+                case 2:
+                    break;
+            }
+        } else {
+            return redirect('/');
         }
+
     }
 
     /**

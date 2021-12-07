@@ -18,10 +18,10 @@ class MonthlyUsersChart
     public function build($admins, $managers, $workers): PieChart
     {
         return $this->chart->pieChart()
-            ->setTitle('Site Statistics')
-            ->setSubtitle('Users')
+            ->setTitle( __("strings.site_statistics"))
+            ->setSubtitle( __("strings.users"))
             ->addData([$admins, $managers, $workers])
-            ->setLabels(['Admins', 'Managers', 'Workers'])
+            ->setLabels([__("strings.admin"), __("strings.manager"), __("strings.worker")])
             ->setFontColor("#FFF");
     }
 }
