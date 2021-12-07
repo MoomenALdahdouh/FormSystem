@@ -97,11 +97,13 @@ return [
     'manager_subprojects_list' => 'Manager Subprojects List',
     'manager_activities_list' => 'Manager Activities List',
     'worker_activities_list' => 'Worker Activities List',
-    /*Edit user*/
+    /*Edit user page*/
     'edit_user' => 'Edit User',
     'remove_user' => 'Remove this user! you can not restore it.',
-    '' => '',
-    '' => '',
+    /*Activities page*/
+    'empty_subproject' => 'Empty subprojects',
+    /*View Activity page */
+    'view_activity' => 'View Activity',
     '' => '',
     '' => '',
     '' => '',

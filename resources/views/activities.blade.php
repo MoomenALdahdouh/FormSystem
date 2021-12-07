@@ -2,7 +2,7 @@
     <x-slot name="header">
         <br>
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Activities') }}
+            {{ __('strings.activities') }}
         </h1>
     </x-slot>
     <br>
@@ -10,17 +10,6 @@
     <br>
     <div class="container">
         <div class="row">
-            {{--Section nav activity types--}}
-            {{-- <div class="col-md-12">
-                 <div class="container justify-content-start">
-                     <input id="activity_type" type="hidden" value="4">
-                     <button id="activitys-all" class="btn btn-outline-success me-2">All</button>
-                     <button id="activitys-admins" class="btn btn-sm btn-outline-secondary">Admins</button>
-                     <button id="activitys-managers" class="btn btn-sm btn-outline-secondary">Managers</button>
-                     <button id="activitys-workers" class="btn btn-sm btn-outline-secondary">Workers</button>
-                 </div>
-             </div>--}}
-
         </div>
         <br>
         {{--Section all activity table--}}
@@ -35,15 +24,15 @@
                                    style="width: 100%; padding-top: 30px;margin-bottom: 15px">
                                 <thead class="text-light" style="background-color: #11101D">
                                 <tr>
-                                    <th>SL No</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Subproject</th>
-                                    <th>Worker</th>
-                                    <th>Created At</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>{{ __('strings.sl_no') }}</th>
+                                    <th>{{ __('strings.name') }}</th>
+                                    <th>{{ __('strings.description') }}</th>
+                                    <th>{{ __('strings.subproject') }}</th>
+                                    <th>{{ __('strings.worker') }}</th>
+                                    <th>{{ __('strings.created_at') }}</th>
+                                    <th>{{ __('strings.type') }}</th>
+                                    <th>{{ __('strings.status') }}</th>
+                                    <th>{{ __('strings.action') }}</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -70,7 +59,7 @@
                         <div class="col-md-12">
                             <div class="card shadow">
                                 <div class="card-header alert alert-secondary">
-                                    <h4><i class="las la-plus-square"></i>Create new activity</h4>
+                                    <h4><i class="las la-plus-square"></i>{{ __('strings.create_new_activity') }}</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="container">
@@ -82,30 +71,30 @@
                                             <li>
                                                 <div class="">
                                                     <strong><i
-                                                            class="las la-signature text-primary"></i>Name
+                                                            class="las la-signature text-primary"></i>{{ __('strings.name') }}
                                                     </strong>
                                                     &nbsp &nbsp<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="name" name="name" type="text"
-                                                        placeholder="Name">
+                                                        placeholder="{{ __('strings.name') }}">
                                                     <p id="name_error" class="alert alert-danger"
                                                        style="display: none"></p>
                                                 </div>
                                                 <div class="">
                                                     <strong>
-                                                        <i class="las la-signature text-primary"></i>Description
+                                                        <i class="las la-signature text-primary"></i>{{ __('strings.description') }}
                                                     </strong>
                                                     &nbsp &nbsp<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
                                                         id="description" name="description" type="text"
-                                                        placeholder="description">
+                                                        placeholder="{{ __('strings.description') }}">
                                                     <p id="description_error" class="alert alert-danger"
                                                        style="display: none"></p>
                                                 </div>
                                             </li>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>Select Activity type
+                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_activity_type') }}
                                                 </strong>
 
                                                 <div class="row alert alert-secondary"
@@ -116,7 +105,7 @@
                                                                 value="0">
                                                             {{--<option hidden>activity type</option>--}}
                                                             <option class="alert-light"
-                                                                    value="0"> Form
+                                                                    value="0"> {{ __('strings.form') }}
                                                             </option>
                                                         </select>
                                                     </div>
@@ -125,7 +114,7 @@
                                             <br>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>Select Worker
+                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_worker') }}
                                                 </strong>
 
                                                 <div class="row alert alert-secondary"
@@ -153,7 +142,7 @@
                                                                 @endforeach
                                                                 @if($countWorker==0)
                                                                     <option class="alert-warning"
-                                                                            value=""> Empty Workers
+                                                                            value=""> {{ __('strings.empty_workers') }}
                                                                     </option>
                                                                 @endif
                                                             @endif
@@ -165,7 +154,7 @@
                                             <br>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>Select Subproject
+                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_subproject') }}
                                                 </strong>
 
                                                 <div class="row alert alert-secondary"
@@ -180,7 +169,7 @@
                                                             @endphp
                                                             @if($subprojects == '[]')
                                                                 <option class="alert-warning"
-                                                                        value=""> Empty subprojects
+                                                                        value=""> {{ __('strings.empty_subproject') }}
                                                                 </option>
                                                             @else
                                                                 @foreach ($subprojects as $activity)
@@ -192,7 +181,7 @@
                                                                 @endforeach
                                                                 @if($count==0)
                                                                     <option class="alert-warning"
-                                                                            value=""> Empty subprojects
+                                                                            value=""> {{ __('strings.empty_subproject') }}
                                                                     </option>
                                                                 @endif
                                                             @endif
@@ -204,13 +193,14 @@
                                             <br>
                                             <li>
                                                 <strong><i
-                                                        class="las la-toggle-off text-primary"></i>&nbspStatus</strong>
+                                                        class="las la-toggle-off text-primary"></i>&nbsp;{{ __('strings.status') }}
+                                                </strong>
                                                 <br>
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                                     <div class="col-md-11">
                                                         <strong id="status-project"
-                                                                class=" paragraph-active shadow">Active</strong>
+                                                                class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="form-check form-switch">
@@ -225,7 +215,7 @@
                                             <br>
                                             <li>
                                                 <button id="create_activity" class="btn btn-primary float-right"><i
-                                                        class="las la-plus-square"></i> Create
+                                                        class="las la-plus-square"></i> {{ __('strings.create') }}
                                                 </button>
                                             </li>
                                         </ul>

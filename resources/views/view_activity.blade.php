@@ -1,10 +1,11 @@
 <x-app-layout>
     <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <x-slot name="header">
-        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('View activity') }}
+        <br>
+        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('strings.view_activity') }}
             {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h2>
+        </h1>
     </x-slot>
     <br>
     <br>
@@ -35,7 +36,7 @@
                                         <h5 class="name">{{$activity->name}}</h5>
                                         @switch($activity->type)
                                             @case(0)
-                                            <p class="activity-type shadow">&nbsp;Form&nbsp;</p>
+                                            <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
                                             @break
                                             @case (1)
                                             <p class="activity-type shadow">activity2</p>
@@ -46,10 +47,11 @@
                                         @endswitch
                                         @switch($activity->staus)
                                             @case (0)
-                                            <p class="paragraph-pended shadow">Pended</p>
+                                            <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                             @break
                                             @case(1)
-                                            <p class="paragraph-active shadow">&nbsp;Active&nbsp;</p>
+                                            <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}
+                                                &nbsp;</p>
                                             @break
                                         @endswitch
                                     </div>
@@ -70,11 +72,11 @@
                                     <li>
                                         <div class="alert alert-secondary">
                                             <strong><i
-                                                    class="las la-audio-description text-primary"></i>Name
+                                                    class="las la-audio-description text-primary"></i>{{ __('strings.name') }}
                                             </strong>
                                             <br>
                                             @if ($activity->name === '' || $activity->name === NULL)
-                                                <p>&nbsp &nbsp no name ...</p>
+                                                <p>&nbsp; &nbsp; {{ __('strings.no_name') }}</p>
                                             @else
                                                 <p>&nbsp &nbsp {{$activity->name}}</p>
                                             @endif
@@ -82,25 +84,25 @@
                                     </li>
                                     <li>
                                         <div class="alert alert-secondary">
-                                            <strong><i class="las la-activity-tie text-primary"></i>Description
+                                            <strong><i class="las la-activity-tie text-primary"></i>{{ __('strings.description') }}
                                             </strong>
                                             <br>
-                                            <p> &nbsp &nbsp {{$activity->description}}</p>
+                                            <p> &nbsp; &nbsp; {{$activity->description}}</p>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="alert alert-secondary">
                                             <div class="">
-                                                <strong><i class="las la-calendar-check text-primary"></i>Created At
+                                                <strong><i class="las la-calendar-check text-primary"></i>{{ __('strings.created_at') }}
                                                 </strong>
                                                 <br>
                                                 <p>&nbsp &nbsp {{$activity->created_at}}</p>
                                             </div>
                                             <div class="">
-                                                <strong><i class="las la-clock text-primary"></i></i>&nbspUpdate At
+                                                <strong><i class="las la-clock text-primary"></i></i>&nbsp;{{ __('strings.update_at') }}
                                                 </strong>
                                                 <br>
-                                                <p>&nbsp &nbsp {{$activity->updated_at}}</p>
+                                                <p>&nbsp; &nbsp; {{$activity->updated_at}}</p>
                                             </div>
                                         </div>
 
@@ -120,7 +122,8 @@
                                         <strong><i class="lab la-wpforms"></i>&nbsp; View Form Questions</strong>
                                     </div>
                                     <div class="col-md-2">
-                                        <a href="{{url("/form/apply/$activity->id")}}" class="btn btn-success float-right">View</a>
+                                        <a href="{{url("/form/apply/$activity->id")}}"
+                                           class="btn btn-success float-right">View</a>
                                     </div>
                                 </div>
                             </div>
