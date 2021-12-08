@@ -35,7 +35,8 @@ class HomeController extends Controller
                     $activities = Activity::query()->get();
                     $forms = Form::query()->latest()->limit(7)->get();
                     $formss = Form::query()->orderBy('created_at', 'asc')->get();
-                    $latestForms = Form::query()->latest()->limit(10)->get();
+                    $latestForms = Form::query()->latest()->limit(7)->get();
+                    $latestActivities = Activity::query()->limit(7)->get();
 
                     //$formname= DB::select('SELECT name FROM form');
                     //$formdate= DB::select('SELECT created_at FROM form');
@@ -49,7 +50,8 @@ class HomeController extends Controller
                         'latestForms' => $latestForms,
                         'users' => $users,
                         'latestUsers' => $latestUsers,
-                        'latestProjects' => $latestProjects
+                        'latestProjects' => $latestProjects,
+                        'latestActivities' => $latestActivities
                     ];
                     return view('home', $data);
                 case 1:

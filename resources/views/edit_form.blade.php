@@ -35,7 +35,8 @@
                                             <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
                                             @break
                                             @case(1)
-                                            <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
+                                            <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}
+                                                &nbsp;</p>
                                             @break
                                         @endswitch
                                     </div>
@@ -208,12 +209,15 @@
                                name="title"
                                placeholder="{{ __('strings.question_title') }}">
                         <br>
-                        <p class="alert alert-warning"><i class="las la-key"></i>&nbsp;{{ __('strings.question_key') }} &nbsp; <strong
+                        <p class="alert alert-warning"><i class="las la-key"></i>&nbsp;{{ __('strings.question_key') }}
+                            &nbsp; <strong
                                 id="question_key">{{ __('strings.key') }}</strong>
                         </p>
                     </div>
-                    <button id="save_edit_question" class="selector btn btn-primary" data-bs-dismiss="modal">{{ __('strings.save') }}
+                    <button id="save_edit_question" class="selector btn btn-primary"
+                            data-bs-dismiss="modal">{{ __('strings.save') }}
                     </button>
+                    {{csrf_field()}}
                 </div>
             </div>
         </div>

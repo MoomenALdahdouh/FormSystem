@@ -126,7 +126,7 @@
                                     </p>
                                 </li>
                                 <div>
-                                    @foreach($latestForms as $form)
+                                    @foreach($latestActivities as $form)
                                         <li class="m-3">
                                             <div class="row">
                                                 <div class="col-1">
