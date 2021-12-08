@@ -123,8 +123,15 @@
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0; padding-left:0; padding-right: 0">
                                                     <div class="col-md-10">
-                                                        <strong id="user_type_strong"
-                                                                class="paragraph-admin shadow">{{ __('strings.admin') }}</strong>
+                                                        @if(Auth::user())
+                                                            @if(Auth::user()->type == 0)
+                                                                <strong id="user_type_strong"
+                                                                        class="paragraph-admin shadow">{{ __('strings.admin') }}</strong>
+                                                            @else
+                                                                <strong id="user_type_strong"
+                                                                        class="paragraph-worker shadow">{{ __('strings.worker') }}</strong>
+                                                            @endif
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-check form-switch">

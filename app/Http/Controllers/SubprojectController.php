@@ -20,6 +20,22 @@ class SubprojectController extends Controller
         $subprojects = Subproject::query()->latest()->get();
         $trash = Subproject::onlyTrashed()->latest()->paginate(3);
         $projects = Project::all();
+
+        if (Auth::user()) {
+            $type = Auth::user()->type;
+            switch ($type) {
+                case 0:
+                    //$subprojects = Subproject::query()->where("create_by_id", Auth::user()->id)->latest()->get();
+                    break;
+                case 1:
+                    $projects = Project::query()->where("manager_fk_id", Auth::user()->id)->get();
+                    $project_fk_id = $projects[0]->id;
+                    $subprojects = Subproject::query()->where("project_fk_id", $project_fk_id)->latest()->get();
+                    break;
+            }
+        } else
+            return redirect('/');
+
         if ($request->ajax()) {
             return DataTables::of($subprojects)
                 ->addColumn('user_fk_id', function ($subprojects) {
@@ -34,9 +50,9 @@ class SubprojectController extends Controller
                 ->addColumn('status', function ($subprojects) {
                     $status = '';
                     if ($subprojects->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">'.__('strings.pended').'</p>';
+                        $status .= '<p class="paragraph-pended shadow">' . __('strings.pended') . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;'.__('strings.active').'&nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __('strings.active') . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($subprojects) {

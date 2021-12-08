@@ -83,7 +83,9 @@
                         <li class="col-one-second-list">
                             <ul class="col-two-group-one">
                                 <li>
-                                    <p><i class="lab la-wpforms"></i>&nbsp;<strong>{{__('strings.latest_projects')}}</strong></p>
+                                    <p>
+                                        <i class="lab la-wpforms"></i>&nbsp;<strong>{{__('strings.latest_projects')}}</strong>
+                                    </p>
                                 </li>
                                 <div>
                                     @foreach($latestProjects as $form)
@@ -171,13 +173,16 @@
                                             <div class="col-4">
                                                 @switch($user->type)
                                                     @case(0)
-                                                    <span class="hint paragraph-admin shadow">{{__('strings.admin')}}</span>
+                                                    <span
+                                                        class="hint paragraph-admin shadow">{{__('strings.admin')}}</span>
                                                     @break
                                                     @case (1)
-                                                    <span class="hint paragraph-manager shadow">{{__('strings.manager')}}</span>
+                                                    <span
+                                                        class="hint paragraph-manager shadow">{{__('strings.manager')}}</span>
                                                     @break
                                                     @case (2)
-                                                    <span class="hint paragraph-worker shadow">{{__('strings.worker')}}</span>
+                                                    <span
+                                                        class="hint paragraph-worker shadow">{{__('strings.worker')}}</span>
                                                     @break
                                                 @endswitch
                                             </div>
@@ -204,7 +209,7 @@
         </div>
     </div>
     {{--Forms table--}}
-    <div class="header-section ml-1">
+    <div class="header-section">
         <div class="container">
             <div class="row section-tow">
                 <p class="mt-3"><i class='bx bxl-react'></i>&nbsp;<strong>{{__('strings.forms_activity')}}</strong></p>

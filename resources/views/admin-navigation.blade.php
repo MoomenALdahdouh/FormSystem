@@ -50,12 +50,6 @@
                     <span class="tooltip">{{ __('Users') }}</span>
                     {{--<i class='bx bxs-chevron-down arrow' ></i>--}}
                 </div>
-                {{--<ul class="sub-menu">
-                    <li><a class="link_name" href="#">{{ __('Users') }}</a></li>
-                    <li><a href="{{ route('users.admin') }}"><i class="las la-user-check"></i>Admins</a></li>
-                    <li><a href="{{ route('users.managers') }}"><i class="las la-user-tag"></i>Managers</a></li>
-                    <li><a href="{{ route('users.workers') }}"><i class='bx bxs-user-voice'></i>Workers</a></li>
-                </ul>--}}
             </li>
             <li>
                 <a href="{{ route('activities') }}">
@@ -64,13 +58,6 @@
                 </a>
                 <span class="tooltip">{{ __('Activities') }}</span>
             </li>
-            {{--<li>
-                <a href="{{ route('workers') }}">
-                    <i class='bx bxs-user-voice'></i>
-                    <span class="links_name">{{ __('Workers') }}</span>
-                </a>
-                <span class="tooltip">{{ __('Workers') }}</span>
-            </li>--}}
             <li>
                 <a href="{{ route('profile.show') }}">
                     <i class='bx bx-cog'></i>

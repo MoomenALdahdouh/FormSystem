@@ -71,7 +71,7 @@ $(function () {
         var type = 0;
         const spinner_type = document.getElementById('type');
         $('#type').click(function () {
-            type = spinner_type.value;
+            type = spinner_type.value
             const type_strong = $('#user_type_strong');
             if (type == 0) {
                 type_strong.html("Admin");

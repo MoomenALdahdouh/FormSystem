@@ -19,13 +19,14 @@
                 </a>
                 <span class="tooltip">{{ __('Home') }}</span>
             </li>
+           --}}
             <li>
                 <a href="{{ route('projects') }}">
                     <i class='bx bx-folder'></i>
                     <span class="links_name">{{ __('Projects') }}</span>
                 </a>
                 <span class="tooltip">{{ __('Projects') }}</span>
-            </li>--}}
+            </li>
             <li>
                 <a href="{{ route('subprojects') }}">
                     <i class='bx bx-file'></i>

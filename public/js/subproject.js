@@ -54,7 +54,80 @@ $(function () {
                     location.href = "/subprojects";
             }, 2000);
         });
-    })
+
+        create_subproject();
+    });
+
+    function create_subproject() {
+        const name_error = $('#name_error');
+        const description_error = $('#description_error');
+        const project_error = $('#project_error');
+        name_error.css('display', 'none');
+        description_error.css('display', 'none');
+        project_error.css('display', 'none');
+
+        $('#create_subproject').click(function () {
+            const name = $('#name').val();
+            const description = $('#description').val();
+            const project = $('#project').val();
+            const status = $('#flexSwitchCheckChecked').val();
+            //console.log(name, phone, email, type, status)
+            $.ajax({
+                type: "POST",
+                url: "/subprojects/create",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    action: "create",
+                    name: name,
+                    description: description,
+                    project: project,
+                    status: status,
+                },
+                success: function (data) {
+                    if ($.isEmptyObject(data.error)) {
+                        name_error.css('display', 'none');
+                        description_error.css('display', 'none');
+                        project_error.css('display', 'none');
+                        $('#successfully-creat').modal('show');
+                        table.DataTable().ajax.reload();
+                    } else {
+                        printErrorMsg(data.error);
+                    }
+                }
+            });
+
+            function printErrorMsg(msg) {
+                if (msg['name']) {
+                    name_error.html(msg['name']);
+                    name_error.css('display', 'block');
+                } else {
+                    name_error.css('display', 'none');
+                }
+                if (msg['description']) {
+                    $('#description_error').html(msg['description']);
+                    description_error.css('display', 'block');
+                } else {
+                    description_error.css('display', 'none');
+                }
+                if (msg['project']) {
+                    $('#project_error').html(msg['project']);
+                    project_error.css('display', 'block');
+                } else {
+                    project_error.css('display', 'none');
+                }
+            }
+
+            /*function fetch_projects(page) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('projects.all') }}" + "?page=" + page,
+                    success: function (response) {
+                        $('#table-data').html(response)
+                    }
+                });
+            }*/
+        });
+    }
 
     function get_subprojects_as() {
         table.DataTable({

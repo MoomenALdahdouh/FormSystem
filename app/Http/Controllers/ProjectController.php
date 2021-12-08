@@ -19,10 +19,23 @@ class ProjectController extends Controller
         $projects = Project::query()->latest()->get();
         $trash = Project::onlyTrashed()->latest()->paginate(6);
         $users = User::query()->where('type', 1)->get();
+
+        if (Auth::user()) {
+            $type = Auth::user()->type;
+            switch ($type) {
+                case 0:
+                    //$projects = Project::query()->where("user_fk_id", Auth::user()->id)->get();
+                    break;
+                case 1:
+                    $projects = Project::query()->where("manager_fk_id", Auth::user()->id)->get();
+                    break;
+            }
+        } else
+            return redirect('/');
+
         $data['projects'] = $projects;
         $data['trash'] = $trash;
         $data['users'] = $users;
-
         if ($request->ajax()) {
             return DataTables::of($projects)
                 ->addColumn('user_fk_id', function ($projects) {
@@ -53,13 +66,10 @@ class ProjectController extends Controller
                 ->make(true);
         }
 
-        $type = Auth::user()->type;
-        switch ($type) {
-            case 0:
-                return view('projects', $data);
-            case 1:
-                return redirect('/');
-        }
+        if (Auth::user()) {
+            return view('projects', $data);
+        } else
+            return redirect('/');
     }
 
     public function all(Request $request)

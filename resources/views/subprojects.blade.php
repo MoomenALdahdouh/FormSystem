@@ -81,7 +81,7 @@
                                                     </strong>
                                                     &nbsp &nbsp<input
                                                         class="rounded-md col-md-12 alert alert-secondary"
-                                                        id="email" name="description" type="text"
+                                                        id="description" name="description" type="text"
                                                         placeholder="{{ __('strings.description') }}">
                                                     <p id="description_error" class="alert alert-danger"
                                                        style="display: none"></p>
@@ -95,7 +95,7 @@
                                                 <div class="row alert alert-secondary"
                                                      style=" margin: 0">
                                                     <div class="form-check form-switch col-md-3" style="padding-left:0">
-                                                        <select name="manager" id="manager"
+                                                        <select name="project" id="project"
                                                                 class="btn-outline-primary manager-dropdown form-control input-group-lg "
                                                                 value="0">
                                                             @php
@@ -165,15 +165,12 @@
         </div>
         <br>
         <br>
-
-
-        @include('modal_alert')
-        @push('js')
-            <script src="{{asset('js/subproject.js')}}" defer></script> {{--Must add defer to active js file--}}
-        @endpush
     </div>
 
-
+    @include('modal_alert')
+    @push('js')
+        <script src="{{asset('js/subproject.js')}}" defer></script> {{--Must add defer to active js file--}}
+    @endpush
     {{--<div class="header-section">
         <div class="container">
             <div class="row">

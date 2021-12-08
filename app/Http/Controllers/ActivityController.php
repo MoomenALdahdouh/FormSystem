@@ -34,7 +34,7 @@ class ActivityController extends Controller
                     $type = '<p class="paragraph-admin shadow">&nbsp;' . __("strings.admin") . '&nbsp;</p>';
                     switch ($activities->type) {
                         case 0:
-                            $type = '<p class="activity-type shadow">&nbsp;&nbsp; ' . __("strings.form") . ' &nbsp;&nbsp;</p>';
+                            $type = '<p class="activity-type shadow">&nbsp; ' . __("strings.form") . ' &nbsp;</p>';
                             break;
                         case 1:
                             $type = '<p class="paragraph-manager shadow">' . __("strings.manager") . '</p>';
