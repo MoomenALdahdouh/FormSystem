@@ -12,7 +12,7 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $questions = Question::query()->where('form_fk_id', $request->form_fk_id)->orderBy('questions_key','ASC')->get();
+            $questions = Question::query()->where('form_fk_id', $request->form_fk_id)->orderBy('questions_key', 'ASC')->get();
             return response()->json(['success' => $questions]);
         }
     }
@@ -26,10 +26,10 @@ class QuestionController extends Controller
     {
         if ($request->ajax()) {
             $questionsList = $request->questionsList;
-            $questions = Question::query()->where('form_fk_id', $request->form_fk_id)->get();
-            foreach ($questions as $question) {
+            $questions = Question::query()->where('form_fk_id', $request->form_fk_id)->delete();
+            /*foreach ($questions as $question) {
                 $question->delete();
-            }
+            }*/
             foreach ($questionsList as $question) {
                 $data = Question::query()->create([
                     'form_fk_id' => $question["form_fk_id"],
