@@ -11,4 +11,15 @@ class Form extends Model
     protected $table = "form";
     protected $guarded = [];
     public $timestamps = false;
+
+    public function interviews()
+    {
+        return $this->hasMany(Interview::class, 'form_fk_id', 'id');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'form_fk_id', 'id');
+    }
+
 }

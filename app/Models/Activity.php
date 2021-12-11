@@ -18,4 +18,8 @@ class Activity extends Model
     {
         return $this->hasOne(Subproject::class, 'id', 'subproject_fk_id');
     }
+
+    public function form(){
+        return $this->hasOne(Form::class, 'activity_fk_id', 'id');
+    }
 }

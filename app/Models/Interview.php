@@ -11,4 +11,9 @@ class Interview extends Model
     protected $table = "interviews";
     protected $guarded = [];
     public $timestamps = false;
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'interview_fk_id', 'id');
+    }
 }
