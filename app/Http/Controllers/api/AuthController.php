@@ -31,7 +31,8 @@ class AuthController extends Controller
                 'remember_token' => $token
             ])->save();
             return response()->json([
-                'token' => $token
+                'token' => $token,
+                'user' => $user
             ]);
         }
         return response()->json([

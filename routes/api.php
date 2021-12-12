@@ -9,6 +9,13 @@ use App\Http\Controllers\api\InterviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//TODO::MOOMEN S. ALDAHDOUH
+
+//TODO::Use ->middleware('auth:sanctum'); in last all Route if you need the authenticator user
+// EX:Route::prefix('activities')->group(function () {
+//      Route::get('/', [ActivityUserController::class, 'index'])->middleware('auth:sanctum');
+//      Route::get('/{id}/form', [ActivityUserController::class, 'form'])->middleware('auth:sanctum');
+//    });
 
 Route::post('login', [AuthController::class, 'login']);
 
@@ -18,7 +25,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::prefix('activities')->group(function () {
-    Route::get('/', [ActivityUserController::class, 'index'])->middleware('auth:sanctum');
+    Route::get('/{id}', [ActivityUserController::class, 'index'])->middleware('auth:sanctum');
     Route::get('/{id}/form', [ActivityUserController::class, 'form'])->middleware('auth:sanctum');
 });
 

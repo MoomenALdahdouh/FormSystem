@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivityUserController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $activities = Activity::query()->where('user_fk_id', Auth::user()->id)->get();
-        return $activities;
+        $activities = Activity::query()->where('user_fk_id', $id)->get();
+        return ['results'=>$activities];
     }
 
     public function form($id)
