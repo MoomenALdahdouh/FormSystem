@@ -25,24 +25,24 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::prefix('activities')->group(function () {
-    Route::get('/{id}', [ActivityUserController::class, 'index'])->middleware('auth:sanctum');
-    Route::get('/{id}/form', [ActivityUserController::class, 'form'])->middleware('auth:sanctum');
+    Route::get('/{id}', [ActivityUserController::class, 'index']);
+    Route::get('/{id}/form', [ActivityUserController::class, 'form']);
 });
 
 Route::prefix('forms')->group(function () {
-    Route::get('/{id}/interviews', [FormController::class, 'index'])->middleware('auth:sanctum');//Get all interviews to this form id and when click to view an interview will use interview/answers and forms/questions
-    Route::get('/{id}/questions', [FormController::class, 'show'])->middleware('auth:sanctum');//When click create interview to this form id will open screen with all form questions so when click submit will create interview and answers
+    Route::get('/{id}/interviews', [FormController::class, 'index']);//Get all interviews to this form id and when click to view an interview will use interview/answers and forms/questions
+    Route::get('/{id}/questions', [FormController::class, 'show']);//When click create interview to this form id will open screen with all form questions so when click submit will create interview and answers
 });
 
 Route::prefix('interviews')->group(function () {
     Route::get('/', [InterviewController::class, 'index'])->middleware('auth:sanctum');
-    Route::post('/create', [InterviewController::class, 'create'])->middleware('auth:sanctum');//After created will return id so can insert all answer for this interview so ask /answer/crete rout
-    Route::get('/{id}/answers', [InterviewController::class, 'show'])->middleware('auth:sanctum');
+    Route::post('/create', [InterviewController::class, 'create']);//After created will return id so can insert all answer for this interview so ask /answer/crete rout
+    Route::get('/{id}/answers', [InterviewController::class, 'show']);
 });
 
 Route::prefix('answers')->group(function () {
-    Route::get('/', [AnswersController::class, 'index'])->middleware('auth:sanctujm');
-    Route::post('/create', [AnswersController::class, 'create'])->middleware('auth:sanctum');
+    Route::get('/', [AnswersController::class, 'index']);
+    Route::post('/create', [AnswersController::class, 'create']);
 });
 
 
