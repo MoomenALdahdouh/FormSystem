@@ -16,4 +16,8 @@ class Interview extends Model
     {
         return $this->hasMany(Answer::class, 'interview_fk_id', 'id');
     }
+
+    public function form(){
+        return $this->hasOne(Form::class, 'id', 'form_fk_id');
+    }
 }

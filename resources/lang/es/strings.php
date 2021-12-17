@@ -181,4 +181,8 @@ return [
     'field_delete_worker' => 'Fallo la eliminacion del trabajador',
     'can_not_remove_worker' => 'No se puede eliminar a este trabajador, por que tiene actividades',
     'field_delete_user' => 'Fallo la eliminacion de este trabajador',
+    'view_interview' => 'Ver entrevista',
+    'title' => 'Título',
+    'location' => 'Ubicación',
+    'answers' => 'Respuestas',
 ];

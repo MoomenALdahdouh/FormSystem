@@ -3,6 +3,7 @@
     <div class="sidebar open">
         <div class="logo-details">
             <i class='bx bxl-c-plus-plus icon'></i>
+            {{--<img src="{{'http://127.0.0.1:8000/storage/profile-photos/KSeKY34O2SlgGq2krnxAuf3NLsTwuJQLWaBaRKuX.jpg'}}"/>--}}
             <div class="logo_name">DIRCAMS</div>
             <i class='bx bx-menu' id="btn"></i>
         </div>

@@ -215,18 +215,14 @@
                 <p class="mt-3"><i class='bx bxl-react'></i>&nbsp;<strong>{{__('strings.forms_activity')}}</strong></p>
                 <div class="col-md-12">
                     <div class="table-responsive" style="padding: 30px">
-                        <table id="activities-table" class="text-center table table-bordered table-striped"
+                        <table id="interviews-table" class="text-center table table-bordered table-striped"
                                style="width: 100%; padding-top: 30px;margin-bottom: 15px">
-                            <thead class="text-light btn-primary">
+                            <thead class="">
                             <tr>
                                 <th>{{__('strings.sl_no')}}</th>
-                                <th>{{__('strings.name')}}</th>
-                                <th>{{__('strings.description')}}</th>
-                                <th>{{__('strings.subproject')}}</th>
-                                <th>{{__('strings.worker')}}</th>
+                                <th>{{__('strings.title')}}</th>
+                                <th>{{__('strings.location')}}</th>
                                 <th>{{__('strings.created_at')}}</th>
-                                <th>{{__('strings.type')}}</th>
-                                <th>{{__('strings.status')}}</th>
                                 <th>{{__('strings.action')}}</th>
                             </tr>
                             </thead>
@@ -242,7 +238,7 @@
     {{ $formChart->script() }}
     @include('modal_alert')
     @push('js')
-        <script src="{{asset('js/activity.js')}}" defer></script> {{--Must add defer to active js file--}}
+        <script src="{{asset('js/interview.js')}}" defer></script> {{--Must add defer to active js file--}}
     @endpush
     <br>
     <br>

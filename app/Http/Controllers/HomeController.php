@@ -6,6 +6,7 @@ use App\Charts\DyalyFormChart;
 use App\Charts\MonthlyUsersChart;
 use App\Models\Activity;
 use App\Models\Form;
+use App\Models\Interview;
 use App\Models\Project;
 use App\Models\Subproject;
 use App\Models\User;
@@ -34,7 +35,7 @@ class HomeController extends Controller
                     $subprojects = Subproject::query()->get();
                     $activities = Activity::query()->get();
                     $forms = Form::query()->latest()->limit(7)->get();
-                    $formss = Form::query()->orderBy('created_at', 'asc')->get();
+                    $latestInterview = Interview::query()->orderBy('created_at')->get();//'asc'
                     $latestForms = Form::query()->latest()->limit(7)->get();
                     $latestActivities = Activity::query()->limit(7)->get();
 
@@ -42,7 +43,7 @@ class HomeController extends Controller
                     //$formdate= DB::select('SELECT created_at FROM form');
                     $data = [
                         'chart' => $chart->build(count($admins), count($managers), count($workers)),
-                        'formChart' => $formChart->build($formss),
+                        'formChart' => $formChart->build($latestInterview),
                         'projects' => $projects,
                         'subprojects' => $subprojects,
                         'activities' => $activities,
@@ -127,7 +128,8 @@ class HomeController extends Controller
         //
     }
 
-    public function languageDemo(){
+    public function languageDemo()
+    {
         return view('languageDemo');
     }
 }

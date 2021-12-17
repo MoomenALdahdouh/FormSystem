@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\ManagerHomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuestionController;
@@ -93,6 +94,12 @@ Route::prefix('form')->group(function () {
 Route::prefix('questions')->group(function () {
     Route::get('/', [QuestionController::class, 'index'])->name('questions');
     Route::post('/store', [QuestionController::class, 'store'])->name('questions.store');
+});
+//TODO:: MOOMEN S. ALDAHDOUH 11/28/2021
+Route::prefix('interviews')->group(function () {
+    Route::get('/', [InterviewController::class, 'index'])->name('interviews');
+    Route::get('/view/{id}', [InterviewController::class, 'show'])->name('interviews.view');
+    Route::delete('/delete/{id}', [InterviewController::class, 'destroy'])->name('interviews.delete');
 });
 
 //TODO:: MOOMEN S. ALDAHDOUH 11/30/2021

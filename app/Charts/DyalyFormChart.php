@@ -22,7 +22,7 @@ class DyalyFormChart
         foreach ($forms as $form) {
             $date = date_create($form->created_at);
             array_push($formdate, date_format($date, "d"));
-            array_push($formname, $form->name);
+            array_push($formname, $form->title);
         }
 
         return $this->chart->areaChart()

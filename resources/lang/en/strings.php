@@ -181,5 +181,8 @@ return [
     'can_not_remove_worker' => 'Can not remove this worker, he manage some activities!',
     'field_delete_user' => 'Field to delete the user',
     'settings' => 'Settings',
-
+    'title' => 'Title',
+    'location' => 'Location',
+    'view_interview' => 'View Interview',
+    'answers' => 'Answers',
 ];
