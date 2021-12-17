@@ -43,6 +43,8 @@ Route::prefix('interviews')->group(function () {
 Route::prefix('answers')->group(function () {
     Route::get('/', [AnswersController::class, 'index']);
     Route::post('/create', [AnswersController::class, 'create']);
+    Route::post('/update', [AnswersController::class, 'update']);
+    Route::post('/upload', [AnswersController::class, 'upload']);
 });
 
 
