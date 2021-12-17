@@ -1,9 +1,9 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="sidebar">
+    <div class="sidebar open">
         <div class="logo-details">
             <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name">FormSystem</div>
+            <div class="logo_name">DIRCAMS</div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list" style="list-style-type: none; padding: 0; margin: 0">
@@ -22,48 +22,48 @@
             <li>
                 <a href="{{ route('home') }}">
                     <i class='bx bx-home'></i>
-                    <span class="links_name">{{ __('Home') }}</span>
+                    <span class="links_name">{{ __('strings.home') }}</span>
                 </a>
-                <span class="tooltip">{{ __('Home') }}</span>
+                <span class="tooltip">{{ __('strings.home') }}</span>
             </li>
             <li>
                 <a href="{{ route('projects') }}">
                     <i class='bx bx-folder'></i>
-                    <span class="links_name">{{ __('Projects') }}</span>
+                    <span class="links_name">{{ __('strings.projects') }}</span>
                 </a>
-                <span class="tooltip">{{ __('Projects') }}</span>
+                <span class="tooltip">{{ __('strings.projects') }}</span>
             </li>
             <li>
                 <a href="{{ route('subprojects') }}">
                     <i class='bx bx-file'></i>
-                    <span class="links_name">{{ __('Subprojects') }}</span>
+                    <span class="links_name">{{ __('strings.subprojects') }}</span>
                 </a>
-                <span class="tooltip">{{ __('Subprojects') }}</span>
+                <span class="tooltip">{{ __('strings.subprojects') }}</span>
             </li>
             <li>
                 <div class="iocn-link">
                     <a href="{{url('users')}}">
                         <i class='bx bx-user'></i>
 
-                        <span class="links_name">{{ __('Users') }}</span>
+                        <span class="links_name">{{ __('strings.users') }}</span>
                     </a>
-                    <span class="tooltip">{{ __('Users') }}</span>
+                    <span class="tooltip">{{ __('strings.users') }}</span>
                     {{--<i class='bx bxs-chevron-down arrow' ></i>--}}
                 </div>
             </li>
             <li>
                 <a href="{{ route('activities') }}">
                     <i class='bx bxl-react'></i>
-                    <span class="links_name">{{ __('Activities') }}</span>
+                    <span class="links_name">{{ __('strings.activities') }}</span>
                 </a>
-                <span class="tooltip">{{ __('Activities') }}</span>
+                <span class="tooltip">{{ __('strings.activities') }}</span>
             </li>
             <li>
                 <a href="{{ route('profile.show') }}">
                     <i class='bx bx-cog'></i>
-                    <span class="links_name">Setting</span>
+                    <span class="links_name">{{ __('strings.settings') }}</span>
                 </a>
-                <span class="tooltip">Setting</span>
+                <span class="tooltip">{{ __('strings.settings') }}</span>
             </li>
             <li class="profile">
                 <div class="profile-details">

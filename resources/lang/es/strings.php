@@ -58,6 +58,7 @@ return [
     'no_subprojects' => 'Este proyecto no tiene ningún subproyecto ...',
     /*Edit project page*/
     'project_settings' => 'Opciones de Proyecto',
+    'settings' => 'Ajustes',
     'edit' => 'Editar',
     'save' => 'Guardar',
     'remove_project' => '¡Elimina este Proyecto! no podras restaurarlo.',

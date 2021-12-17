@@ -180,5 +180,6 @@ return [
     'field_delete_worker' => 'Field to delete this worker',
     'can_not_remove_worker' => 'Can not remove this worker, he manage some activities!',
     'field_delete_user' => 'Field to delete the user',
+    'settings' => 'Settings',
 
 ];

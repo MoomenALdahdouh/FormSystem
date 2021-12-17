@@ -31,16 +31,16 @@ class ActivityController extends Controller
                     return '<p>' . \Carbon\Carbon::parse($activities->created_at)->diffForHumans() . '</p>';
                 })
                 ->addColumn('type', function ($activities) {
-                    $type = '<p class="paragraph-admin shadow">&nbsp;' . __("strings.admin") . '&nbsp;</p>';
+                    $type = '<p class="paragraph-admin shadow hint">&nbsp;' . __("strings.admin") . '&nbsp;</p>';
                     switch ($activities->type) {
                         case 0:
-                            $type = '<p class="activity-type shadow">&nbsp; ' . __("strings.form") . ' &nbsp;</p>';
+                            $type = '<p class="activity-type shadow hint">&nbsp; ' . __("strings.admin") . ' &nbsp;</p>';
                             break;
                         case 1:
-                            $type = '<p class="paragraph-manager shadow">' . __("strings.manager") . '</p>';
+                            $type = '<p class="paragraph-manager shadow hint">' . __("strings.manager") . '</p>';
                             break;
                         case 2:
-                            $type = '<p class="paragraph-worker shadow">&nbsp;' . __("strings.worker") . '&nbsp;</p>';
+                            $type = '<p class="paragraph-worker shadow hint">&nbsp;' . __("strings.worker") . '&nbsp;</p>';
                     }
                     return $type;
                 })
@@ -48,9 +48,9 @@ class ActivityController extends Controller
                     $status = '';
 
                     if ($activities->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">' . __("strings.pended") . '</p>';
+                        $status .= '<p class="paragraph-pended shadow hint">' . __("strings.pended") . '</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow">&nbsp;' . __("strings.active") . ' &nbsp;</p>';
+                        $status .= '<p class="paragraph-active shadow hint">' . __("strings.active") . '</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($activities) {
