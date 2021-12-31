@@ -3,11 +3,11 @@
         <br>
         <div class="row">
             <div class="col-md-11">
-                <h1 class="home-section font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('strings.home') }}
-                    {{--<h3>{{__('strings.welcome')}}</h3>--}}
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.forms') }}
                 </h1>
             </div>
+            {{--Select language--}}
             <div class="col-md-1">
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle" type="button"
@@ -29,8 +29,8 @@
             </div>
         </div>
     </x-slot>
-
     {{--//TODO:: MOOMEN S. ALDAHDOUH 11/15/2021--}}
+    <br>
     <br>
     <div class="header-section">
         <div class="container">
@@ -208,7 +208,7 @@
             <br>
         </div>
     </div>
-    {{--Forms table--}}
+    {{--interviews table--}}
     <div class="header-section">
         <div class="container">
             <div class="row section-tow">
@@ -217,7 +217,7 @@
                     <div class="table-responsive" style="padding: 30px">
                         <table id="interviews-table" class="text-center table table-bordered table-striped"
                                style="width: 100%; padding-top: 30px;margin-bottom: 15px">
-                            <thead class="">
+                            <thead class="text-light hint" style="background-color: #525256;">
                             <tr>
                                 <th>{{__('strings.sl_no')}}</th>
                                 <th>{{__('strings.title')}}</th>

@@ -634,6 +634,21 @@
     display: inline-flex;
     padding: 0 12px;
 }
+.paragraph-activity {
+    background-color: #606e8d;
+    color: #FFF;
+    border-radius: 12px;
+    display: inline-flex;
+    padding: 0 12px;
+}
+
+.paragraph-subactivity {
+    background-color: #5f6565;
+    color: #FFF;
+    border-radius: 12px;
+    display: inline-flex;
+    padding: 0 12px;
+}
 
 .paragraph-worker {
     background-color: #f89500;

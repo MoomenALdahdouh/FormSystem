@@ -60,6 +60,27 @@
                 <span class="tooltip">{{ __('strings.activities') }}</span>
             </li>
             <li>
+                <a href="{{ route('subactivities') }}">
+                    <i class="las la-biohazard"></i>
+                    <span class="links_name">{{ __('strings.subactivities') }}</span>
+                </a>
+                <span class="tooltip">{{ __('strings.subactivities') }}</span>
+            </li>
+            <li>
+                <a href="{{ route('forms') }}">
+                    <i class='bx bxs-data'></i>
+                    <span class="links_name">{{ __('strings.forms') }}</span>
+                </a>
+                <span class="tooltip">{{ __('strings.forms') }}</span>
+            </li>
+            <li>
+                <a href="{{ route('interviews.fetch') }}">
+                    <i class="lab la-wpforms"></i>
+                    <span class="links_name">{{ __('strings.interviews') }}</span>
+                </a>
+                <span class="tooltip">{{ __('strings.interviews') }}</span>
+            </li>
+            <li>
                 <a href="{{ route('profile.show') }}">
                     <i class='bx bx-cog'></i>
                     <span class="links_name">{{ __('strings.settings') }}</span>
@@ -97,6 +118,9 @@
              <span class="text">Drop Down Sidebar</span>
          </div>
      </section>--}}
+
+
+
     <script>
         let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {

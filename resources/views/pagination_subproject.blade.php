@@ -38,15 +38,15 @@
                 <!--Use this line if you compact users from DB to pars the date by carbon library-->
                 <td>
                     <button id="delete-subproject"
-                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i>
+                            class="btn-outline-danger rounded-2 p-1" title="delete"><i class='bx bx-trash'></i>
                         <input type="hidden" id="subproject-id" name="subproject-id" value="{{$subproject->id}}">
                     </button>
                     &nbsp
                     <a href="{{url('subprojects/edit/'.$subproject->id .'#edit-subproject')}}"
-                       class="btn-outline-dark sm:rounded-md" title="settings">
+                       class="btn-outline-dark rounded-2 p-1" title="settings">
                         <i class="las la-cog"></i></a>
                     &nbsp
-                    <a href="{{url('subprojects/view/'.$subproject->id)}}" class="btn-outline-primary sm:rounded-md"
+                    <a href="{{url('subprojects/view/'.$subproject->id)}}" class="btn-outline-primary rounded-2 p-1"
                        title="view">
                         <i class="las la-external-link-alt"></i></a>
                 </td>

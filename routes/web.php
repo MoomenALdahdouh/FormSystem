@@ -8,6 +8,7 @@ use App\Http\Controllers\ManagerHomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RedirectsController;
+use App\Http\Controllers\SubActivitiesController;
 use App\Http\Controllers\SubprojectController;
 use App\Http\Controllers\UserController;
 use App\Models\Project;
@@ -84,11 +85,27 @@ Route::prefix('activities')->group(function () {
     Route::post('/create', [ActivityController::class, 'create'])->name('activities.create');
     Route::delete('/delete/{id}', [ActivityController::class, 'destroy'])->name('activities.delete');
 });
+//TODO:: MOOMEN S. ALDAHDOUH 11/26/2021
+Route::prefix('subactivities')->group(function () {
+    Route::get('/', [SubActivitiesController::class, 'index'])->name('subactivities');
+    Route::get('/{id}/forms', [SubActivitiesController::class, 'forms'])->name('subactivities.forms');
+    Route::get('/all', [SubActivitiesController::class, 'all'])->name('subactivities.all');
+    Route::get('/edit/{id}', [SubActivitiesController::class, 'edit'])->name('subactivities.edit');
+    Route::post('/update/{id}', [SubActivitiesController::class, 'update'])->name('subactivities.update');
+    Route::get('/view/{id}', [SubActivitiesController::class, 'show'])->name('subactivities.view');
+    Route::post('/create', [SubActivitiesController::class, 'create'])->name('subactivities.create');
+    Route::post('/createForm', [SubActivitiesController::class, 'createForm'])->name('subactivities.createForm');
+    Route::delete('/delete/{id}', [SubActivitiesController::class, 'destroy'])->name('subactivities.delete');
+});
 //TODO:: MOOMEN S. ALDAHDOUH 11/25/2021
 Route::prefix('form')->group(function () {
+    Route::get('/', [FormController::class, 'index'])->name('forms');
     Route::post('/create', [FormController::class, 'create'])->name('form.create');
     Route::get('/edit/{id}', [FormController::class, 'edit'])->name('form.edit');
     Route::get('/apply/{id}', [FormController::class, 'apply'])->name('form.apply');
+    Route::delete('/delete/{id}', [FormController::class, 'destroy'])->name('form.delete');
+    Route::post('/worker/remove/{id}', [FormController::class, 'remove_worker'])->name('form.remove_worker');
+    Route::post('/worker/add', [FormController::class, 'add_worker'])->name('form.add_worker');
 });
 //TODO:: MOOMEN S. ALDAHDOUH 11/28/2021
 Route::prefix('questions')->group(function () {
@@ -98,6 +115,7 @@ Route::prefix('questions')->group(function () {
 //TODO:: MOOMEN S. ALDAHDOUH 11/28/2021
 Route::prefix('interviews')->group(function () {
     Route::get('/', [InterviewController::class, 'index'])->name('interviews');
+    Route::get('/fetch', [InterviewController::class, 'fetch'])->name('interviews.fetch');
     Route::get('/view/{id}', [InterviewController::class, 'show'])->name('interviews.view');
     Route::delete('/delete/{id}', [InterviewController::class, 'destroy'])->name('interviews.delete');
 });

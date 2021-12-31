@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Form;
+use App\Models\SubActivities;
 use App\Models\Subproject;
 use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -21,26 +23,24 @@ class ActivityController extends Controller
         $activities = Activity::query()->latest()->get();
         if ($request->ajax()) {
             return DataTables::of($activities)
-                ->addColumn('worker', function ($activities) {
-                    return '<strong>' . $activities->worker->name . '</strong>';
-                })
+                /*->addColumn('worker', function ($activities) {
+                    return '<span>' . $activities->worker->name . '</span>';
+                })*/
                 ->addColumn('subproject', function ($activities) {
-                    return '<strong>' . $activities->subproject->name . '</strong>';
+                    return '<span>' . $activities->subproject->name . '</span>';
                 })
                 ->addColumn('created_at', function ($activities) {
                     return '<p>' . \Carbon\Carbon::parse($activities->created_at)->diffForHumans() . '</p>';
                 })
                 ->addColumn('type', function ($activities) {
-                    $type = '<p class="paragraph-admin shadow hint">&nbsp;' . __("strings.admin") . '&nbsp;</p>';
+                    $type = '<p class="paragraph-admin shadow hint">&nbsp;' . __("strings.form") . '&nbsp;</p>';
                     switch ($activities->type) {
                         case 0:
-                            $type = '<p class="activity-type shadow hint">&nbsp; ' . __("strings.admin") . ' &nbsp;</p>';
+                            $type = '<p class="activity-type shadow hint">&nbsp; ' . __("strings.form") . ' &nbsp;</p>';
                             break;
                         case 1:
-                            $type = '<p class="paragraph-manager shadow hint">' . __("strings.manager") . '</p>';
+                            $type = '<p class="paragraph-manager shadow hint">' . __("strings.subactivity") . '</p>';
                             break;
-                        case 2:
-                            $type = '<p class="paragraph-worker shadow hint">&nbsp;' . __("strings.worker") . '&nbsp;</p>';
                     }
                     return $type;
                 })
@@ -48,20 +48,27 @@ class ActivityController extends Controller
                     $status = '';
 
                     if ($activities->status == 0)
-                        $status .= '<p class="paragraph-pended shadow hint">' . __("strings.pended") . '</p>';
+                        $status .= '<p class="paragraph-pended shadow hint">&nbsp;' . __("strings.pended") . '&nbsp;</p>';
                     else
-                        $status .= '<p class="paragraph-active shadow hint">' . __("strings.active") . '</p>';
+                        $status .= '<p class="paragraph-active shadow hint">&nbsp;' . __("strings.active") . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($activities) {
-                    $button = '<button data-id="' . $activities->id . '" id="form" class="btn-outline-info sm:rounded-md" title="form"><i class="lab la-wpforms"></i></button>&nbsp;
-                               <button data-id="' . $activities->id . '" id="apply" class="btn-outline-warning sm:rounded-md" title="apply"><i class="las la-feather-alt"></i></button>&nbsp;
-                               <button data-id="' . $activities->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                               <button data-id="' . $activities->id . '#edit-activity' . '" data-type="' . $activities->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                               <button data-id="' . $activities->id . '" data-type="' . $activities->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    if ($activities->type == 0)
+                        $button = '<button data-id="' . $activities->id . '" id="form" class="btn-outline-info rounded-2 p-1" title="form"><i class="lab la-wpforms"></i></button>&nbsp;
+                               <button data-id="' . $activities->id . '" id="apply" class="btn-outline-warning rounded-2 p-1" title="apply"><i class="las la-feather-alt"></i></button>&nbsp;
+                               <button data-id="' . $activities->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                               <button data-id="' . $activities->id . '#edit-activity' . '" data-type="' . $activities->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                               <button data-id="' . $activities->id . '" data-type="' . $activities->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
+                    else{
+                        $button = '<button data-id="' . $activities->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                               <button data-id="' . $activities->id . '#edit-activity' . '" data-type="' . $activities->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                               <button data-id="' . $activities->id . '" data-type="' . $activities->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
+
+                    }
                     return $button;
                 })
-                ->rawColumns(['subproject'], ['worker'], ['created_at'], ['type'], ['status'])
+                ->rawColumns(['subproject'], ['created_at'], ['type'], ['status'])
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }
@@ -96,7 +103,6 @@ class ActivityController extends Controller
                     $data = new Activity();
                     $data->name = $request->name;
                     $data->description = $request->description;
-                    $data->user_fk_id = $request->worker;
                     $data->subproject_fk_id = $request->subproject;
                     $data->type = $request->type;
                     $data->status = $request->status;
@@ -119,8 +125,12 @@ class ActivityController extends Controller
         $form->activity_fk_id = $activity_fk_id;
         $form->user_fk_id = $user_fk_id;
         $form->subproject_fk_id = $subproject_fk_id;
+        $form->type = 0;
+        $form->created_at = Carbon::now();
         $form->save();
     }
+
+
 
     public function store(Request $request)
     {
@@ -131,13 +141,15 @@ class ActivityController extends Controller
     public function show($id)
     {
         $activity = Activity::find($id);
-        return view('view_activity', compact('activity'));
+        $workers = Worker::query()->where("form_fk_id",$activity->form->id)->get();
+        return view('view_activity', compact('activity','workers'));
     }
 
     public function edit($id)
     {
         $activity = Activity::find($id);
-        return view('edit_activity', compact('activity'));
+        $workers = Worker::query()->where("form_fk_id",$activity->form->id)->get();
+        return view('edit_activity', compact('activity','workers'));
     }
 
     public function update(Request $request, $id)
@@ -167,8 +179,15 @@ class ActivityController extends Controller
         if ($request->ajax()) {
             $activity = Activity::query()->find($id);
             $form = Form::query()->where('activity_fk_id', $id);
-            if ($form->delete() && $activity->delete()) {
-                return response()->json(['success' => __('strings.successfully_delete_project')]);
+            $subactivity = SubActivities::query()->where('activity_fk_id', $id);
+            if ($activity->type == 0) {
+                if ($form->delete() && $activity->delete()) {
+                    return response()->json(['success' => __('strings.successfully_delete_project')]);
+                }
+            } else {
+                if ($subactivity->delete() && $activity->delete()) {
+                    return response()->json(['success' => __('strings.successfully_delete_project')]);
+                }
             }
             return response()->json(['error' => 'strings.field_delete_activity']);
         }

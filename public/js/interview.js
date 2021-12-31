@@ -2,6 +2,7 @@
 $(function () {
     const table = $('#interviews-table');
     let removed = false;
+    let is_interview_page = $('#interviews_page').val();
     $(document).ready(function () {
         get_interview_as();
 
@@ -27,9 +28,13 @@ $(function () {
     })
 
     function get_interview_as() {
+        console.log(is_interview_page);
+        let url = '/interviews';
+        if (is_interview_page === 1)
+            url = '/interviews/fetch';
         table.DataTable({
             ajax: {
-                "url": '/interviews',
+                "url": url,
                 "type": 'GET',
                 "data": function (d) {
                     //d.user_type = in_user_type.val()
@@ -42,12 +47,12 @@ $(function () {
                     data: 'title',
                     name: 'title',
                 }, {
-                    data: 'created_at',
-                    name: 'created_at',
-                }, {
                     data: 'customer_location',
                     name: 'customer_location',
-                }, {
+                },  {
+                    data: 'created_at',
+                    name: 'created_at',
+                },{
                     data: 'action',
                     name: 'action',
                     orderable: false,

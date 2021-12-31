@@ -39,10 +39,10 @@ class ProjectController extends Controller
         if ($request->ajax()) {
             return DataTables::of($projects)
                 ->addColumn('user_fk_id', function ($projects) {
-                    return '<strong>' . $projects->createBy->name . '</strong>';
+                    return '<span>' . $projects->createBy->name . '</span>';
                 })
                 ->addColumn('manager_fk_id', function ($projects) {
-                    return '<strong>' . $projects->manageBy->name . '</strong>';
+                    return '<span>' . $projects->manageBy->name . '</span>';
                 })
                 ->addColumn('created_at', function ($projects) {
                     return '<p>' . \Carbon\Carbon::parse($projects->created_at)->diffForHumans() . '</p>';
@@ -50,15 +50,15 @@ class ProjectController extends Controller
                 ->addColumn('status', function ($projects) {
                     $status = '';
                     if ($projects->status == 0)
-                        $status .= '<p class="paragraph-pended shadow">' . __("strings.pended") . '</p>';
+                        $status .= '<p class="paragraph-pended shadow">&nbsp;' . __("strings.pended") . '&nbsp;</p>';
                     else
                         $status .= '<p class="paragraph-active shadow">&nbsp;' . __("strings.active") . '&nbsp;</p>';
                     return $status;
                 })
                 ->addColumn('action', function ($projects) {
-                    $button = '<button data-id="' . $projects->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $projects->id . '#edit-project' . '" data-type="' . $projects->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                           <button data-id="' . $projects->id . '" data-type="' . $projects->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    $button = '<button data-id="' . $projects->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $projects->id . '#edit-project' . '" data-type="' . $projects->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $projects->id . '" data-type="' . $projects->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
                 ->rawColumns(['user_fk_id'], ['manager_fk_id'], ['created_at'], ['status'])

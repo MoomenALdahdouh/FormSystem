@@ -40,15 +40,15 @@
                        class="btn btn-outline-danger" title="delete"><i class='bx bx-trash'></i></a>--}}
                     <input value="{{$project->id}}" type="hidden" id="project_id">
                     <button
-                        class="delete btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'></i>
+                        class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class='bx bx-trash'></i>
                     </button>
                     &nbsp
                     <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}"
-                       class="btn-outline-dark sm:rounded-md"
+                       class="btn-outline-dark rounded-2 p-1"
                        title="settings">
                         <i class="las la-cog"></i></a>
                     &nbsp
-                    <a href="{{url('projects/view/'.$project->id)}}" class="btn-outline-primary sm:rounded-md"
+                    <a href="{{url('projects/view/'.$project->id)}}" class="btn-outline-primary rounded-2 p-1"
                        title="view">
                         <i class="las la-external-link-alt"></i></a>
                 </td>

@@ -39,10 +39,10 @@ class SubprojectController extends Controller
         if ($request->ajax()) {
             return DataTables::of($subprojects)
                 ->addColumn('user_fk_id', function ($subprojects) {
-                    return '<strong>' . $subprojects->user->name . '</strong>';
+                    return '<span>' . $subprojects->user->name . '</span>';
                 })
                 ->addColumn('project_fk_id', function ($subprojects) {
-                    return '<strong>' . $subprojects->mainProject->name . '</strong>';
+                    return '<span>' . $subprojects->mainProject->name . '</span>';
                 })
                 ->addColumn('created_at', function ($subprojects) {
                     return '<p>' . \Carbon\Carbon::parse($subprojects->created_at)->diffForHumans() . '</p>';
@@ -56,9 +56,9 @@ class SubprojectController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($subprojects) {
-                    $button = '<button data-id="' . $subprojects->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $subprojects->id . '#edit-subproject' . '" data-type="' . $subprojects->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                           <button data-id="' . $subprojects->id . '" data-type="' . $subprojects->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    $button = '<button data-id="' . $subprojects->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $subprojects->id . '#edit-subproject' . '" data-type="' . $subprojects->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $subprojects->id . '" data-type="' . $subprojects->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
                 ->rawColumns(['user_fk_id'], ['project_fk_id'], ['created_at'], ['status'])

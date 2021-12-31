@@ -1,11 +1,34 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header_2">
         <br>
-        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('strings.users') }}
-        </h1>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.users') }}
+                </h1>
+            </div>
+            {{--Select language--}}
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-slot>
-    <br>
     <br>
     <br>
     <div class="container">
@@ -37,7 +60,7 @@
                         <div class="table-responsive" style="padding: 30px">
                             <table id="users-table" class="text-center table table-bordered table-striped"
                                    style="width: 100%; padding-top: 30px;margin-bottom: 15px">
-                                <thead class="text-light" style="background-color: #11101D">
+                                <thead class="text-light hint" style="background-color: #525256;">
                                 <tr>
                                     <th>{{ __('strings.sl_no') }}</th>
                                     <th>{{ __('strings.name') }}</th>

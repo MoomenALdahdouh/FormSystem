@@ -51,21 +51,23 @@ class UserController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
-                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })
                 ->rawColumns(['created_at'], ['type'], ['status'])
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }
-        $type = Auth::user()->type;
-        switch ($type) {
-            case 0:
-                return view('users', compact('users'));
-            case 1:
-                return redirect('/');
+        if (Auth::user()) {
+            $type = Auth::user()->type;
+            switch ($type) {
+                case 0:
+                    return view('users', compact('users'));
+                case 1:
+                    return redirect('/');
+            }
         }
     }
 
@@ -83,9 +85,9 @@ class UserController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
-                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })->rawColumns(['status', 'action'])->make(true);
         }
@@ -107,9 +109,9 @@ class UserController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
-                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })->rawColumns(['status', 'action'])->make(true);
         }
@@ -130,9 +132,9 @@ class UserController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($users) {
-                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark sm:rounded-md" title="settings"><i class="las la-cog"></i></button>&nbsp;
-                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>';
+                    $button = '<button data-id="' . $users->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '#edit-user' . '" data-type="' . $users->type . '" id="edit" class="btn-outline-dark rounded-2 p-1" title="settings"><i class="las la-cog"></i></button>&nbsp;
+                           <button data-id="' . $users->id . '" data-type="' . $users->type . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>';
                     return $button;
                 })->rawColumns(['', 'action'])->make(true);
         }

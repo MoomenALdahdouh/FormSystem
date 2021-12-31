@@ -1,13 +1,12 @@
 /*start Project Setting and edit*/
 $(function () {
-    const table = $('#activities-table');
+    const table = $('#subactivity_form-table');
     const is_activity_page = $('#is_activity_page').val();
     let removed = false;
-    let workers_list = [];
+    let subactivity_id = $('#subactivity_id').val();
     $(document).ready(function () {
         $("#name").focus();
-        if (is_activity_page != 0)
-            get_activities_as();
+        get_forms();
         $(document).on('click', '#form', function () {
             var id = $(this).data('id');
             location.href = "/form/edit/" + id;
@@ -20,35 +19,20 @@ $(function () {
 
         $(document).on('click', '#view', function () {
             var id = $(this).data('id');
-            var type = $(this).data('type');
-            if (type === 0)
-                location.href = "/activities/view/" + id;
-            else
-                location.href = "/subactivities/view/" + id;
+            location.href = "/subactivities/view/" + id;
         });
+
 
         $(document).on('click', '#edit', function () {
             var id = $(this).data('id');
-            var type = $(this).data('type');
-            if (type === 0)
-                location.href = "/activities/edit/" + id;
-            else
-                location.href = "/subactivities/edit/" + id;
+            location.href = "/subactivities/edit/" + id;
         });
 
         $(document).on('click', '#delete', function () {
-            var activity_id = $(this).data('id');
-            delete_activity(activity_id);
-            /* //location.href = "/activities/delete/" + id;
-             $.ajax({
-                 type: "get",
-                 url: "/activities/delete/" + id,
-                 success: function (response) {
-                     $('#successfully-remove').modal('show');
-                     table.DataTable().ajax.reload();
-                 }
-             });*/
+            var form_id = $(this).data('id');
+            delete_form(form_id);
         });
+
 
         /*Project settings*/
         var status = 0;
@@ -78,16 +62,21 @@ $(function () {
         })
 
         var type = 0;
-        $('#type').on('change', function () {
-            type = $('#type').val();
-            if (type == 0) {
-                console.log("0")
-                $('#worker_part').removeClass("d-none")
-            } else if (type == 1) {
-                console.log("1")
-                $('#worker_part').addClass("d-none")
-            }
-        });
+        /* const spinner_type = document.getElementById('type');
+         $('#type').click(function () {
+             type = spinner_type.value
+             const type_strong = $('#user_type_strong');
+             if (type == 0) {
+                 type_strong.html("Admin");
+                 type_strong.css("background-color", "#003198");
+             } else if (type == 1) {
+                 type_strong.html("Manager");
+                 type_strong.css("background-color", "#00a445");
+             } else if (type == 2) {
+                 type_strong.html("Worker");
+                 type_strong.css("background-color", "#f89500");
+             }
+         })*/
 
         $('#remove-activity').click(function () {
             var activity_id = document.getElementById('activity-id').value;
@@ -99,11 +88,22 @@ $(function () {
             }, 2000);
         });
         create_activity();
-        select_workers();
-        delete_worker();
     })
 
-    function get_activities_as() {
+    function delete_form(id) {
+        $.ajax({
+            type: "DELETE",
+            url: "/form/delete/" + id,
+            data: {
+                _token: $("input[name=_token]").val()
+            },
+            success: function (response) {
+            }
+        });
+    }
+
+
+    function get_forms() {
         table.DataTable({
             /*processing: true,
             serverSide: true,
@@ -111,7 +111,7 @@ $(function () {
             sDom: 'lrtip',
             "order": [[0, "desc"]],*/
             ajax: {
-                "url": '/activities',
+                "url": '/subactivities/' + subactivity_id + '/forms',
                 "type": 'GET',
                 "data": function (d) {
                     //d.user_type = in_user_type.val()
@@ -124,17 +124,8 @@ $(function () {
                     data: 'name',
                     name: 'name',
                 }, {
-                    data: 'description',
-                    name: 'description',
-                }, {
-                    data: 'subproject',
-                    name: 'subproject',
-                }, {
                     data: 'created_at',
                     name: 'created_at',
-                }, {
-                    data: 'type',
-                    name: 'type',
                 }, {
                     data: 'status',
                     name: 'status',
@@ -221,6 +212,7 @@ $(function () {
                     name: name,
                     description: description,
                     type: type,
+                    worker: worker,
                     subproject: subproject,
                     status: status,
                 },
@@ -228,10 +220,10 @@ $(function () {
                     if ($.isEmptyObject(data.error)) {
                         name_error.css('display', 'none');
                         description_error.css('display', 'none');
-                        if (type == 0)
+                        if (type === 0)
                             createForm(data.activity_fk_id, worker, subproject);
                         else
-                            createSubActivity(data.activity_fk_id, subproject);
+                            createSubActivity(data.activity_fk_id, worker, subproject);
 
                     } else {
                         printErrorMsg(data.error);
@@ -252,57 +244,13 @@ $(function () {
                 } else {
                     description_error.css('display', 'none');
                 }
-                if (msg['user_fk_id']) {
-                    worker_selected_error.html(msg['user_fk_id']);
-                    worker_selected_error.css('display', 'block');
-                } else {
-                    worker_selected_error.css('display', 'none');
-                }
             }
 
 
-        });
-    }
-
-    let worker_selector = $('#worker');
-    let worker_selected_list = $('#worker_selected');
-
-    function delete_worker() {
-        $(document).on('click', '#delete_worker', function () {
-            var id = $(this).data('id');
-            let item_list = $('#' + id);
-            item_list.remove();
-            for (let i = 0; i < workers_list.length; i++) {
-                console.log(workers_list[i].toString() + "::" + id.toString());
-                if (workers_list[i].toString() == id.toString()) {
-                    workers_list.splice(i);
-                    console.log("Ssss");
-                }
-            }
-            //delete from database
-        });
-    }
-
-    function select_workers() {
-        workers_list.push(worker_selector.val());
-        worker_selector.on('change', function () {
-            var worker_id = worker_selector.val();
-            var worker_name = $('#worker option:selected').text();
-            console.log(workers_list.indexOf(worker_id));
-            if (workers_list.indexOf(worker_id) === -1) {
-                workers_list.push(worker_id);
-                var body_worker = $('#worker_selected').html();
-                $('#worker_selected').html(body_worker + worker_item(worker_id, worker_name));
-                //add on database
-            }
-            console.log(workers_list.length);
         });
     }
 
     function createForm(activity, worker, subproject) {
-        const worker_selected_error = $('#worker_selected_error');
-        worker_selected_error.css('display', 'none');
-        console.log(activity);
         $.ajax({
             type: "POST",
             url: "/form/create",
@@ -310,40 +258,16 @@ $(function () {
                 _token: $("input[name=_token]").val(),
                 action: "create",
                 activity_fk_id: activity,
-                workers_list: workers_list,
+                worker_fk_id: worker,
                 subproject_fk_id: subproject,
-                user_fk_id: worker,
             },
             success: function (data) {
-                if ($.isEmptyObject(data.error)) {
-                    $('#successfully-creat-activity').modal('show');
-                    table.DataTable().ajax.reload();
-                    worker_selected_error.css('display', 'none');
-                    $('#name').val("");
-                    $('#description').val("");
-                } else {
-                    printErrorMsg(data.error);
-                }
-
+                $('#successfully-creat-activity').modal('show');
+                table.DataTable().ajax.reload();
+                $('#name').val("");
+                $('#description').val("");
             }
         });
-
-        function printErrorMsg(msg) {
-            if (msg['user_fk_id']) {
-                worker_selected_error.html(msg['user_fk_id']);
-                worker_selected_error.css('display', 'block');
-            } else {
-                worker_selected_error.css('display', 'none');
-            }
-        }
-    }
-
-    function worker_item(worker_id, worker_name) {
-        return "<div class=\"btn btn-primary mr-2\" id=" + worker_id + ">\n" +
-            "                                                            <span>" + worker_name + "</span>&nbsp;\n" +
-            "                                                            <i class='las la-times' id=\"delete_worker\" data-id=" + worker_id + " ></i>\n" +
-            "                                                        </div>";
-
     }
 
     function createSubActivity(activity, worker, subproject) {
@@ -354,6 +278,7 @@ $(function () {
                 _token: $("input[name=_token]").val(),
                 action: "create",
                 activity_fk_id: activity,
+                worker_fk_id: worker,
                 subproject_fk_id: subproject,
             },
             success: function (data) {

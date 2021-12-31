@@ -4,5 +4,7 @@
     @elseif(Auth::user()->type == 1)
         @include('manager-navigation')
     @endif
+@else
+    <script>window.location = "/";</script>
 @endif
 

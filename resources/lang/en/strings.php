@@ -23,7 +23,7 @@ return [
     'sl_no' => 'SL No',
     'name' => 'Name',
     'description' => 'Description',
-    'subproject' => 'Subproject',
+    'subproject' => 'Component',
     'created_at' => 'Created At',
     'created_by' => 'Created By',
     'update_at' => 'Update At',
@@ -31,7 +31,7 @@ return [
     'type' => 'Type',
     'status' => 'Status',
     'action' => 'Action',
-    'subprojects' => 'Subprojects',
+    'subprojects' => 'Components',
     'projects' => 'Projects',
     'activities' => 'Activities',
     'forms' => 'Forms',
@@ -50,10 +50,10 @@ return [
     /*View project page*/
     'view_project' => 'View Project',
     'no_description' => 'no description ...',
-    'subprojects_list' => 'Subprojects List',
-    'create_new_subproject' => 'Create new Subproject',
+    'subprojects_list' => 'Components List',
+    'create_new_subproject' => 'Create new Component',
     'select_project' => 'Select Project',
-    /*Pagination Subprojects page*/
+    /*Pagination Components page*/
     'no_date_set' => 'No Date Set',
     'no_subprojects' => 'this project not have any subproject ...',
     /*Edit project page*/
@@ -62,20 +62,20 @@ return [
     'save' => 'Save',
     'remove_project' => 'Remove this project! you can not restore it.',
     'remove_now' => 'Remove Now',
-    /*Subprojects page*/
-    /*View Subprojects page*/
-    'view_subproject' => 'View Subproject',
+    /*Components page*/
+    /*View Components page*/
+    'view_subproject' => 'View Component',
     'activities_list' => 'Activities List',
     'create_new_activity' => 'Create new activity',
     'select_activity_type' => 'Select Activity type',
     'form' => 'Form',
     'select_worker' => 'Select Worker',
     'empty_workers' => 'Empty Workers',
-    'select_subproject' => 'Select Subproject',
+    'select_subproject' => 'Select Component',
     /*Pagination Activities page*/
-    /*Edit Subprojects page*/
-    'subproject_settings' => 'Subproject Settings',
-    'remove_subproject' => 'Remove this Subproject! you can not restore it.',
+    /*Edit Components page*/
+    'subproject_settings' => 'Component Settings',
+    'remove_subproject' => 'Remove this Component! you can not restore it.',
     /*Users page*/
     'all' => 'All',
     'admins' => 'Admins',
@@ -90,11 +90,11 @@ return [
     'no_phone' => 'no phone ...',
     'account_type' => 'Account Type',
     'admin_projects_list' => 'Admin Projects List',
-    'admin_subprojects_list' => 'Admin Subprojects List',
+    'admin_subprojects_list' => 'Admin Components List',
     'admin_activities_list' => 'Admin Activities List',
     'admin_users_list' => 'Admin Users List',
     'manager_projects_list' => 'Manager Projects List',
-    'manager_subprojects_list' => 'Manager Subprojects List',
+    'manager_subprojects_list' => 'Manager Components List',
     'manager_activities_list' => 'Manager Activities List',
     'worker_activities_list' => 'Worker Activities List',
     /*Edit user page*/
@@ -149,10 +149,10 @@ return [
     'name_required' => 'The name is required!',
     'description_required' => 'The description is required!',
     'successfully_update_project' => 'Successfully update Project',
-    'successfully_update_subproject' => 'Successfully update Subproject',
+    'successfully_update_subproject' => 'Successfully update Component',
     'field_update_project' => 'Field to update! Please try again.',
     'successfully_delete_project' => 'Successfully Delete Project',
-    'successfully_delete_subproject' => 'Successfully Delete Subproject',
+    'successfully_delete_subproject' => 'Successfully Delete Component',
     'field_delete_activity' => 'Field to delete this activity, Try again!',
     'successfully_create_form' => 'Successfully create new Form',
     'manager_required' => 'The manager is required!',
@@ -162,9 +162,9 @@ return [
     'user_manager' => 'Please Select User Manager!',
     'have_subprojects' => 'This project have subprojects',
     'project_required' => 'The project is required!',
-    'successfully_create_subproject' => 'Successfully create new Subproject',
-    'subproject_name' => 'Please Input Subproject Name!',
-    'have_activity' => 'This Subproject have activities',
+    'successfully_create_subproject' => 'Successfully create new Component',
+    'subproject_name' => 'Please Input Component Name!',
+    'have_activity' => 'This Component have activities',
     'email_required' => 'The email is required!',
     'phone_required' => 'The phone is required!',
     'successfully_create_user' => 'Successfully create new User',
@@ -185,4 +185,13 @@ return [
     'location' => 'Location',
     'view_interview' => 'View Interview',
     'answers' => 'Answers',
+    'subactivity' => 'SubActivity',
+    'subactivities' => 'SubActivities',
+    'view_subactivity' => 'View SubActivity',
+    'interview' => 'Interview',
+    'interviews' => 'Interviews',
+    'create_form' => 'Create Form',
+    'manage_by_workers' => 'Manage By Workers',
+    'add_worker'=>'Add Worker',
+    'select_subactivity'=>'Select SubActivity',
 ];

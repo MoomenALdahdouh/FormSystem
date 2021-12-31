@@ -12,6 +12,12 @@ class Form extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+
+    public function activity()
+    {
+        return $this->hasOne(Activity::class, 'id', 'activity_fk_id');
+    }
+
     public function interviews()
     {
         return $this->hasMany(Interview::class, 'form_fk_id', 'id');
@@ -20,6 +26,11 @@ class Form extends Model
     public function questions()
     {
         return $this->hasMany(Question::class, 'form_fk_id', 'id');
+    }
+
+    public function workers()
+    {
+        return $this->hasMany(Worker::class, 'form_fk_id', 'id');
     }
 
 }

@@ -1,5 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header_2">
+        <br>
         <h2 class="home-section font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Manager') }}
         </h2>

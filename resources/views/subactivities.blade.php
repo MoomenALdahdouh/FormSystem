@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-11">
                 <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('strings.activities') }}
+                    {{ __('strings.subactivities') }}
                 </h1>
             </div>
             {{--Select language--}}
@@ -43,14 +43,14 @@
                     <br>--}}
                     <div class="bg-white overflow-hidden shadow-xl ">
                         <div class="table-responsive" style="padding: 30px">
-                            <table id="activities-table" class="text-center table table-bordered table-striped"
+                            <table id="sub-activities-table" class="text-center table table-bordered table-striped"
                                    style="width: 100%; padding-top: 30px;margin-bottom: 15px">
-                                <thead class="text-light hint" style="background-color: #525256;">{{--<thead class="text-light" style="background-color: #11101D">--}}
+                                <thead class="text-light hint" style="background-color: #525256;">
                                 <tr>
                                     <th>{{ __('strings.sl_no') }}</th>
                                     <th>{{ __('strings.name') }}</th>
                                     <th>{{ __('strings.description') }}</th>
-                                    <th>{{ __('strings.subproject') }}</th>
+                                    <th>{{ __('strings.worker') }}</th>
                                     <th>{{ __('strings.created_at') }}</th>
                                     <th>{{ __('strings.type') }}</th>
                                     <th>{{ __('strings.status') }}</th>
@@ -65,7 +65,7 @@
         </div>
         <br>
         <br>
-        {{--Section create new activity--}}
+        {{--Section create new form--}}
         <div class="row">
             <div class="col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -81,7 +81,7 @@
                         <div class="col-md-12">
                             <div class="card shadow">
                                 <div class="card-header alert alert-secondary">
-                                    <h4><i class="las la-plus-square"></i>{{ __('strings.create_new_activity') }}</h4>
+                                    <h4><i class="las la-plus-square"></i>{{ __('strings.create_form') }}</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="container">
@@ -93,51 +93,29 @@
                                             <li>
                                                 <div class="">
                                                     <strong><i
-                                                            class="las la-signature text-primary"></i>{{ __('strings.name') }}
+                                                                class="las la-signature text-primary"></i>{{ __('strings.name') }}
                                                     </strong>
                                                     &nbsp &nbsp<input
-                                                        class="rounded-md col-md-12 alert alert-secondary"
-                                                        id="name" name="name" type="text"
-                                                        placeholder="{{ __('strings.name') }}">
+                                                            class="rounded-md col-md-12 alert alert-secondary"
+                                                            id="name" name="name" type="text"
+                                                            placeholder="{{ __('strings.name') }}">
                                                     <p id="name_error" class="alert alert-danger"
                                                        style="display: none"></p>
                                                 </div>
-                                                <div class="">
+                                               {{-- <div class="">
                                                     <strong>
                                                         <i class="las la-signature text-primary"></i>{{ __('strings.description') }}
                                                     </strong>
                                                     &nbsp &nbsp<input
-                                                        class="rounded-md col-md-12 alert alert-secondary"
-                                                        id="description" name="description" type="text"
-                                                        placeholder="{{ __('strings.description') }}">
+                                                            class="rounded-md col-md-12 alert alert-secondary"
+                                                            id="description" name="description" type="text"
+                                                            placeholder="{{ __('strings.description') }}">
                                                     <p id="description_error" class="alert alert-danger"
                                                        style="display: none"></p>
-                                                </div>
+                                                </div>--}}
                                             </li>
+                                            <br>
                                             <li>
-                                                <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_activity_type') }}
-                                                </strong>
-                                                <div class="row alert alert-secondary"
-                                                     style=" margin: 0">
-                                                    <div class="form-check form-switch col-md-3" style="padding-left:0">
-                                                        <select name="type" id="type"
-                                                                class="btn-outline-primary manager-dropdown form-control input-group-lg "
-                                                                value="0">
-                                                            {{--<option hidden>activity type</option>--}}
-                                                            <option class="alert-light"
-                                                                    value="0"> {{ __('strings.form') }}
-                                                            </option>
-                                                            <option class="alert-light"
-                                                                    value="1"> {{ __('strings.subactivity') }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li id="worker_part">
-                                                <br>
                                                 <strong>
                                                     <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_worker') }}
                                                 </strong>
@@ -188,7 +166,7 @@
                                             <br>
                                             <li>
                                                 <strong>
-                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_subproject') }}
+                                                    <i class="las la-hand-pointer text-primary"></i>{{ __('strings.select_subactivity') }}
                                                 </strong>
 
                                                 <div class="row alert alert-secondary"
@@ -197,16 +175,15 @@
                                                         <select name="subproject" id="subproject"
                                                                 class="btn-outline-primary manager-dropdown form-control input-group-lg "
                                                                 value="0">
-                                                            {{--<option hidden>Subprojects name</option>--}}
                                                             @php
                                                                 $count = 0;
                                                             @endphp
-                                                            @if($subprojects == '[]')
+                                                            @if($subactivities == '[]')
                                                                 <option class="alert-warning"
-                                                                        value=""> {{ __('strings.empty_subproject') }}
+                                                                        value=""> {{ __('strings.empty_subactivities') }}
                                                                 </option>
                                                             @else
-                                                                @foreach ($subprojects as $activity)
+                                                                @foreach ($subactivities as $activity)
                                                                     @php
                                                                         $count =+ 1;
                                                                     @endphp
@@ -215,7 +192,7 @@
                                                                 @endforeach
                                                                 @if($count==0)
                                                                     <option class="alert-warning"
-                                                                            value=""> {{ __('strings.empty_subproject') }}
+                                                                            value=""> {{ __('strings.empty_subactivities') }}
                                                                     </option>
                                                                 @endif
                                                             @endif
@@ -227,7 +204,7 @@
                                             <br>
                                             <li>
                                                 <strong><i
-                                                        class="las la-toggle-off text-primary"></i>&nbsp;{{ __('strings.status') }}
+                                                            class="las la-toggle-off text-primary"></i>&nbsp;{{ __('strings.status') }}
                                                 </strong>
                                                 <br>
                                                 <div class="row alert alert-secondary"
@@ -249,7 +226,7 @@
                                             <br>
                                             <li>
                                                 <button id="create_activity" class="btn btn-primary float-right"><i
-                                                        class="las la-plus-square"></i> {{ __('strings.create') }}
+                                                            class="las la-plus-square"></i> {{ __('strings.create') }}
                                                 </button>
                                             </li>
                                         </ul>
@@ -263,7 +240,7 @@
         </div>
         @include('modal_alert')
         @push('js')
-            <script src="{{asset('js/activity.js')}}" defer></script> {{--Must add defer to active js file--}}
+            <script src="{{asset('js/subactivity.js')}}" defer></script> {{--Must add defer to active js file--}}
         @endpush
     </div>
     <br>

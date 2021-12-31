@@ -127,7 +127,54 @@ $(function () {
             edit_question(question_title, que_key);
         });
 
+        delete_worker();
+        add_workers();
     });
+
+
+    function delete_worker() {
+        console.log("assas");
+        $('#worker_section #remove_worker').on('click', function () {
+            console.log("assas");
+            var id = $(this).data('id');
+            $.ajax({
+                method: "POST",
+                url: "/form/worker/remove/" + id,
+                data: {
+                    _token: $("input[name=_token]").val(),
+                },
+                success: function (response) {
+                    if (response['success']) {
+                        let item_list = $('#' + id);
+                        item_list.remove();
+                    }
+                }
+            });
+        });
+    }
+
+    function add_workers() {
+        $('#worker').on('change', function () {
+            var worker_id = $('#worker').val();
+            //add on database
+            $.ajax({
+                method: "POST",
+                url: "/form/worker/add",
+                dataType: "json",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    worker_id: worker_id,
+                    form_id: form_id,
+                },
+                success: function (response) {
+                    if (response['success']) {
+                        location.reload();
+                    }
+                }
+            });
+
+        });
+    }
 
     function add_input_field() {
         check_form_size();

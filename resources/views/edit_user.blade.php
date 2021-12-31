@@ -1,9 +1,34 @@
 <x-app-layout>
     {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>--}}
-    <x-slot name="header">
-        <h2 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('strings.edit_user') }}
-        </h2>
+    <x-slot name="header_2">
+        <br>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.edit_user') }}
+                </h1>
+            </div>
+            {{--Select language--}}
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-slot>
     <br>
     <br>
@@ -42,7 +67,7 @@
                                 </div>
                                 <div class="col-1 row-3">
                                     <a href="{{url('/users/view/'.$user->id)}}"><i
-                                            class="las la-binoculars btn-outline-primary sm:rounded-md"></i></a>
+                                            class="las la-binoculars btn-outline-primary rounded-2 p-1"></i></a>
                                 </div>
 
                                 <div class="alert alert-light">

@@ -1,6 +1,6 @@
 <x-app-layout>
     <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
-    <x-slot name="header">
+    <x-slot name="header_2">
         <br>
         <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
             {{ __('strings.view_project') }}
@@ -28,7 +28,7 @@
                                             </div>
                                             <div class="col-1 row-3">
                                                 <a href="{{url('projects/edit/'.$project->id.'#edit-project')}}"><i
-                                                        class="lar la-edit btn-outline-primary sm:rounded-md"></i></a>
+                                                        class="lar la-edit btn-outline-primary rounded-2 p-1"></i></a>
                                             </div>
                                         </div>
                                     </li>
@@ -96,7 +96,7 @@
                             <p class="hint">{{__('strings.manager')}}</p>
                             <p><strong>{{$project->manageBy->name}}</strong>
                                 <a href="{{url('/users/view/'.$project->manageBy->id)}}"><i
-                                        class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
+                                        class="las la-external-link-square-alt btn-outline-primary rounded-2 p-1"></i></a>
                             </p>
                             <p>
                                 @if($project->manageBy->status == 1)

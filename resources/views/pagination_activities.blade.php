@@ -4,7 +4,7 @@
         <th scope="col">{{ __('strings.sl_no') }}</th>
         <th scope="col">{{ __('strings.name') }}</th>
         <th scope="col">{{ __('strings.subproject') }}</th>
-        <th scope="col">{{ __('strings.worker') }}</th>
+        {{--<th scope="col">{{ __('strings.worker') }}</th>--}}
         <th scope="col">{{ __('strings.created_at') }}</th>
         <th scope="col">{{ __('strings.status') }}</th>
         <th scope="col">{{ __('strings.action') }}</th>
@@ -21,7 +21,7 @@
                 <td>{{$activity->name}}</td>
                 {{--<td>{{$subproject->user_id}}</td>--}} {{--Just aarived to user id so we will join two table to arrived --}}
                 <td>{{@$activity->subproject->name}}</td>
-                <td>{{$activity->worker->name}}</td> {{--Use this when join table by ROM method--}}
+                {{--<td>{{$activity->worker->name}}</td>--}} {{--Use this when join table by ROM method--}}
                 {{--<td>{{$subproject->name}}</td>--}}  {{--After join with Quiry builder --}}
                 {{--<td>{{$subproject->created_at}}</td>--}}
                 @if($activity->created_at == NULL)
@@ -38,15 +38,15 @@
                 <!--Use this line if you compact users from DB to pars the date by carbon library-->
                 <td>
                     <button id="delete-activity"
-                            class="btn-outline-danger sm:rounded-md" title="delete"><i class='bx bx-trash'><input
+                            class="btn-outline-danger rounded-2 p-1" title="delete"><i class='bx bx-trash'><input
                                 type="hidden" id="activity-id" name="activity-id" value="{{$activity->id}}"></i>
                     </button>
                     &nbsp;
                     <a href="{{url('activities/edit/'.$activity->id .'#edit-activity')}}"
-                       class="btn-outline-dark sm:rounded-md" title="settings">
+                       class="btn-outline-dark rounded-2 p-1" title="settings">
                         <i class="las la-cog"></i></a>
                     &nbsp;
-                    <a href="{{url('activities/view/'.$activity->id)}}" class="btn-outline-primary sm:rounded-md"
+                    <a href="{{url('activities/view/'.$activity->id)}}" class="btn-outline-primary rounded-2 p-1"
                        title="view">
                         <i class="las la-external-link-alt"></i></a>
                 </td>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header_2">
         <br>
         <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Managers') }}
@@ -11,7 +11,7 @@
             <div class="bg-white overflow-hidden shadow-xl ">
                 <div class="table-responsive" style="padding: 30px">
                     <table id="users-table" class="text-center table table-bordered table-striped" style="width: 100%; padding-top: 30px">
-                        <thead class="text-light" style="background-color: #11101D">
+                        <thead class="text-light hint" style="background-color: #525256;">
                         <tr>
                             <th>SL No</th>
                             <th>Name</th>

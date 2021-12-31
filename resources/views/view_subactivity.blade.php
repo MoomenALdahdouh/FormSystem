@@ -1,15 +1,39 @@
 <x-app-layout>
-    <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+    {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>--}}
     <x-slot name="header_2">
         <br>
-        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('strings.view_activity') }}
-            {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h1>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.view_subactivity') }}
+                </h1>
+            </div>
+            {{--Select language--}}
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-slot>
     <br>
     <br>
     <div class="header-section">
+        <input id="subactivity_id" type="hidden" value="{{$activity->id}}">
         <div class="container">
             {{--Alert actions--}}
             @if(session('successUpdate'))
@@ -39,7 +63,7 @@
                                             <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
                                             @break
                                             @case (1)
-                                            <p class="activity-type shadow">activity2</p>
+                                            <p class="paragraph-manager shadow">&nbsp;{{ __('strings.subactivity') }}&nbsp;</p>
                                             @break
                                         @endswitch
                                         @switch($activity->staus)
@@ -92,7 +116,7 @@
                                                         class="las la-audio-description text-primary"></i>{{ __('strings.type') }}
                                             </strong>
                                             <br>
-                                            <p class="">&nbsp; &nbsp; {{ __('strings.form') }}&nbsp;</p>
+                                            <p class="">&nbsp; &nbsp; {{ __('strings.subactivity') }}</p>
                                         </div>
                                     </li>
                                     <li>
@@ -119,20 +143,28 @@
                         </div>
                     </div>
                     <br>
-                    {{--Section View Form Questions --}}
+                    {{--Section View Subactivity Forms --}}
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card shadow">
-                                <div class="row alert alert-success text-dark"
-                                     style=" margin: 0; padding-left:0; padding-right: 0">
-                                    <div class="col-md-10">
-                                        <strong><i
-                                                    class="lab la-wpforms"></i>&nbsp; {{ __('strings.view_form_questions') }}
-                                        </strong>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <a href="{{url("/form/apply/$activity->id")}}"
-                                           class="btn btn-success float-right">{{ __('strings.view') }}</a>
+                                <div class="card-header">
+                                    <h6 class="mt-2 mb-2">SubActivity Forms</h6>
+                                </div>
+                                <div class="bg-white overflow-hidden shadow-xl ">
+                                    <div class="table-responsive" style="padding: 30px">
+                                        <table id="subactivity_form-table"
+                                               class="text-center table table-bordered table-striped"
+                                               style="width: 100%; padding-top: 30px;margin-bottom: 15px">
+                                            <thead class="text-light hint" style="background-color: #525256;">
+                                            <tr>
+                                                <th>{{ __('strings.sl_no') }}</th>
+                                                <th>{{ __('strings.name') }}</th>
+                                                <th>{{ __('strings.created_at') }}</th>
+                                                <th>{{ __('strings.status') }}</th>
+                                                <th>{{ __('strings.action') }}</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -168,42 +200,30 @@
                     </div>
                     {{--<div class="card shadow">
                         <br>
-                        <div class="p-3">
-                            <img class="" height="30" width="30" src="{{asset('images/user.png')}}">
-                            <p class="hint mb-2 mt-2">{{ __('strings.manage_by_workers') }}</p>
-                            @foreach($workers as $worker)
-                                @php
-                                    $worker_user = App\Models\User::query()->find($worker->worker_fk_id	);
-
-                                @endphp
-
-                                <div class="alert-secondary mb-2 p-2">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <span>{{$worker_user->name}}</span>
-                                            <a href="{{url('/users/view/'.$worker->id)}}">
-                                                <i class="las la-external-link-square-alt btn-outline-primary rounded-2 p-1"></i>
-                                            </a>
-                                            <br>
-                                            @if($worker_user->status == 1)
-                                                <span class=" paragraph-active shadow">{{ __('strings.active') }}</span>
-                                            @else
-                                                <span class=" paragraph-pended shadow">{{ __('strings.pended') }}</span>
-                                            @endif
-                                        </div>
-                                        <div class="col-md-2">
-                                            <i id="remove_worker" data-id="{{$worker->id}}" class="las la-trash btn-outline-danger rounded-2 p-1"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
+                        <div class="text-center">
+                            <img class="user-image" width="80" src="{{asset('images/user.png')}}">
+                            <p class="hint">{{ __('strings.worker_name') }}</p>
+                            <p><strong>{{$activity->worker->name}}</strong>
+                                <a href="{{url('/users/view/'.$activity->worker->id)}}"><i
+                                            class="las la-external-link-square-alt btn-outline-primary rounded-2 p-1"></i></a>
+                            </p>
+                            <p>
+                                @if($activity->worker->status == 1)
+                                    <strong class=" paragraph-active shadow">{{ __('strings.active') }}</strong>
+                                @else
+                                    <strong class=" paragraph-pended shadow">{{ __('strings.pended') }}</strong>
+                                @endif
+                            </p>
                         </div>
                         <br>
                     </div>--}}
                 </div>
             </div>
         </div>
+        @include('modal_alert')
+        @push('js')
+            <script src="{{asset('js/view_subactivity.js')}}" defer></script> {{--Must add defer to active js file--}}
+        @endpush
     </div>
     <br>
     <br>

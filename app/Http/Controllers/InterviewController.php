@@ -27,15 +27,38 @@ class InterviewController extends Controller
                     return '<p>' . \Carbon\Carbon::parse($activities->created_at)->diffForHumans() . '</p>';
                 })
                 ->addColumn('action', function ($interviews) {
-                    $button = '<button data-id="' . $interviews->id . '" id="view" class="btn-outline-primary sm:rounded-md" title="view"><i class="las la-external-link-alt"></i></button>&nbsp;&nbsp;
-                               <button data-id="' . $interviews->id . '" id="delete" class="delete btn-outline-danger sm:rounded-md" title="delete"><i class="bx bx-trash"></i></button>&nbsp;';
+                    $button = '<button data-id="' . $interviews->id . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>&nbsp;&nbsp;
+                               <button data-id="' . $interviews->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;';
+                    return $button;
+                })
+                ->rawColumns( ['customer_location'],['created_at'])
+                ->escapeColumns(['action' => 'action'])
+                ->make(true);
+        }
+        return view('activities', compact('interviews'));
+    }
+
+    public function fetch(Request $request)
+    {
+        $interviews = Interview::query()->latest()->get();
+        if ($request->ajax()) {
+            return DataTables::of($interviews)
+                ->addColumn('customer_location', function ($activities) {
+                    return '<p class="hint paragraph-admin">' . $activities->customer_location . '</p>';
+                })
+                ->addColumn('created_at', function ($activities) {
+                    return '<p>' . \Carbon\Carbon::parse($activities->created_at)->diffForHumans() . '</p>';
+                })
+                ->addColumn('action', function ($interviews) {
+                    $button = '<button data-id="' . $interviews->id . '" id="view" class="btn-outline-primary rounded-2 p-1" title="view"><i class="las la-external-link-alt"></i></button>&nbsp;&nbsp;
+                               <button data-id="' . $interviews->id . '" id="delete" class="delete btn-outline-danger rounded-2 p-1" title="delete"><i class="bx bx-trash"></i></button>&nbsp;';
                     return $button;
                 })
                 ->rawColumns(['created_at'], ['customer_location'])
                 ->escapeColumns(['action' => 'action'])
                 ->make(true);
         }
-        return view('activities', compact('interviews'));
+        return view('interviews', compact('interviews'));
     }
 
     public function show($id)

@@ -1,10 +1,35 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header_2">
         <br>
-        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('strings.apply_form') }}
-        </h1>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.apply_form') }}
+                </h1>
+            </div>
+            {{--Select language--}}
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-slot>
+    <br>
     <br>
     <div class="header-section">
         <div class="container">
@@ -13,39 +38,67 @@
                 <div class="col-md-12">
                     <div class="card shadow">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-1">
-                                    <img class="activity-image" width="60" src="{{asset('images/list.png')}}">
+                            {{--If type is activity form--}}
+                            @if($form->type == 0)
+                                <div class="row">
+                                    <div class="col-1">
+                                        <img class="activity-image" width="60" src="{{asset('images/list.png')}}">
+                                    </div>
+                                    <div class="col-10 row-2">
+                                        <h5 class="name">{{$activity->name}}</h5>
+                                        @switch($activity->type)
+                                            @case(0)
+                                            <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
+                                            @break
+                                            @case (1)
+                                            <p class="activity-type shadow">activity2</p>
+                                            @break
+                                            @case (2)
+                                            <p class="activity-type shadow">&nbsp; activity2 &nbsp;</p>
+                                            @break
+                                        @endswitch
+                                        @switch($activity->status)
+                                            @case (0)
+                                            <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
+                                            @break
+                                            @case(1)
+                                            <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}
+                                                &nbsp;</p>
+                                            @break
+                                        @endswitch
+                                    </div>
+                                    <div class="col-1 row-3-2">
+                                        <a href="{{url('/form/edit/'.$activity->id)}}"><i
+                                                    class="lab la-wpforms btn-outline-info rounded-2 p-1"></i></a>
+                                        <a href="{{url('/activities/edit/'.$activity->id.'#edit-activity')}}"><i
+                                                    class="lar la-edit btn-outline-primary rounded-2 p-1"></i></a>
+                                    </div>
                                 </div>
-                                <div class="col-10 row-2">
-                                    <h5 class="name">{{$activity->name}}</h5>
-                                    @switch($activity->type)
-                                        @case(0)
+                            @else
+                                <div class="row">
+                                    <div class="col-1">
+                                        <img class="activity-image" width="60" src="{{asset('images/list.png')}}">
+                                    </div>
+                                    <div class="col-10 row-2">
+                                        <h5 class="name">{{$form->name}}</h5>
                                         <p class="activity-type shadow">&nbsp;{{ __('strings.form') }}&nbsp;</p>
-                                        @break
-                                        @case (1)
-                                        <p class="activity-type shadow">activity2</p>
-                                        @break
-                                        @case (2)
-                                        <p class="activity-type shadow">&nbsp; activity2 &nbsp;</p>
-                                        @break
-                                    @endswitch
-                                    @switch($activity->staus)
-                                        @case (0)
-                                        <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
-                                        @break
-                                        @case(1)
-                                        <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}&nbsp;</p>
-                                        @break
-                                    @endswitch
+                                        @switch($form->status)
+                                            @case (0)
+                                            <p class="paragraph-pended shadow">{{ __('strings.pended') }}</p>
+                                            @break
+                                            @case(1)
+                                            <p class="paragraph-active shadow">&nbsp;{{ __('strings.active') }}
+                                                &nbsp;</p>
+                                            @break
+                                        @endswitch
+                                    </div>
+                                    <div class="col-1 row-3-2">
+                                        <a href="{{url('/form/edit/'.$form->id)}}"><i
+                                                    class="lab la-wpforms btn-outline-info rounded-2 p-1"></i></a>
+                                    </div>
                                 </div>
-                                <div class="col-1 row-3-2">
-                                    <a href="{{url('/form/edit/'.$activity->id)}}"><i
-                                            class="lab la-wpforms btn-outline-info sm:rounded-md"></i></a>
-                                    <a href="{{url('/activities/edit/'.$activity->id.'#edit-activity')}}"><i
-                                            class="lar la-edit btn-outline-primary sm:rounded-md"></i></a>
-                                </div>
-                            </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -126,7 +179,7 @@
                                 @endif
                             </ul>
                             <button id="save_form" class="selector shadow btn btn-primary float-right"><i
-                                    class="las la-save"></i> {{ __('strings.submit') }}
+                                        class="las la-save"></i> {{ __('strings.submit') }}
                             </button>
                         </div>
                     </div>

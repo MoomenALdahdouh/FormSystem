@@ -1,11 +1,34 @@
 <x-app-layout>
-    <script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
-    <x-slot name="header">
+    {{--<script type="text/javascript" src="{{asset('js/jquery-3.6.0.min.js')}}"></script>--}}
+    <x-slot name="header_2">
         <br>
-        <h1 class="title-header font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('strings.view_subproject') }}
-            {{--<button class="btn btn-danger" style="float: right">{{ __('Create Project') }}</button>--}}
-        </h1>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.view_subproject') }}
+                </h1>
+            </div>
+            {{--Select language--}}
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-slot>
     <br>
     <br>
@@ -28,7 +51,7 @@
                                             </div>
                                             <div class="col-1 row-3">
                                                 <a href="{{url('subprojects/edit/'.$subproject->id.'#edit-project')}}"><i
-                                                        class="lar la-edit btn-outline-primary sm:rounded-md"></i></a>
+                                                        class="lar la-edit btn-outline-primary rounded-2 p-1"></i></a>
                                             </div>
                                         </div>
                                     </li>
@@ -107,7 +130,7 @@
                                     </p>
                                     <p>&nbsp;<strong>{{$subproject->mainProject->name}}</strong>
                                         <a href="{{url('/projects/view/'.$subproject->mainProject->id)}}"><i
-                                                class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
+                                                class="las la-external-link-square-alt btn-outline-primary rounded-2 p-1"></i></a>
                                     </p>
                                 </div>
                             </div>
@@ -121,7 +144,7 @@
                             <p class="hint">{{ __('strings.created_by') }}</p>
                             <p><strong>{{$subproject->user->name}}</strong>
                                 <a href="{{url('/users/view/'.$subproject->user->id)}}"><i
-                                        class="las la-external-link-square-alt btn-outline-primary sm:rounded-md"></i></a>
+                                        class="las la-external-link-square-alt btn-outline-primary rounded-2 p-1"></i></a>
                             </p>
                             <p>
                                 @if($subproject->user->status == 1)

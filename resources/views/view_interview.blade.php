@@ -1,10 +1,35 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header_2">
         <br>
-        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('strings.view_interview') }}
-        </h1>
+        <div class="row">
+            <div class="col-md-11">
+                <h1 class="pt-1 home-section font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('strings.view_interview') }}
+                </h1>
+            </div>
+            {{--Select language--}}
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-globe"></i>&nbsp; {{ Config::get('language')[App::getLocale()] }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (Config::get('language') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-slot>
+    <br>
     <br>
     <div class="header-section">
         <div class="container">
@@ -20,7 +45,7 @@
                                 <div class="col-11 row-2">
                                     <h5 class="name">{{$interview->title}}</h5>
                                     <p><i class="fas fa-map-marker-alt "></i><strong
-                                            class="">&nbsp; {{$interview->customer_location}}</strong></p>
+                                                class="">&nbsp; {{$interview->customer_location}}</strong></p>
                                     <p class=""><i class="far fa-clock"></i>&nbsp;{{$interview->created_at}}</p>
                                 </div>
 
@@ -86,7 +111,8 @@
                                             @case(4)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <img height="100" width="100" src="@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{'http://127.0.0.1:8000/storage/answer_images/'.$answer->answer}}@endif @endforeach">
+                                                <img height="100" width="100"
+                                                     src="@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{'http://127.0.0.1:8000/storage/answer_images/'.$answer->answer}}@endif @endforeach">
                                             </li>
                                             @break
                                         @endswitch
