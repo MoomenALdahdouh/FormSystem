@@ -6,6 +6,7 @@ use App\Http\Controllers\api\AnswersController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\FormController;
 use App\Http\Controllers\api\InterviewController;
+use App\Http\Controllers\api\WorkerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::prefix('activities')->group(function () {
 Route::prefix('forms')->group(function () {
     Route::get('/{id}/interviews', [FormController::class, 'index']);//Get all interviews to this form id and when click to view an interview will use interview/answers and forms/questions
     Route::get('/{id}/questions', [FormController::class, 'show']);//When click create interview to this form id will open screen with all form questions so when click submit will create interview and answers
+});
+
+Route::prefix('worker')->group(function () {
+    Route::get('/forms/{id}', [WorkerController::class, 'forms']);
 });
 
 Route::prefix('interviews')->group(function () {

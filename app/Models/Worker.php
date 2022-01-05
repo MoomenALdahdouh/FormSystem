@@ -10,4 +10,10 @@ class Worker extends Model
     protected $table = "workers";
     protected $guarded = [];
     public $timestamps = false;
+
+    public function form()
+    {
+        return $this->hasMany(Form::class, 'id', 'form_fk_id');
+    }
+
 }

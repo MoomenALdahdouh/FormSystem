@@ -635,7 +635,7 @@
     padding: 0 12px;
 }
 .paragraph-activity {
-    background-color: #606e8d;
+    background-color: #3d5da8;
     color: #FFF;
     border-radius: 12px;
     display: inline-flex;
@@ -643,7 +643,7 @@
 }
 
 .paragraph-subactivity {
-    background-color: #5f6565;
+    background-color: #498d8d;
     color: #FFF;
     border-radius: 12px;
     display: inline-flex;

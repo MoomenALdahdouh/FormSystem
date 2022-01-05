@@ -43,9 +43,12 @@
                                     <img class="activity-image" width="60" src="{{asset('images/list.png')}}">
                                 </div>
                                 <div class="col-11 row-2">
-                                    <h5 class="name">{{$interview->title}}</h5>
-                                    <p><i class="fas fa-map-marker-alt "></i><strong
-                                                class="">&nbsp; {{$interview->customer_location}}</strong></p>
+                                    <input id="latitude" value="{{$interview->latitude}}" type="hidden">
+                                    <input id="longitude" value="{{$interview->longitude}}" type="hidden">
+                                    <input id="location" value="{{$interview->customer_location}}" type="hidden">
+                                    <p class="name"><i class="fas fa-signature"></i>&nbsp; {{$interview->title}}</p>
+                                    <p><i class="fas fa-map-marker-alt "></i>&nbsp; {{$interview->customer_location}}
+                                    </p>
                                     <p class=""><i class="far fa-clock"></i>&nbsp;{{$interview->created_at}}</p>
                                 </div>
 
@@ -71,14 +74,27 @@
                             <ul id="form-body" class="questions-list list-group-item">
                                 @if(count($questions)>0)
                                     @foreach($questions as $question)
-                                        @switch($question->type)
+                                        @if($question->type == 4)
+                                            <li>
+                                                <p class="mb-1">&nbsp; {{$question->title}}</p>
+                                                <img style="object-fit: cover; width: 100%; height: 200px;"
+                                                     src="@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{'http://127.0.0.1:8000/storage/answer_images/'.$answer->answer}}@endif @endforeach">
+                                            </li>
+                                        @else
+                                            <li>
+                                                <p class="mb-1">&nbsp; {{$question->title}}</p>
+                                                <p data-question-id="{{$question->id}}"
+                                                   class="rounded-md col-md-12 alert alert-secondary">@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{trim($answer->answer)}}@endif @endforeach</p>
+                                            </li>
+                                        @endif
+                                        {{--@switch($question->type)
                                             @case(0)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
                                                 <input data-question-id="{{$question->id}}"
                                                        class="rounded-md col-md-12 alert alert-secondary"
                                                        type="text" placeholder="{{$question->title}}"
-                                                       value="@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{$answer->answer}}@endif @endforeach">
+                                                       value="@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{trim($answer->answer)}}@endif @endforeach">
                                             </li>
                                             @break
                                             @case(1)
@@ -111,11 +127,11 @@
                                             @case(4)
                                             <li>
                                                 <strong>&nbsp; {{$question->title}}</strong>
-                                                <img height="100" width="100"
+                                                <img style="object-fit: cover; height: 200px;"
                                                      src="@foreach($answers as $answer)@if($answer->questions_fk_id == $question->id){{'http://127.0.0.1:8000/storage/answer_images/'.$answer->answer}}@endif @endforeach">
                                             </li>
                                             @break
-                                        @endswitch
+                                        @endswitch--}}
 
                                         {{--{!! $question->body !!}--}}
                                     @endforeach
@@ -136,11 +152,56 @@
                                     class="las la-save"></i> {{ __('strings.submit') }}
                             </button>--}}
                         </div>
+                        <div class="card-footer">
+                            <script>
+                                // Initialize and add the map
+                                function initMap() {
+                                    var latitude = $('#latitude').val();
+                                    var longitude = $('#longitude').val();
+                                    var location = $('#location').val();
+                                    // The location of Uluru
+                                    console.log(latitude)
+                                    console.log(longitude)
+                                    const uluru = { lat: Number(latitude), lng: Number(longitude) };
+                                    // The map, centered at Uluru
+                                    const map = new google.maps.Map(document.getElementById("map"), {
+                                        zoom: 8,
+                                        center: uluru,
+                                    });
+                                    // The marker, positioned at Uluru
+                                    const marker = new google.maps.Marker({
+                                        position: uluru,
+                                        map: map,
+                                    });
+
+                                }
+                            </script>
+                            <div id="map" style="height: 300px">
+
+                            </div>
+                            <script
+                                    src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&libraries=&v=weekly"
+                                    async
+                            ></script>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('js')
+        {{--Must add defer to active js file--}}
+        {{--<script type='text/javascript'
+                src='https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap'
+                async defer></script>--}}
+        {{--<script
+                src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap&libraries=&v=weekly"
+                async
+        ></script>
+         <script src="{{asset('js/view_interview.js')}}" defer></script>
+--}}
+
+    @endpush
     <br>
     <br>
     <br>
