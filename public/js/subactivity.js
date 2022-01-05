@@ -300,7 +300,7 @@ $(function () {
             for (let i = 0; i < workers_list.length; i++) {
                 console.log(workers_list[i].toString() + "::" + id.toString());
                 if (workers_list[i].toString() == id.toString()) {
-                    workers_list.splice(i);
+                    workers_list.splice(i, 1);
                     console.log("Ssss");
                 }
             }

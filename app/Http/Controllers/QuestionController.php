@@ -34,6 +34,7 @@ class QuestionController extends Controller
                 $data = Question::query()->create([
                     'form_fk_id' => $question["form_fk_id"],
                     'questions_key' => $question["questions_key"],
+                    'data_question_key' => $question["data_question_key"],
                     'title' => $question["title"],
                     'body' => $question["body"],
                     'type' => $question["type"],
